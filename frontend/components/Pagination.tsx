@@ -1,15 +1,16 @@
+
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export function Pagination({ page, hasMore, baseUrl }: { page: number; hasMore: boolean; baseUrl: string }) {
-    const prevPage = page > 1 ? page - 1 : 1;
-    const nextPage = page + 1;
+export function Pagination({ pagina, tieneMas, urlBase }: { pagina: number; tieneMas: boolean; urlBase: string }) {
+    const paginaAnterior = pagina > 1 ? pagina - 1 : 1;
+    const paginaSiguiente = pagina + 1;
 
     return (
         <div className="flex justify-center gap-4 mt-6 items-center">
-            {page > 1 ? (
+            {pagina > 1 ? (
                 <Link
-                    href={`${baseUrl}&page=${prevPage}`}
+                    href={`${urlBase}&pagina=${paginaAnterior}`}
                     className="flex items-center gap-1 bg-white px-3 py-1 rounded shadow text-sm font-medium hover:bg-gray-50"
                 >
                     <ChevronLeft className="w-4 h-4" /> Anterior
@@ -20,11 +21,11 @@ export function Pagination({ page, hasMore, baseUrl }: { page: number; hasMore: 
                 </span>
             )}
 
-            <span className="text-sm font-bold text-gray-600">Pag. {page}</span>
+            <span className="text-sm font-bold text-gray-600">Pag. {pagina}</span>
 
-            {hasMore ? (
+            {tieneMas ? (
                 <Link
-                    href={`${baseUrl}&page=${nextPage}`}
+                    href={`${urlBase}&pagina=${paginaSiguiente}`}
                     className="flex items-center gap-1 bg-white px-3 py-1 rounded shadow text-sm font-medium hover:bg-gray-50"
                 >
                     Siguiente <ChevronRight className="w-4 h-4" />
