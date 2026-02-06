@@ -1,6 +1,6 @@
 import sql from '@/lib/db';
 import Link from 'next/link';
-import { ArrowLeft, Trophy } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Pagination } from '@/components/Pagination';
 import { SearchBar } from '@/components/SearchBar';
 
@@ -42,10 +42,7 @@ export default async function TopProductsReport({
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8 flex items-center gap-4">
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
-                    <div className="flex items-center gap-2">
-                        <Trophy className="w-8 h-8 text-yellow-500" />
-                        <h1 className="text-3xl font-bold text-gray-900">🏆 Productos Top</h1>
-                    </div>
+                    <h1 className="text-3xl font-bold text-gray-900">Productos Top</h1>
                 </div>
 
                 <form className="mb-6 flex gap-2">

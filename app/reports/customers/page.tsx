@@ -1,6 +1,6 @@
 import sql from '@/lib/db';
 import Link from 'next/link';
-import { ArrowLeft, Users } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Pagination } from '@/components/Pagination';
 
 export const dynamic = 'force-dynamic';
@@ -30,10 +30,7 @@ export default async function CustomersReport({
             <div className="max-w-6xl mx-auto">
                 <div className="mb-8 flex items-center gap-4">
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
-                    <div className="flex items-center gap-2">
-                        <Users className="w-8 h-8 text-purple-600" />
-                        <h1 className="text-3xl font-bold text-gray-900">💎 Clientes VIP (Valor de Vida)</h1>
-                    </div>
+                    <h1 className="text-3xl font-bold text-gray-900">Clientes VIP</h1>
                 </div>
 
                 <div className="bg-white rounded-xl shadow overflow-hidden">

@@ -1,8 +1,7 @@
 import sql from '@/lib/db';
 import Link from 'next/link';
-import { ArrowLeft, AlertTriangle } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import clsx from 'clsx';
-import { SearchBar } from '@/components/SearchBar';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,12 +30,8 @@ export default async function InventoryRiskReport({
             <div className="max-w-6xl mx-auto">
                 <div className="mb-8 flex items-center gap-4">
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
-                    <div className="flex items-center gap-2">
-                        <AlertTriangle className="w-8 h-8 text-red-600" />
-                        <h1 className="text-3xl font-bold text-gray-900">⚠️ Riesgo de Inventario</h1>
-                    </div>
+                    <h1 className="text-3xl font-bold text-gray-900">Riesgo de Inventario</h1>
                 </div>
-
                 {/* Filtro por Categoría */}
                 <form className="mb-8 bg-white p-4 rounded-lg shadow flex gap-4 items-end">
                     <div className="flex-1">

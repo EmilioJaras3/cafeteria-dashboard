@@ -1,6 +1,6 @@
 import sql from '@/lib/db';
 import Link from 'next/link';
-import { ArrowLeft, CreditCard } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,10 +12,7 @@ export default async function PaymentsReport() {
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8 flex items-center gap-4">
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
-                    <div className="flex items-center gap-2">
-                        <CreditCard className="w-8 h-8 text-orange-600" />
-                        <h1 className="text-3xl font-bold text-gray-900">💳 Mix de Métodos de Pago</h1>
-                    </div>
+                    <h1 className="text-3xl font-bold text-gray-900">Mix de Metodos de Pago</h1>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

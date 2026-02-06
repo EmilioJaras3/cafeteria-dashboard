@@ -32,11 +32,11 @@ export default async function SalesReport({
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8 flex items-center gap-4">
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
-                    <h1 className="text-3xl font-bold text-gray-900">💰 Ventas Diarias</h1>
+                    <h1 className="text-3xl font-bold text-gray-900">Ventas Diarias</h1>
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow border mb-8 text-center">
-                    <p className="text-sm text-gray-500 uppercase font-bold">Ingresos Totales (Selección)</p>
+                    <p className="text-sm text-gray-500 uppercase font-bold">Ingresos Totales</p>
                     <p className="text-4xl font-bold text-blue-600">${totalRevenue.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</p>
                 </div>
 
