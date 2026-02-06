@@ -13,15 +13,12 @@ export default async function InventoryRiskReport({
     const params = await searchParams;
     const categoryFilter = typeof params.category === 'string' ? params.category : '';
 
-    // 1. Obtener datos filtrados
     let query = sql`SELECT * FROM vw_inventory_risk`;
     if (categoryFilter) {
         query = sql`SELECT * FROM vw_inventory_risk WHERE category = ${categoryFilter}`;
     }
     const stock = await query;
 
-    // 2. Obtener categorías para el filtro (Whitelist)
-    // Usamos la misma vista para no violar la regla de "solo vistas"
     const categoriesResult = await sql`SELECT DISTINCT category FROM vw_inventory_risk ORDER BY category`;
     const categories = categoriesResult.map(c => c.category);
 
@@ -32,7 +29,6 @@ export default async function InventoryRiskReport({
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
                     <h1 className="text-3xl font-bold text-gray-900">Riesgo de Inventario</h1>
                 </div>
-                {/* Filtro por Categoría */}
                 <form className="mb-8 bg-white p-4 rounded-lg shadow flex gap-4 items-end">
                     <div className="flex-1">
                         <label className="block text-sm font-medium text-gray-700 mb-1">Filtrar por Categoría</label>

@@ -17,7 +17,6 @@ export default async function TopProductsReport({
     const limit = 5;
     const offset = (page - 1) * limit;
 
-    // Consulta dinámica con búsqueda y paginación
     let products;
     if (q) {
         products = await sql`
@@ -34,7 +33,6 @@ export default async function TopProductsReport({
     `;
     }
 
-    // Verificar si hay más (simple check: si trajo menos del límite, es la última)
     const hasMore = products.length === limit;
 
     return (

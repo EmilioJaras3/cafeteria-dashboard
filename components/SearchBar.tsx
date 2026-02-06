@@ -8,7 +8,6 @@ export function SearchBar({ placeholder, name = "q", defaultValue }: { placehold
                 placeholder={placeholder}
                 className="w-full md:w-80 p-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 font-medium"
             />
-            {/* Hidden submit button to allow Enter key */}
             <button type="submit" className="hidden" />
         </div>
     );

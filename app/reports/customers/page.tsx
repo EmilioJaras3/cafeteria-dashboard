@@ -15,14 +15,12 @@ export default async function CustomersReport({
     const limit = 10;
     const offset = (page - 1) * limit;
 
-    // Consulta con paginación
     const customers = await sql`
     SELECT * FROM vw_customer_value 
     ORDER BY total_spent DESC 
     LIMIT ${limit} OFFSET ${offset}
   `;
 
-    // Check simple de "Siguiente" página
     const hasMore = customers.length === limit;
 
     return (

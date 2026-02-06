@@ -5,9 +5,6 @@ export function Pagination({ page, hasMore, baseUrl }: { page: number; hasMore: 
     const prevPage = page > 1 ? page - 1 : 1;
     const nextPage = page + 1;
 
-    // Preservar otros params? Simplificado: asumo que baseUrl ya trae los filtros o se construye en el padre
-    // Mejor estrategia simple: Links planos
-
     return (
         <div className="flex justify-center gap-4 mt-6 items-center">
             {page > 1 ? (
@@ -23,7 +20,7 @@ export function Pagination({ page, hasMore, baseUrl }: { page: number; hasMore: 
                 </span>
             )}
 
-            <span className="text-sm font-bold text-gray-600">Pág. {page}</span>
+            <span className="text-sm font-bold text-gray-600">Pag. {page}</span>
 
             {hasMore ? (
                 <Link

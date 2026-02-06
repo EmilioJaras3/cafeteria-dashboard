@@ -40,7 +40,6 @@ export default async function SalesReport({
                     <p className="text-4xl font-bold text-blue-600">${totalRevenue.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</p>
                 </div>
 
-                {/* Formulario Server-Side Standard */}
                 <form className="bg-white p-4 rounded-lg shadow mb-6 flex flex-wrap gap-4 items-end">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Desde</label>
