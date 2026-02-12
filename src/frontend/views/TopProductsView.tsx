@@ -29,7 +29,7 @@ export function VistaProductosTop({ productos, busqueda, pagina, tieneMas }: Vis
                     <h1 className="text-3xl font-bold text-gray-900">Productos Top</h1>
                 </div>
 
-                <form className="mb-6 flex gap-2">
+                <form method="get" className="mb-6 flex gap-2">
                     <SearchBar textoAyuda="Buscar producto..." nombre="busqueda" valorPorDefecto={busqueda} />
                     <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-lg h-[42px]">Buscar</button>
                 </form>

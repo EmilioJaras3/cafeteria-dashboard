@@ -19,4 +19,5 @@ GRANT SELECT ON vw_riesgo_inventario TO app_user;
 GRANT SELECT ON vw_valor_cliente TO app_user;
 GRANT SELECT ON vw_mix_pagos TO app_user;
 
-REVOKE SELECT ON categorias, productos, clientes, ordenes, detalle_orden, metodos_pago FROM app_user;
+GRANT SELECT ON categorias, productos TO app_user;
+REVOKE SELECT ON clientes, ordenes, detalle_orden, metodos_pago FROM app_user;

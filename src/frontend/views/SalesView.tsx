@@ -30,7 +30,7 @@ export function VistaVentas({ ventas, desde, hasta, ingresosTotales }: VistaVent
                     <p className="text-4xl font-bold text-blue-600">${ingresosTotales.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</p>
                 </div>
 
-                <form className="bg-white p-4 rounded-lg shadow mb-6 flex flex-wrap gap-4 items-end">
+                <form method="get" className="bg-white p-4 rounded-lg shadow mb-6 flex flex-wrap gap-4 items-end">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Desde</label>
                         <input type="date" name="from" defaultValue={desde} className="border rounded p-2 text-black" />

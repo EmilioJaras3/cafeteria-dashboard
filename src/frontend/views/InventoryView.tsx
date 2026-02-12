@@ -25,7 +25,7 @@ export function VistaInventario({ inventario, categorias, filtroCategoria }: Vis
                     <Link href="/" className="p-2 hover:bg-gray-200 rounded-full transition"><ArrowLeft className="w-6 h-6 text-gray-600" /></Link>
                     <h1 className="text-3xl font-bold text-gray-900">Riesgo de Inventario</h1>
                 </div>
-                <form className="mb-8 bg-white p-4 rounded-lg shadow flex gap-4 items-end">
+                <form method="get" className="mb-8 bg-white p-4 rounded-lg shadow flex gap-4 items-end">
                     <div className="flex-1">
                         <label className="block text-sm font-medium text-gray-700 mb-1">Filtrar por Categoría</label>
                         <select name="categoria" defaultValue={filtroCategoria} className="w-full p-2 border rounded text-black bg-white">

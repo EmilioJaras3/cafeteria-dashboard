@@ -24,13 +24,13 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ],
       "@backend/*": [
         "./backend/*"
       ],
       "@frontend/*": [
-        "./frontend/*"
+        "./src/frontend/*"
       ],
       "@database/*": [
         "./database/*"
