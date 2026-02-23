@@ -7,6 +7,7 @@ export function GoogleProvider({ children }: { children: React.ReactNode }) {
 
     if (!clientId) {
         console.warn('Google Client ID is missing. OAuth Benchmarking will not work.');
+        return <>{children}</>;
     }
 
     return (

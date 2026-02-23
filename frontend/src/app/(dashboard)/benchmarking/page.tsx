@@ -17,14 +17,18 @@ import { toast } from 'sonner';
 import { useGoogleLogin } from '@react-oauth/google';
 
 export default function BenchmarkingPage() {
+    const [isMounted, setIsMounted] = useState(false);
     const [projectId, setProjectId] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isRunningQueries, setIsRunningQueries] = useState(false);
     const [lastStatus, setLastStatus] = useState<string | null>(null);
 
     useEffect(() => {
+        setIsMounted(true);
         loadProject();
     }, []);
+
+    if (!isMounted) return null;
 
     const loadProject = async () => {
         try {
