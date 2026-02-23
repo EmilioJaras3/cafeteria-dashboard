@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { ArrowLeft, Loader2, Save, ShoppingBag, DollarSign, Image as ImageIcon, Calendar, Info } from 'lucide-react';
+import { ArrowLeft, Loader2, Save, ShoppingBag, DollarSign, Image as ImageIcon, Calendar, Info, Upload, X } from 'lucide-react';
 import Link from 'next/link';
 import { productsService } from '@/services/products.service';
 import { toast } from 'sonner';
@@ -13,22 +13,31 @@ import { toast } from 'sonner';
 // Definimos el esquema con tipos más explícitos para el resolver
 const productSchema = z.object({
     name: z.string().min(3, 'El nombre debe tener al menos 3 caracteres'),
-    description: z.string().optional().or(z.literal('')),
-    unitCost: z.preprocess((val) => Number(val), z.number().min(0, 'El costo no puede ser negativo')),
-    salePrice: z.preprocess((val) => Number(val), z.number().min(0, 'El precio no puede ser negativo')),
+    description: z.string().optional().default(''),
+    unitCost: z.coerce.number().min(0, 'El costo no puede ser negativo'),
+    salePrice: z.coerce.number().min(0, 'El precio no puede ser negativo'),
     isPerishable: z.boolean().default(false),
-    shelfLifeDays: z.preprocess((val) => (val === '' || val === null || val === undefined) ? undefined : Number(val), z.number().min(0).optional()),
-    imageUrl: z.string().optional().or(z.literal('')),
+    shelfLifeDays: z.coerce.number().min(0).optional(),
+    imageUrl: z.string().optional().default(''),
 });
 
-type ProductFormValues = z.infer<typeof productSchema>;
+interface ProductFormValues {
+    name: string;
+    description?: string;
+    unitCost: number;
+    salePrice: number;
+    isPerishable: boolean;
+    shelfLifeDays?: number;
+    imageUrl?: string;
+}
 
 export default function NewProductPage() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
 
     const form = useForm<ProductFormValues>({
-        resolver: zodResolver(productSchema),
+        resolver: zodResolver(productSchema) as any,
         defaultValues: {
             name: '',
             description: '',
@@ -41,6 +50,31 @@ export default function NewProductPage() {
     });
 
     const isPerishable = form.watch('isPerishable');
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                toast.error('Imagen demasiado grande', {
+                    description: 'El tamaño máximo es de 2MB'
+                });
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result as string;
+                setImagePreview(base64String);
+                form.setValue('imageUrl', base64String);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const removeImage = () => {
+        setImagePreview(null);
+        form.setValue('imageUrl', '');
+    };
 
     const onSubmit = async (data: ProductFormValues) => {
         setIsSubmitting(true);
@@ -180,13 +214,53 @@ export default function NewProductPage() {
                                 </div>
                                 Visuales
                             </h2>
-                            <div className="space-y-2">
-                                <label className="text-xs font-black uppercase text-black pl-1">URL de la Imagen (FOTO)</label>
-                                <input
-                                    placeholder="HTTPS://..."
-                                    {...form.register('imageUrl')}
-                                    className="w-full h-12 px-4 border-4 border-black font-black outline-none focus:bg-slate-50"
-                                />
+                            <div className="space-y-4">
+                                <label className="text-xs font-black uppercase text-black pl-1">Foto del Producto (Archivos)</label>
+
+                                <div className="relative group/upload">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                        className="hidden"
+                                        id="product-image-upload"
+                                    />
+
+                                    {!imagePreview ? (
+                                        <label
+                                            htmlFor="product-image-upload"
+                                            className="flex flex-col items-center justify-center w-full h-48 border-4 border-black border-dashed bg-slate-50 hover:bg-neo-yellow/10 transition-colors cursor-pointer group"
+                                        >
+                                            <Upload className="w-10 h-10 text-slate-400 group-hover:text-black transition-colors mb-2" />
+                                            <span className="font-black text-[10px] uppercase tracking-widest text-slate-400 group-hover:text-black">Click para subir foto</span>
+                                            <span className="text-[8px] text-slate-400 uppercase mt-1">PNG, JPG hasta 2MB</span>
+                                        </label>
+                                    ) : (
+                                        <div className="relative w-full h-48 border-4 border-black overflow-hidden group">
+                                            <img
+                                                src={imagePreview}
+                                                alt="Preview"
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                                                <label
+                                                    htmlFor="product-image-upload"
+                                                    className="p-2 bg-white border-2 border-black cursor-pointer hover:bg-neo-yellow transition-colors"
+                                                >
+                                                    <Upload size={20} />
+                                                </label>
+                                                <button
+                                                    type="button"
+                                                    onClick={removeImage}
+                                                    className="p-2 bg-neo-red border-2 border-black text-white hover:bg-red-600 transition-colors"
+                                                >
+                                                    <X size={20} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
                                 {form.formState.errors.imageUrl && (
                                     <p className="text-[10px] font-black text-neo-red uppercase italic">{form.formState.errors.imageUrl.message}</p>
                                 )}
