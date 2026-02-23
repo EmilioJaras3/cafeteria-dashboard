@@ -146,7 +146,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                             <label className="text-sm font-medium leading-none">Nombre del Producto</label>
                             <Input
                                 {...form.register('name')}
-                                className={form.formState.errors.name ? "border-destructive" : ""}
+                                className={`neo-input ${form.formState.errors.name ? "border-destructive" : ""}`}
                             />
                             {form.formState.errors.name && (
                                 <p className="text-sm text-destructive">{form.formState.errors.name.message}</p>
@@ -156,20 +156,20 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium leading-none">Costo Unitario ($)</label>
-                                <Input type="number" step="0.01" {...form.register('unitCost')} />
+                                <Input type="number" step="0.01" {...form.register('unitCost')} className="neo-input text-black" />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-sm font-medium leading-none">Precio de Venta ($)</label>
-                                <Input type="number" step="0.01" {...form.register('salePrice')} />
+                                <Input type="number" step="0.01" {...form.register('salePrice')} className="neo-input text-black" />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium leading-none">Descripción</label>
-                            <div className="min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                            <div className="min-h-[120px] w-full">
                                 <textarea
-                                    className="w-full h-full bg-transparent outline-none resize-none"
+                                    className="neo-input h-full py-4 resize-none"
                                     {...form.register('description')}
                                 />
                             </div>
@@ -193,7 +193,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                         {form.watch('isPerishable') && (
                             <div className="space-y-2">
                                 <label className="text-sm font-medium leading-none">Días de vida útil</label>
-                                <Input type="number" {...form.register('shelfLifeDays')} />
+                                <Input type="number" {...form.register('shelfLifeDays')} className="neo-input w-32" />
                             </div>
                         )}
 

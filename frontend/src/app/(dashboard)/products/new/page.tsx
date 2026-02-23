@@ -141,7 +141,7 @@ export default function NewProductPage() {
                                 <input
                                     placeholder="EJ. GALLETAS DE AVENA ARTESANALES"
                                     {...form.register('name')}
-                                    className={`w-full h-14 px-4 border-4 border-black font-black uppercase outline-none focus:bg-neo-yellow/5 ${form.formState.errors.name ? 'bg-red-50' : 'bg-white'}`}
+                                    className={`neo-input ${form.formState.errors.name ? 'bg-red-50' : ''}`}
                                 />
                                 {form.formState.errors.name && (
                                     <p className="text-[10px] font-black text-neo-red uppercase italic">{form.formState.errors.name.message}</p>
@@ -156,7 +156,7 @@ export default function NewProductPage() {
                                     placeholder="CUÉNTALES POR QUÉ TU PRODUCTO ES EL MEJOR DEL CAMPUS..."
                                     rows={3}
                                     {...form.register('description')}
-                                    className="w-full p-4 border-4 border-black font-black uppercase outline-none focus:bg-neo-yellow/5 bg-white resize-none"
+                                    className="neo-input h-auto py-4 resize-none"
                                 />
                             </div>
                         </div>
@@ -177,7 +177,7 @@ export default function NewProductPage() {
                                         type="number"
                                         step="0.01"
                                         {...form.register('unitCost')}
-                                        className="bg-transparent border-b-4 border-black w-full outline-none focus:text-neo-green transition-colors"
+                                        className="bg-transparent border-b-4 border-black w-full outline-none text-black focus:text-neo-green transition-colors"
                                     />
                                 </div>
                                 <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">¿Cuánto te cuesta producirlo/comprarlo?</p>
@@ -197,7 +197,7 @@ export default function NewProductPage() {
                                         type="number"
                                         step="0.01"
                                         {...form.register('salePrice')}
-                                        className="bg-transparent border-b-4 border-black w-full outline-none focus:text-neo-red transition-colors"
+                                        className="bg-transparent border-b-4 border-black w-full outline-none text-black focus:text-neo-red transition-colors"
                                     />
                                 </div>
                                 <p className="text-[10px] font-bold text-black uppercase tracking-wider">¿A cuánto lo vendes al público?</p>
@@ -291,7 +291,7 @@ export default function NewProductPage() {
                                         <input
                                             type="number"
                                             {...form.register('shelfLifeDays')}
-                                            className="w-24 h-12 px-4 border-4 border-black font-black outline-none focus:bg-neo-red/5"
+                                            className="neo-input w-24 h-12"
                                         />
                                         <span className="font-bold uppercase text-[10px] text-slate-400">días desde producción</span>
                                     </div>
