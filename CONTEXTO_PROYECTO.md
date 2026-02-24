@@ -8,7 +8,9 @@ Este documento tiene el propósito de explicar de forma detallada e ingenieril c
 
 ## Hipótesis del Proyecto
 
-*La integración de recomendaciones de inventario basadas en el filtrado estadístico de demanda (método IQR) reducirá el desperdicio de productos perecederos en un 10% semanal en comparación con los métodos tradicionales de preparación por tanteo. Esto se logrará porque el sistema evita la sobreproducción al ajustar dinámicamente las estimaciones, eliminando el ruido estadístico causado por días de venta excepcionalmente altos o bajos.*
+## Hipótesis del Proyecto
+
+*Proporcionar a los vendedores universitarios de snacks un dashboard analítico que registre su historial de ventas, mermas y ganancias, reducirá el desperdicio de productos perecederos en un 10% semanal. Esto se logrará porque la plataforma permitirá al vendedor realizar estimaciones manuales basadas en evidencia documental de su propio desempeño financiero, abandonando la preparación intuitiva o "al tanteo" por una toma de decisiones informada por datos duros.*
 
 ---
 
