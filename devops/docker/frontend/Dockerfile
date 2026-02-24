@@ -29,6 +29,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Dentro de Docker el frontend accede al backend vía Nginx en la misma red
 ARG NEXT_PUBLIC_API_URL=/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
+ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
 RUN npm run build
 
 # ── Stage 3: Producción ─────────────────────

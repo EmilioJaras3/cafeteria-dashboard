@@ -67,14 +67,14 @@ const routes = [
         icon: ShieldCheck,
         href: '/audit',
         color: 'bg-neo-red',
-        roles: ['admin', 'seller'],
+        roles: ['admin', 'seller', 'buyer'],
     },
     {
         label: 'Benchmarking',
         icon: TrendingUp,
         href: '/benchmarking',
         color: 'bg-neo-yellow',
-        roles: ['admin', 'seller'],
+        roles: ['admin', 'seller', 'buyer'],
     },
 ];
 

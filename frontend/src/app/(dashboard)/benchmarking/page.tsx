@@ -10,11 +10,53 @@ import {
     Loader2,
     Globe,
     Zap,
-    History
+    History as HistoryIcon
 } from 'lucide-react';
 import { benchmarkingService } from '@/services/benchmarking.service';
 import { toast } from 'sonner';
 import { useGoogleLogin } from '@react-oauth/google';
+
+interface GoogleLoginButtonProps {
+    isLoading: boolean;
+    setIsLoading: (loading: boolean) => void;
+    setLastStatus: (status: string) => void;
+}
+
+function GoogleLoginButton({ isLoading, setIsLoading, setLastStatus }: GoogleLoginButtonProps) {
+    const login = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            setIsLoading(true);
+            try {
+                const response = await benchmarkingService.sendSnapshot(tokenResponse.access_token) as any;
+                toast.success('¡SNAPSHOT ENVIADO!', {
+                    description: `Se enviaron ${response.count} métricas al almacén de BigQuery.`
+                });
+                setLastStatus(`Exitoso: ${new Date().toLocaleTimeString()}`);
+            } catch (error: any) {
+                toast.error('Error al enviar snapshot', {
+                    description: error.response?.data?.message || error.message
+                });
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        onError: () => {
+            toast.error('Fallo en la autenticación con Google');
+        },
+        scope: 'https://www.googleapis.com/auth/bigquery'
+    });
+
+    return (
+        <button
+            onClick={() => login()}
+            disabled={isLoading}
+            className="w-full py-4 bg-black text-white font-black uppercase border-4 border-black shadow-[6px_6px_0_0_#FFC72C] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+        >
+            {isLoading ? <Loader2 className="animate-spin" /> : <Globe size={20} className="text-neo-yellow" />}
+            ENVIAR A BIGQUERY
+        </button>
+    );
+}
 
 export default function BenchmarkingPage() {
     const [isMounted, setIsMounted] = useState(false);
@@ -54,29 +96,7 @@ export default function BenchmarkingPage() {
         }
     };
 
-    // OAuth Login & BigQuery Upload
-    const login = useGoogleLogin({
-        onSuccess: async (tokenResponse) => {
-            setIsLoading(true);
-            try {
-                const response = await benchmarkingService.sendSnapshot(tokenResponse.access_token) as any;
-                toast.success('¡SNAPSHOT ENVIADO!', {
-                    description: `Se enviaron ${response.count} métricas al almacén de BigQuery.`
-                });
-                setLastStatus(`Exitoso: ${new Date().toLocaleTimeString()}`);
-            } catch (error: any) {
-                toast.error('Error al enviar snapshot', {
-                    description: error.response?.data?.message || error.message
-                });
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        onError: () => {
-            toast.error('Fallo en la autenticación con Google');
-        },
-        scope: 'https://www.googleapis.com/auth/bigquery'
-    });
+    // OAuth Login & BigQuery Upload logic moved to GoogleLoginButton component
 
     return (
         <div className="p-4 md:p-10 space-y-10 font-display min-h-screen bg-neo-white pb-24">
@@ -137,14 +157,11 @@ export default function BenchmarkingPage() {
                     <p className="font-bold text-slate-500 uppercase text-xs leading-relaxed">
                         Sube las métricas consolidadas al almacén central BigQuery y reinicia las estadísticas tras éxito.
                     </p>
-                    <button
-                        onClick={() => login()}
-                        disabled={isLoading}
-                        className="w-full py-4 bg-black text-white font-black uppercase border-4 border-black shadow-[6px_6px_0_0_#FFC72C] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
-                    >
-                        {isLoading ? <Loader2 className="animate-spin" /> : <Globe size={20} className="text-neo-yellow" />}
-                        ENVIAR A BIGQUERY
-                    </button>
+                    <GoogleLoginButton
+                        isLoading={isLoading}
+                        setIsLoading={setIsLoading}
+                        setLastStatus={setLastStatus}
+                    />
                 </div>
             </div>
 
@@ -171,7 +188,7 @@ export default function BenchmarkingPage() {
                     </div>
                     <div className="space-y-2">
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                            <History size={12} /> Última Actividad
+                            <HistoryIcon size={12} /> Última Actividad
                         </p>
                         <p className="text-sm font-bold text-black border-l-4 border-black pl-4 uppercase">
                             {lastStatus || 'No hay actividad registrada'}

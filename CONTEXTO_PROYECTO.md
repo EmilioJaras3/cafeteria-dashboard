@@ -6,6 +6,12 @@ Este documento tiene el propósito de explicar de forma detallada e ingenieril c
 
 ---
 
+## Hipótesis del Proyecto
+
+*La integración de recomendaciones de inventario basadas en el filtrado estadístico de demanda (método IQR) reducirá el desperdicio de productos perecederos en un 10% semanal en comparación con los métodos tradicionales de preparación por tanteo. Esto se logrará porque el sistema evita la sobreproducción al ajustar dinámicamente las estimaciones, eliminando el ruido estadístico causado por días de venta excepcionalmente altos o bajos.*
+
+---
+
 ## 1. Arquitectura General (Microservicios en Docker)
 
 El sistema está construido pensando en escalabilidad y está orquestado completamente mediante **Docker Compose**. Se compone de 4 servicios principales (basados en 4 contenedores):
