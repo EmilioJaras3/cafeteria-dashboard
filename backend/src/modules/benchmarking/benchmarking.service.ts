@@ -2,6 +2,7 @@ import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { BigQuery } from '@google-cloud/bigquery';
+import { OAuth2Client } from 'google-auth-library';
 import { Project } from './entities/project.entity';
 import { Query } from './entities/query.entity';
 
@@ -65,10 +66,13 @@ export class BenchmarkingService {
 
         // 2. Enviar a BigQuery usando el token del usuario
         try {
+            const oauth2Client = new OAuth2Client();
+            oauth2Client.setCredentials({ access_token: accessToken });
+
             const bigquery = new BigQuery({
                 projectId: 'data-from-software',
-                credentials: { access_token: accessToken }
-            } as any);
+                authClient: oauth2Client
+            });
 
             const datasetId = 'benchmarking_warehouse';
             const tableId = 'daily_query_metrics';
