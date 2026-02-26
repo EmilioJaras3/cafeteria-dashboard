@@ -3,7 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{tikz}
 \usetikzlibrary{positioning, shapes.multipart, arrows.meta}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.5in]{geometry}
 
 \title{Diagrama Entidad-Relación - TienditaCampus}
 \author{Equipo de Desarrollo}
@@ -13,7 +13,7 @@
 \maketitle
 
 \begin{center}
-\begin{tikzpicture}[
+\begin{tikzpicture}[scale=0.75, transform shape,
   entity/.style={
     draw=black!50!blue, very thick,
     rectangle split, rectangle split parts=2,
@@ -73,7 +73,7 @@
 };
 
 % Fila 2
-\node[entity] (Pedido) at (0,-8) {
+\node[entity] (Pedido) at (0,-7) {
   \centering \textbf{PEDIDO}
   \nodepart{second}
   \textbf{PK id : UUID} \\
@@ -85,7 +85,7 @@
   createdAt : Date
 };
 
-\node[entity] (DetallePedido) at (9,-8) {
+\node[entity] (DetallePedido) at (9,-7) {
   \centering \textbf{DETALLE\_PEDIDO}
   \nodepart{second}
   \textbf{PK id : UUID} \\
@@ -97,7 +97,7 @@
 };
 
 % Fila 3
-\node[entity] (VentaDiaria) at (0,-16) {
+\node[entity] (VentaDiaria) at (0,-14) {
   \centering \textbf{VENTA\_DIARIA}
   \nodepart{second}
   \textbf{PK id : UUID} \\
@@ -109,7 +109,7 @@
   totalOrders : Int
 };
 
-\node[entity] (ProyectoBQ) at (9,-16) {
+\node[entity] (ProyectoBQ) at (9,-14) {
   \centering \textbf{PROYECTO\_BQ}
   \nodepart{second}
   \textbf{PK id : UUID} \\[1ex]
@@ -119,7 +119,7 @@
   clientEmail : String
 };
 
-\node[entity] (EjecucionSQL) at (18,-16) {
+\node[entity] (EjecucionSQL) at (18,-14) {
   \centering \textbf{EJECUCION\_SQL}
   \nodepart{second}
   \textbf{PK id : UUID} \\

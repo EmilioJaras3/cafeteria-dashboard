@@ -3,7 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{tikz}
 \usepackage{pgf-umlcd}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.5in]{geometry}
 
 \title{Diagrama de Clases - TienditaCampus}
 \author{Equipo de Desarrollo}
@@ -17,7 +17,7 @@
 \renewcommand{\umldrawcolor}{black!70!blue}
 \renewcommand{\umlfillcolor}{white!95!blue}
 
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.75, transform shape]
 
 % -------------------------
 % Entidad User
@@ -65,7 +65,7 @@
 % -------------------------
 % Entidad Order
 % -------------------------
-\begin{class}[text width=4.5cm]{Pedido}{0,-10}
+\begin{class}[text width=4.5cm]{Pedido}{0,-8}
   \attribute{- id : UUID}
   \attribute{- status : OrderStatusEnum}
   \attribute{- totalAmount : Decimal}
@@ -78,7 +78,7 @@
 % -------------------------
 % Entidad OrderItem
 % -------------------------
-\begin{class}[text width=4.5cm]{DetallePedido}{10,-10}
+\begin{class}[text width=4.5cm]{DetallePedido}{10,-8}
   \attribute{- id : UUID}
   \attribute{- quantity : Int}
   \attribute{- unitPrice : Decimal}
@@ -89,7 +89,7 @@
 % -------------------------
 % Entidades Benchmarking
 % -------------------------
-\begin{class}[text width=4.5cm]{VentaDiaria}{0,-18}
+\begin{class}[text width=4.5cm]{VentaDiaria}{0,-15}
   \attribute{- id : UUID}
   \attribute{- saleDate : Date}
   \attribute{- totalRevenue : Decimal}
@@ -98,7 +98,7 @@
   \operation{+ calculateDailyMetrics() : void}
 \end{class}
 
-\begin{class}[text width=4.5cm]{ProyectoBQ}{10,-18}
+\begin{class}[text width=4.5cm]{ProyectoBQ}{10,-15}
   \attribute{- id : UUID}
   \attribute{- datasetId : String}
   \attribute{- tableId : String}
@@ -106,7 +106,7 @@
   \operation{+ getCredentials() : JSON}
 \end{class}
 
-\begin{class}[text width=4.5cm]{EjecucionSQL}{20,-18}
+\begin{class}[text width=4.5cm]{EjecucionSQL}{20,-15}
   \attribute{- id : UUID}
   \attribute{- executionTimeMs : Decimal}
   \attribute{- bytesBilled : Int}
