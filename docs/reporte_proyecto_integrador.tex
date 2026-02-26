@@ -57,7 +57,7 @@
     
     {\large \textbf{Nombre del Proyecto:}}\par
     \vspace{0.3cm}
-    {\Large \textbf{TienditaCampus: Sistema de Soporte a la Decisión para Optimización de Inventarios en Microeconomías Universitarias previendo Mermas con el Método IQR}}\par
+    {\Large \textbf{TienditaCampus}}\par
     \vspace{1.5cm}
     
     {\large \textbf{Integrantes:}}\par
@@ -71,7 +71,7 @@
     
     {\large \textbf{Docente:}}\par
     \vspace{0.3cm}
-    {\normalsize \textbf{[Nombre del Maestro/Asesor]}}\par
+    {\normalsize \textbf{Rocío Crystal Hernández Camacho}}\par
     \vspace{1.5cm}
     
     {\large \textbf{Fecha de entrega:}}\par
@@ -105,7 +105,7 @@
 \section{Resumen}
 El presente proyecto, denominado \textbf{TienditaCampus}, expone el diseño, desarrollo e implementación de un sistema web integral orientado a la gestión de inventarios y punto de venta. Este sistema está dirigido específicamente al nicho de estudiantes emprendedores, quienes conforman las microeconomías informales dentro de las instituciones de educación superior. El avance central de esta propuesta es la mitigación de pérdidas económicas asociadas al desperdicio de alimentos perecederos (mermas), integrando el \textbf{Método del Rango Intercuartílico (IQR)} como un motor estadístico subyacente que funciona como un Sistema de Soporte a la Decisión (SSD) para el cálculo eficiente y automatizado de reabastecimiento.
 
-A nivel de ingeniería, la arquitectura de la aplicación adopta un patrón moderno y altamente robusto: un enfoque de \textit{Monorepo} donde el Frontend es renderizado mediante \textbf{Next.js 14} (aprovechando Server-Side Rendering), la lógica de negocio y API RESTful residen en un servidor \textbf{NestJS} estricto en TypeScript, y la persistencia de datos opera en una base de datos relacional \textbf{PostgreSQL}. Todo esto orquestado en contenedores de \textbf{Docker} para garantizar la agilidad de los despliegues. Además, se construyó un ducto analítico para auditorías en la nube mediante \textbf{Google BigQuery}. El piloto inicial demuestra una alta viabilidad tecnológica para reducir el volumen de desperdicios operativos y, como consecuencia directa, profesionalizar el flujo de ingresos de los comerciantes estudiantiles de la Universidad Politécnica de Chiapas.
+A nivel de ingeniería, la arquitectura de la aplicación adopta un patrón moderno y altamente robusto: un enfoque de \textit{Monorepo} donde el Frontend es renderizado mediante \textbf{Next.js 14} (aprovechando Server-Side Rendering), la lógica de negocio y API RESTful residen en un servidor \textbf{NestJS} estricto en TypeScript, y la persistencia de datos opera en una base de datos relacional \textbf{PostgreSQL}. Todo esto orquestado en contenedores de \textbf{Docker} para garantizar la agilidad de los despliegues. Además, se construyó un ducto analítico para auditorías en la nube mediante \textbf{Google BigQuery}. El piloto inicial demuestra una alta viabilidad tecnológica para reducir el volumen de desperdicios operativos y, como consecuencia directa, profesionalizar el flujo de ingresos de los comerciantes estudiantiles.
 
 % =========================================================
 % 3. Introducción
@@ -124,21 +124,21 @@ El sector comercial al interior de los campus universitarios representa una red 
 En el entorno de convivencia diaria de la Universidad Politécnica de Chiapas, y como patrón generalizado en gran parte de las universidades del país, existe una sólida presencia de comercio de tipo ambulante gestionado por los propios alumnos. Sin embargo, su vulnerabilidad operativa radica en la gestión de la caducidad. Los registros de ingresos y egresos suelen ser manuales, anotaciones informales en libretas o retenciones de memoria empírica. Este enfoque carente de estandarización produce una rotación de inventarios deficiente.
 
 \subsection{Antecedentes y evidencia}
-A escala macroeconómica, México enfrenta una alarmante crisis de desperdicio, perdiendo y desechando aproximadamente 30 millones de toneladas de alimentos consumibles cada año, generando un déficit ambiental y social considerable. A escala micro, en los pasillos de las facultades, este desperdicio mina el precario capital de los estudiantes. Cuando los alumnos compran grandes volúmenes de insumos sin un sustento analítico de su tendencia de ventas, las variaciones aleatorias del mercado escolar (días festivos, exámenes, puentes) irremediablemente derivan en mermas económicas cuantiosas. Se ha observado que las soluciones existentes, como los Terminales Punto de Venta (TPV) comerciales (ej. Square, Toast), resultan hostiles para esta demografía debido a sus exorbitantes comisiones por transacción y membresías fijas, erosionando el escaso margen de ganancia estudiantil.
+A escala macroeconómica, México enfrenta una alarmante crisis de desperdicio, perdiendo y desechando aproximadamente 30 millones de toneladas de alimentos consumibles cada año. A escala micro, en los pasillos de las facultades, este desperdicio mina el precario capital de los estudiantes. Cuando los alumnos compran grandes volúmenes de insumos sin un sustento analítico de su tendencia de ventas, las variaciones aleatorias del mercado escolar irremediablemente derivan en mermas económicas cuantiosas. Las soluciones existentes, como los Terminales Punto de Venta (TPV) comerciales, resultan hostiles para esta demografía debido a sus exorbitantes comisiones por transacción y membresías fijas.
 
 \subsection{Declaración clara del problema}
-La inasistencia de instrumentos analíticos que procesen el historial de ventas bajo modelos estadísticos para la predicción y el resurtido provoca una administración del inventario altamente ineficiente y riesgosa en las economías universitarias informales. Esta deficiencia concluye en un índice perjudicial de desperdicio de productos perecederos, golpeando drásticamente el flujo de caja, el capital semilla y la moral del estudiante emprendedor.
+La inasistencia de instrumentos analíticos que procesen el historial de ventas bajo modelos estadísticos para la predicción y el resurtido provoca una administración del inventario ineficiente y riesgosa en las economías universitarias informales. Esta deficiencia concluye en un índice perjudicial de desperdicio de productos perecederos, golpeando drásticamente el flujo de caja del estudiante emprendedor.
 
 \subsection{Consecuencias del problema}
 Si la situación continúa sin una remediación tecnológica, las consecuencias palpables incluyen:
 \begin{enumerate}
     \item \textbf{Erosión financiera:} Pérdida total de capital semilla en las primeras semanas de emprendimiento.
-    \item \textbf{Impacto ecológico:} Contribución directa y sostenida a la problemática ética del desperdicio alimentario institucional.
+    \item \textbf{Impacto ecológico:} Contribución directa al desperdicio alimentario institucional.
     \item \textbf{Riesgos sanitarios:} Incurrir inadvertidamente en violaciones a la higiene alimentaria al desconocer qué producto fue adquirido primero, transgrediendo los fundamentos de las cadenas PEPS (Primeras Entradas, Primeras Salidas).
 \end{enumerate}
 
 \subsection{Delimitación del problema}
-El alcance del presente sistema se delimita en exclusiva a la ingeniería técnica de un software web responsivo (Punto de Venta e Inventario) estructurado para los perfiles de "Administrador/Vendedor" y "Comprador". El proyecto excluirá explícitamente operaciones de logística extra-campus (flotillas de reparto a otras colonias) y pasarelas bancarias nativas en su fase MVP. A nivel algorítmico, el suavizado matemático de la demanda queda estrictamente confinado al uso del paradigma IQR, excluyendo implementaciones complejas basadas en \textit{Deep Learning} que exceden el presupuesto computacional del servidor proyectado.
+El alcance del presente sistema se delimita en exclusiva a la ingeniería técnica de un software web responsivo (Punto de Venta e Inventario). El proyecto excluirá explícitamente operaciones de logística extra-campus y pasarelas bancarias nativas. A nivel algorítmico, el suavizado matemático de la demanda queda estrictamente confinado al uso del paradigma IQR.
 
 \subsection{Preguntas de investigación}
 \begin{itemize}
@@ -147,7 +147,7 @@ El alcance del presente sistema se delimita en exclusiva a la ingeniería técni
 \end{itemize}
 
 \subsection{Justificación del desarrollo del proyecto}
-TienditaCampus posee una fuerte justificación con un enfoque dual. Desde la perspectiva económica y social, funge como un escudo financiero para blindar la inversión incipiente del alumno, fomentando herramientas asimilables hacia la formalización empresarial. Desde la perspectiva académica y de ingeniería, este proyecto provee el lienzo ideal para que el equipo de desarrollo demuestre el dominio exhaustivo de conceptos avanzados: la construcción de Arquitecturas Orientadas a Servicios, la optimización profunda de Bases de Datos Relacionales mediante extensiones nativas (\texttt{pg\_stat\_statements}), y la instrumentación fluida de flujos de Big Data exportando telemetría hacia ecosistemas de alto calibre como Google BigQuery. Constituye así una resolución palpable a un problema cotidiano mediante un \textit{Stack Enterprise}.
+TienditaCampus posee una fuerte justificación con un enfoque dual. En lo económico, blinda la inversión del alumno. En lo ingenieril, provee el lienzo ideal para que el equipo demuestre el dominio de Arquitecturas Orientadas a Servicios, la optimización profunda de Bases de Datos Relacionales mediante extensiones nativas (\texttt{pg\_stat\_statements}), y la instrumentación de flujos de Big Data hacia Google BigQuery.
 
 % =========================================================
 % 5. Objetivos
@@ -155,15 +155,15 @@ TienditaCampus posee una fuerte justificación con un enfoque dual. Desde la per
 \section{Objetivos}
 
 \subsection{OBJETIVO GENERAL}
-Desarrollar, modelar e implementar TienditaCampus, un robusto sistema web integral para la gestión paralela de inventarios y puntos de venta que, al incorporar programáticamente un algoritmo paramétrico de suavizado de demanda (Método IQR), logre disminuir en un porcentaje predictivo del 10\% la tasa de merma por caducidad en comercios operados por estudiantes.
+Desarrollar, modelar e implementar \textbf{TienditaCampus}, un robusto sistema web integral para la gestión de inventarios y puntos de venta que integre un algoritmo paramétrico de suavizado de demanda (Método IQR) para disminuir predictivamente la tasa de merma por caducidad en comercios operados por estudiantes.
 
 \subsection{OBJETIVOS ESPECÍFICOS}
 \begin{itemize}
-    \item Diseñar y codificar una API RESTful elástica y modular utilizando \textbf{NestJS} bajo estricto tipado de \textbf{TypeScript} para la centralización de toda la lógica de negocio y los cálculos estadísticos.
-    \item Programar e ilustrar un Frontend altamente reactivo, optimizado para interfaces móviles y de accesibilidad premium, impulsado por \textbf{Next.js 14} y perfilado visualmente a través de \textbf{Tailwind CSS}.
-    \item Estructurar una ingeniería de base de datos relacional de Tercera Forma Normal (3FN) alojada en \textbf{PostgreSQL} que aplique constricciones y gatillos (triggers) a favor de la metodología transaccional FIFO.
-    \item Configurar capas de seguridad e identidad integrando los protocolos de autorización federada \textbf{Google SSO (OAuth2.0)}, previniendo brechas de vulnerabilidad originadas por el almacenamiento directo de credenciales.
-    \item Desplegar una arquitectura analítica de extremo a extremo que logre auditar el desempeño temporal de las consultas SQL, exportando estas métricas ininterrumpidamente hacia un clúster analítico en \textbf{Google BigQuery}.
+    \item Diseñar y codificar una API RESTful elástica y modular utilizando \textbf{NestJS} bajo estricto tipado de \textbf{TypeScript} para la centralización de la lógica estadística.
+    \item Programar un Frontend reactivo, optimizado para interfaces móviles impulsado por \textbf{Next.js 14} y \textbf{Tailwind CSS}.
+    \item Estructurar una base de datos relacional (3FN) alojada en \textbf{PostgreSQL} que aplique constricciones a favor de la metodología transaccional FIFO.
+    \item Configurar capas de seguridad integrando los protocolos de autorización federada \textbf{Google SSO (OAuth2.0)}.
+    \item Desplegar una arquitectura analítica para auditar el desempeño temporal de las consultas SQL, exportando estas métricas en tiempo real hacia \textbf{Google BigQuery}.
 \end{itemize}
 
 % =========================================================
@@ -172,47 +172,49 @@ Desarrollar, modelar e implementar TienditaCampus, un robusto sistema web integr
 \section{Marco teórico}
 
 \subsection{Antecedentes teóricos y tecnológicos}
-El paradigma de los Sistemas de Punto de Venta (POS - Point of Sale) tradicionales fue creado históricamente para infraestructuras comerciales estáticas y formalmente constituidas. Las nuevas corrientes tecnológicas intentan abordar el nicho de "rescatistas de comida" con startups transnacionales como \textit{Too Good To Go} o plataformas de origen nacional orientadas al ámbito privado universitario como \textit{Infood}. Sin embargo, estas alternativas padecen limitantes sistémicas: su modelo de ingresos radica en el cobro por comisiones, y su diseño funcional es paleativo ---incentivan al consumo exprés de productos a punto de caducar mermando el precio de remate--- pero raramente aplican heurísticas que detecten y prevengan, desde la matriz del proveedor original, la fuga por excedentes.
+El paradigma de los Sistemas de Punto de Venta (POS - Point of Sale) tradicionales fue creado para infraestructuras comerciales grandes y estáticas (restaurantes, supermercados). Ejemplos como \textit{Square} o \textit{Toast} exigen hardware propietario, conexiones fijas y, lo más crítico, retienen márgenes por transacción que asfixian negocios diminutos. Por el lado del salvamento alimentario, startups como \textit{Too Good To Go} o \textit{Infood} incentivan al consumo de productos a punto de caducar rematándolos a bajo precio; sin embargo, actúan como paliativos: no resuelven la raíz del problema (el exceso de compra irracional) sino que solo lidian con la consecuencia (la sobra). \textbf{TienditaCampus} se posiciona tecnológicamente un paso antes en la cadena de suministro, operando como una contramedida proactiva.
 
 \subsection{Definición de conceptos clave}
+Para cimentar las bases del desarrollo, es imperativo establecer las directrices teóricas de la informática y la estadística que rigen el ecosistema:
 \begin{itemize}
-    \item \textbf{Merma:} Disminución o pérdida de las características físicas, cuantitativas o financieras de un producto. En microempresas, usualmente ocasionada por la caducidad alimenticia.
-    \item \textbf{Monorepo (Repositorio Monolítico):} Arquitectura y estrategia de control de versiones donde el código fuente subyacente de múltiples servicios vinculados (usualmente backend, frontend e infraestructura) converge y se versiona paralelamente dentro de un mismo repositorio central de Git.
-    \item \textbf{Server Side Rendering (SSR):} Patrón de diseño web donde la construcción lógica y la renderización en etiquetas HTML de la aplicación son resueltas internamente por el servidor antes de despacharse al navegador cliente, optimizando abismalmente la indexación para buscadores y los tiempos de latencia inicial en redes de baja calidad (como la telefonía en zonas de campus).
+    \item \textbf{Single Sign-On (SSO):} Mecanismo de autenticación que permite a un usuario acceder a múltiples aplicaciones independientes con una sola credencial (ej. Cuenta de Google). Fundamental para la evasión del manejo local de contraseñas.
+    \item \textbf{JSON Web Token (JWT):} Estándar abierto (RFC 7519) que define una forma compacta y autónoma de transmitir información de forma segura entre las partes como un objeto JSON cifrado. 
+    \item \textbf{Monorepo (Repositorio Monolítico):} Arquitectura de versionamiento (Git) donde el código fuente de múltiples servicios (Frontend, Backend, Configuración DB) convive pacíficamente dentro de un único directorio raíz, compartiendo dependencias globales.
+    \item \textbf{Data Warehouse (Almacén de Datos):} Sistema centralizado utilizado para la analítica (OLAP) que consolida datos de múltiples fuentes; en este proyecto, Google BigQuery.
 \end{itemize}
 
 \subsection{Explicación de tecnologías y herramientas utilizadas}
-\textbf{React \& Next.js:} Como librería líder en el trazado de interfaces dinámicas y su marco de trabajo subsecuente, aportan un manejo de estado atemporal (Client y Server Components) indispensable para un POS de respuesta inmediata.\\
-\textbf{NestJS:} Framework para \textit{Node.js} acoplado con arquitectura \textit{Inversion of Control} estrechamente derivado del diseño semántico de Angular. Sus decoradores inyectables permiten segmentar responsabilidades de forma cristalina entre módulos, controladores y servicios, fomentando rutinas probables matemáticamente (Data Science en el Backend).\\
-\textbf{PostgreSQL \& Docker:} Uno funge como el relacional más aclamado y estricto por la comunidad global de desarrollo; el otro habilita un empaquetado inmutable del ambiente operativo de dicho motor, destruyendo por completo la anomalía de "funciona solamente en mi máquina".\\
-\textbf{TypeORM:} ORM (Object Relational Mapper) en TypeScript utilizado para inyectar un velo de abstracción sobre las transacciones crudas a Postgres, optimizando la refactorización y agilizando las interacciones mediante la sintaxis orientada a objetos.
+\textbf{React \& Next.js 14:} Elegidos por la robustez de los React Server Components (RSC) y el Server Side Rendering (SSR). SSR garantiza que el HTML se construya en el servidor, agilizando la carga inicial en smartphones conectados a redes Wi-Fi públicas universitarias inestables.\\
+\textbf{NestJS \& TypeScript:} NestJS es un framework progresivo para Node.js que impone una arquitectura \textit{Inversion of Control} (Inversión de Control) similar a Angular. Forzar el uso de TypeScript en el backend erradica el 80\% de los errores de ejecución (Runtime Errors) causados por asignaciones dinámicas incorrectas, algo vital al dictaminar matemáticas espaciales como el algoritmo IQR.\\
+\textbf{PostgreSQL 16 \& Docker:} PostgreSQL actúa como el motor relacional infibrecible que defiende la concurrencia. La contenerización mediante \textit{Docker Compose} garantiza la inmutabilidad: el servidor de la base de datos corre en un micro-ambiente Linux virtualizado, ajeno a las particularidades del sistema operativo anfitrión.
 
-\subsection{Relación entre teoría y proyecto (Método IQR)}
-La inclusión del Rango Intercuartílico funge como el núcleo matemático estelar encargado de analizar vectores históricos de ventas dentro de los microservicios de NestJS. Dado un vector ascendente de compras $V$, se extraen el primer cuartil ($Q_1$) y el tercer cuartil ($Q_3$). El IQR se formaliza así:
+\subsection{Relación entre teoría y proyecto (Método Estadístico IQR)}
+La piedra angular algorítmica de TienditaCampus recae sobre el \textbf{Rango Intercuartílico (IQR)}. En la estadística descriptiva, el IQR es una medida de dispersión estocástica. Cuando un estudiante registra sus ventas, pueden existir picos irreales (ej. vendió 40 sándwiches un solo día porque hubo un evento escolar, cuando normalmente vende 10). Promediar ese pico destruye el cálculo de "cuánto debo comprar el lunes siguiente". El IQR purga esas anomalías sin requerir de costosos modelos de Inteligencia Artificial (\textit{Machine Learning}).
 
+A nivel de Backend (NestJS), dado un arreglo ordenado de datos de venta diarios $V$, se extraen el primer cuartil ($Q_1$, el percentil 25) y el tercer cuartil ($Q_3$, el percentil 75). El IQR computado se expresa como:
 \begin{equation}
 IQR = Q_3 - Q_1
 \end{equation}
 
-Establecemos así límites numéricos duros:
+El algoritmo define vallas de exclusión (fences):
 \begin{equation}
 Límite_{Inferior} = Q_1 - 1.5(IQR), \quad Límite_{Superior} = Q_3 + 1.5(IQR)
 \end{equation}
 
-Toda venta real que sobrepase dichos umbrales será catalogada como una "Anomalía de comportamiento o varianza esporádica" (outliers), siendo sesgada y purgada del cálculo del reabastecimiento futuro. Al implementarse computacionalmente, el Vendedor obtiene recomendaciones matemáticas impecables sobre el número óptimo a invertir de su producto, eludiendo promedios aritméticos torpes que fácilmente son engañados y que desembocan en el exceso de gastos, proveyendo valor previsor propio de una IA predictiva de red neuronal perimetral pero sin un costoso \textit{overhead} estadístico.
+Toda cifra de ventas $x$ tal que $x > Límite_{Superior}$ se categoriza como un \textit{Outlier} (Valor atípico) y el motor interno de TienditaCampus la margina del motor de sugerencias de compra. Así, el sistema asiste matemáticamente al emprendedor para invertir en un volumen de insumos altamente preciso, neutralizando la incertidumbre y erradicando drásticamente el margen pre-caducidad.
 
 \subsection{Referencias académicas y técnicas}
-Las afirmaciones estructurales y de salubridad procedentes en esta sección pueden correlacionarse extensivamente con la FAO (\textit{The State of Food and Agriculture, 2019-2024}), la literatura especializada provista por NestJS Foundation sobre Modularidad y Patrones de diseño de Inyección, y compendios matemáticos como \textit{Introduction to the Practice of Statistics} por Moore et al.
+Las nociones estructurales recabadas provienen estrictamente de las literaturas técnicas nativas: La documentación fundacional de NestJS provee el patrón Modelo-Servicio; la FAO alerta sobre la cuantía del desperdicio regional; y la teoría fundamental del IQR emana de textos estadísticos seminales como los postulados de Tukey al desarrollar gráficos de cajas (\textit{Boxplots}).
 
 % =========================================================
 % 7. Normativas
 % =========================================================
 \section{Normativas}
-El desarrollo del software corporativo moderno, aún para su aplicación universitaria, reviste de responsabilidades legales. TienditaCampus considera explícitamente los cánones estatutarios vigentes del marco normativo nacional:
+El desarrollo del software acata expresamente el marco normativo legal vigente en la República Mexicana, enfocando su cumplimiento mediante imposiciones lógicas (por código):
 
 \begin{itemize}
-    \item \textbf{NOM-251-SSA1-2009:} Dictamen referente a las Prácticas de Higiene para el Proceso de Alimentos y Bebidas de manera rigurosa. El proyecto acata esta norma de forma digital preventiva: las rutinas del manejador de datos están configuradas algorítmicamente para forzar, por fecha temporal de inclusión, el despacho ciego bajo la norma FIFO (\textit{First In, First Out}), impidiendo transitoriamente en el \textit{Checkout} la remoción del último estock ingresado previo a liquidar obligatoriamente la mercancía inminente a caducar.
-    \item \textbf{Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP):} Garantizar el aviso, el uso y sobre todo, la imposibilidad de infiltración de las contraseñas de las entidades universitarias. A través de la supresión técnica de bases criptográficas de usuarios locales mediante la integración del inicio de sesión federal validado por Google Analytics SSO y OAuth 2.0, el sistema jamás es contenedor de secretos de estado delicados en reposo en la base de datos residente.
+    \item \textbf{NOM-251-SSA1-2009 (Prácticas de Higiene):} Sorteada algorítmicamente restringiendo la manipulación caprichosa de estantes. Las rutinas SQL subyacentes fuerzan imperativamente en el carrito de compra la deducción tipo FIFO (\textit{First In, First Out}). Lo primero en ser registrado como surtido, es lo primero que se resta al momento del \textit{checkout}, imposibilitando la caducidad oculta en el fondo del estante digital.
+    \item \textbf{LFPDPPP (Privacidad de Datos):} Solucionado arquitectónicamente mediante la supresión técnica del registro de contraseñas de contraseñas planas o \textit{hashes} vulnerables. El sistema acude al estándar OAuth2.0 apoyado en Google Cloud Authentication, por lo que las bases de datos locales no salvaguardan llaves delicadas en reposo.
 \end{itemize}
 
 % =========================================================
@@ -220,28 +222,19 @@ El desarrollo del software corporativo moderno, aún para su aplicación univers
 % =========================================================
 \section{Metodología}
 
-\subsection{Tipo de investigación}
-Se persigue una investigación primariamente Aplicada del corte Tecnológico y de Sistema Cuasi-experimental, debido a que se enfoca rigurosamente en la creación del prototipo palpable de innovación orientado al tratamiento fáctico de merma orgánica para un estrato focalizado.
-
-\subsection{Enfoque metodológico del desarrollo}
-Se ejerció bajo una estricta adopción de las doctrinas ágiles apadrinadas por SCRUM en Sprints adaptables de corta vida iterativa, subdividiendo las unidades especializadas del equipo tripartito en ingenieros centrados al plano de interfaz e interactividad de pantalla (Frontend), flujos pesados y arquitectura lógica (Backend), y finalmente aseguramiento analítico de rendimiento persistente (DBA/DevOps con BigQuery).
+\subsection{Tipo de investigación y Enfoque}
+Investigación Aplicada Tecnológica orientada al desarrollo de software perimetral experimental. Se adoptaron las ideologías ágiles en ciclos cortos (Sprints de SCRUM), dividiendo roles jerárquicos de UI/UX Engineer, Backend Architect, y DevOps Engineer de manera transversal.
 
 \subsection{Fases del proyecto}
 \begin{enumerate}
-    \item \textbf{Análisis Situacional y Peritaje:} Elicitación precisa de requerimientos de la microeconomía y recolección analítica para definir viabilidad matemática con el IQR.
-    \item \textbf{Prototipado Geométrico y Modelado ER:} Generación fluida de planillas de componentes reactivos para experiencia (UX/UI en Figma) sumado a un maquetado estupefaciente del Diagrama Entidad-Relación y de Clases UML por LaTeX vía TiKZ.
-    \item \textbf{Ejecución Lógica:} Escritura nativa de los Módulos paralelos de User Auth, Products, Inventory Records y Benchmarks de NestJS inyectando el orquestador TypeORM.
-    \item \textbf{Refinamiento Final y Despliegue CI/CD:} Contenerización masiva mediante los archivos \texttt{docker-compose.yml}, garantizando la persistencia estéril para despliegues inmutables.
+    \item \textbf{Levantamiento Crítico:} Definición del alcance algorítmico y del caso de uso universitario.
+    \item \textbf{Sondeo Visual y Arquitectónico:} Trazado del flujograma de ventanas en \textit{Figma} y construcción de los Diagramas UML de Base de Datos.
+    \item \textbf{Desarrollo Core:} Escritura central del monolito de NestJS (Rutas Auth, Products, Orders, BQ Telemetry) y programación paralela reactiva en Next.js.
+    \item \textbf{Consolidación:} Integración del enjambre transaccional en \texttt{docker-compose} y simulaciones del tráfico BigQuery.
 \end{enumerate}
 
-\subsection{Herramientas y tecnologías utilizadas}
-La administración colaborativa operó por completo amparada por la red remota bajo \textbf{Git} en los servidores seguros de \textbf{GitHub}. Todo el desarrollo del cuerpo operativo de redacción de lenguaje imperativo fluyó interactivamente en \textbf{Visual Studio Code}. El ecosistema aglutina: el enrutador inteligente de Vercel \textbf{(Next.js 14)}, \textbf{React, Tailwind CSS, TypeORM, PostgreSQL 16}, los enjambres automáticos paramétricos de \textbf{Docker} y de infraestructura perimetral en la Nube mediante los tableros analíticos de \textbf{Google API Services}.
-
-\subsection{Técnicas de recopilación de información}
-Empleo sistemático de etnografía activa y no invasiva: un monitoreo metódico durante múltiples ciclos laborales respecto a los embudos y los colapsos administrativos empíricos de las planillas de los oferentes que deambulan el centro universitario, contrastada simultáneamente contra los reportes numéricos alarmistas de pérdida de capital descritos por el Banco Nacional en sectores incipientes y desinformados de control mercantil orgánico.
-
 \subsection{Validación y evaluación del sistema}
-La validación se sustentó a nivel de capa informática simulando la batería exhaustiva en puntos nodales expuestos (endpoints) con interceptores y verbos HTTP bajo \textbf{Postman}. En concordancia con ello, en el escalón de experiencia perceptiva humana se perfilaron múltiples comprobantes transaccionales "End to End" probatorios a nivel de celulares mediante la progatonización y consolidación iteradas y veloces de la función de enrutamiento al \textit{Checkout}, corroborando el cálculo en decimales idóneo por \texttt{DailySales} al compilarse una baja por compra.
+Para atestiguar la integridad del motor se sometió la API a las baterías transaccionales mediante \textbf{Postman}. En la capa de experiencia de usuario, las validaciones End-to-End confirmaron que la latencia operativa desde la lectura óptica hasta el vaciado en \texttt{DailySales} no excede tolerancias humanas gracias al SSR.
 
 % =========================================================
 % 9. Análisis del sistema
@@ -249,9 +242,6 @@ La validación se sustentó a nivel de capa informática simulando la batería e
 \section{Análisis del sistema}
 
 \subsection{Requerimientos funcionales y no funcionales}
-
-A continuación se detalla la consolidación estricta de las reglas del motor web.
-
 \begin{table}[H]
 \centering
 \caption{Matriz general de Requerimientos de Software}
@@ -259,87 +249,113 @@ A continuación se detalla la consolidación estricta de las reglas del motor we
 \begin{tabular}{@{}ll@{}}
 \toprule
 \textbf{Categoría} & \textbf{Descripción del Requerimiento} \\ \midrule
-Funcional & Autenticación segura y obligatoria forzada vía Google Accounts (SSO OAuth2.0).\\
-Funcional & Interfaz CRUD de insumos parametrizada con conmutador flag (Perecedero/No Perecedero).\\
-Funcional & Extracción de métricas Diarias agregativas de Ganancia Neta contra el Capital de Inversión.\\
-Funcional & Pipeline para auditoría a BigQuery sincronizada por latencia y bytes transaccionales medidos.\\
-No Funcional & Tolerancia a estrés paralela soportada nativamente por los clústeres asíncronos de Node.js.\\
-No Funcional & Encriptación robusta sobre todo transporte al forzar JWT codificados bajo secret-keys firmadas. \\ 
-No Funcional & Altísima disponibilidad asimilable bajo infraestructuras de orquestadores efímeros \textit{Dockerisés}. \\ \bottomrule
+Funcional & Proveer inicio de sesión estrictamente atado a Cuentas de Google (SSO).\\
+Funcional & Módulo CRUD de manejo de \textit{Stock} con opción condicional Perecedero.\\
+Funcional & Vista unificada (\textit{Checkout}) para el procesamiento instantáneo en celular de la venta.\\
+Funcional & Puente asíncrono para ingestar registros de tiempos de ejecución hacia BigQuery.\\
+No Funcional & Tolerancia a la alta latencia escolar solucionada por el renderizado de Next.js SSR.\\
+No Funcional & Transporte seguro resguardado obligatoriamente por un cifrado robusto de tokens JWT. \\ 
+No Funcional & Entorno aislado en bases de datos con reinicio determinista orquestado por Docker. \\ \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Identificación de los actores del sistema}
-A nivel logístico, interceden de manera asimétrica los roles de la entidad de clase \textbf{Vendedor} (encargado de alimentar y poblar sus bases de listados asertivamente) y el \textbf{Comprador} (estudiante facultado con la autorización rápida de un escaneo orgánico o acceso libre de su compra programada expedida por el despachador central).
+\textbf{Vendedor Universitario (Administrador):} Perfil transaccional maestro. Autorizado para modificar registros, ver gráficos del método IQR, resguardar inventario y finiquitar peticiones de la cesta de salida.\\
+\textbf{Comprador Universitario:} Estudiante facultado con interactividad visual a los listados vigentes de forma reactiva. 
 
 \subsection{Diagramas de casos de uso (UML)}
-\textit{(Espacio designado para insertar la captura compilada en PDF pre-renderizado correspondiente a diagramas de casos de Uso Típicos e Inherentes).}
+Las acciones troncales ilustran la división jerárquica de permisos.
 
-\subsection{Narrativas de casos de uso (escenarios)}
-1) Un Vendedor, previamente dado de alta por Google, escanea las etiquetas o captura con celular la cantidad original estipulada de productos procesados y los publica a un valor fijo dentro de su listado.\\
-2) Horas más adelante, al cruzarse con el receptor físico (Comprador), despliega el carrito de finalización transaccional interactivo en la vista móvil de Next.js, consolidando el pedido.\\
-3) El servidor NestJS detecta con estricto rigor el decremento e inicia las reglas de validaciones FIFO (para penalizar la remoción equívoca de lotes tempranos) restando la cuota estipulada del inventario del \texttt{inventory\_records} y generando un bloque histórico y monetario al perfil contable \texttt{VentaDiaria}.
-
-\subsection{Modelo de datos preliminar (modelo ER)}
-Conformado por \textit{Users, Products, Orders, OrderItems, InventoryRecords, DailySales, Projects y EjecucionSQL}. Las líneas de dependencia conforman en conjunto un marco altamente referenciado asegurando restricciones sólidas de eliminaciones nulas y actualizaciones reflejas.
-
+% INSTRUCCIÓN PARA EL USUARIO:
+% Agrega la imagen de tu diagrama de Casos de Uso dentro de la carpeta donde tengas este archivo .tex y cambia 'diagrama-casos-uso.png' por el nombre real de tu imagen.
 \begin{figure}[H]
     \centering
-    % \includegraphics[width=0.8\textwidth]{rutadelarchivo.png} o llamar el output LATEX.
-    \fbox{\rule{0pt}{2in} \rule{0.8\linewidth}{0pt}} \par % Placeholder del diagrama
-    \caption{Placeholder para Diagrama Entidad-Relación pre-generado por TiKZ}
-    \label{fig:er_diagram}
+    % \includegraphics[width=0.7\textwidth]{diagrama-casos-uso.png} 
+    \fbox{\parbox[c][5cm][c]{0.7\textwidth}{\centering \textit{[INSTRUCCIÓN: Inserta aquí la imagen PNG/JPG del \textbf{Diagrama de Casos de Uso}]}}}
+    \caption{Diagrama de Casos de Uso del Sistema TienditaCampus}
+    \label{fig:casos_uso}
 \end{figure}
 
-\subsection{Reglas del negocio}
-Estipulada a nivel crudo de capa controladora: Prohibición absoluta de mermar o vender objetos cuyo umbral perfile en el territorio de las cifras sub-cero imposibles en índoles físicas. Los productos declarados por la interfaz como \textit{No Perecederos} (cuadernos, plumas) están eximidos de regirse bajo el dictamen punitivo y limitativo del algoritmo de advertencia estadística (IQR factor) restrictivo.
+\subsection{Modelo de datos preliminar (modelo ER)}
+La columna neural del guardado reside en un esquema de Tercera Forma Normal intensamente tipificado.
+
+% INSTRUCCIÓN PARA EL USUARIO:
+% Agrega aquí la imagen generada de tu diagrama Entidad-Relación (diagrama_er.pdf o .png que hemos generado anteriormente).
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.9\textwidth]{tienditacampus_er_diagram.pdf}
+    \fbox{\parbox[c][6cm][c]{0.9\textwidth}{\centering \textit{[INSTRUCCIÓN: Inserta aquí el \textbf{Diagrama Entidad-Relación} compilado de TienditaCampus]}}}
+    \caption{Diagrama Entidad-Relación (ER) de la Base de Datos PostgreSQL}
+    \label{fig:er_diagram}
+\end{figure}
 
 % =========================================================
 % 10. Diseño del sistema 
 % =========================================================
 \section{Diseño del sistema}
-La columna arquitectónica del proyecto yació sobre un cimiento incuestionablemente consolidado bajo los modelos estructurales de los Frameworks de Inversión de Control. Mediante el patrón \textbf{Módulo-Controlador-Servicio} nativo de las inyecciones de dependencia expuestas genialmente por \textbf{NestJS}, se garantiza que las peticiones crudas (Controlador), la manipulación del dominio y negocio estadístico IQR (Servicio) y la encapsulación lógica (Módulo) permanezcan indisolublemente desacopladas pero altamente atadas para su testeo modular en paralelo. Asimismo, las infraestructuras a través del aislamiento físico del \texttt{docker-compose.yml} segmentan la partición del volumen \texttt{postgres-db} separada e inmune de reinicios volátiles que pudiera acarrear la detención del código reactivo en TypeScript central.
+Se impuso un paradigma constructivo regido por Componentes Aislados. NestJS separa las incidencias acoplando un estrato de \textbf{Controladores} (que absorben el impacto crudo de las rutas HTTP), un anillo de \textbf{Servicios} (donde se hospeda la aritmética de IQR pura y el guardado TypeORM) y finalmente el \textbf{Módulo} (empaquetador jerárquico inyectable).
+
+% INSTRUCCIÓN PARA EL USUARIO:
+% Agrega aquí la imagen del Diagrama de Clases.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.9\textwidth]{tienditacampus_class_diagram.pdf}
+    \fbox{\parbox[c][6cm][c]{0.9\textwidth}{\centering \textit{[INSTRUCCIÓN: Inserta aquí la imagen del \textbf{Diagrama de Clases UML} de NestJS]}}}
+    \caption{Diagrama de Clases UML de la Arquitectura Lógica}
+    \label{fig:class_diagram}
+\end{figure}
 
 % =========================================================
 % 11. Implementación 
 % =========================================================
 \section{Implementación}
-Para desplegar consistentemente y en un escenario cuasi de producción la vasta conjunción de microdependencias de este código, se construyeron los archivos maestros hiper-estructurados \texttt{docker-compose.yml}, amarrando la red interna estática y los puertos relacionales. Se orquestó la abstracción de \texttt{TypeORM} como mediador exclusivo y relacional interino entre Node.js y la red de las tablas SQL maestras, proveyendo al equipo facilidad contundente de generación de esquemas paralelos. Las vistas, perfiles e interfaces maestras reactivas orientadas en componentes para el ecosistema móvil fueron servidas incondicionalmente a base del motor renderizador del servidor expuesto por \textbf{Next.js 14}, afianzando con inclemente rigor estético los lineamientos visuales inmersivos de un elegante \textit{Tema Oscuro Profesional} e interfaces fluidas propulsadas en base a TailwindCSS omitiendo el despilfarro abismal en códigos disonantes y redundancias textuales estériles.
+El monolito integrador fue unificado mediante un orquestador \texttt{docker-compose.yml}, encadenando las lógicas subyacentes. El FrontEnd materializó de manera pixel-perfect el \textit{Tema Oscuro} pautado utilizando configuraciones estrictas en Tailwind CSS. Paralelamente, la vinculación a credenciales GCP (Google Cloud Platform) fue automatizada insertando el JSON de autenticación de servicios para posibilitar el \textit{Streaming Insert} auditivo directo a BigQuery.
 
 % =========================================================
 % 12. Pruebas 
 % =========================================================
 \section{Pruebas}
-El escrutinio exhaustivo mediante auditorías controladas probó valía indiscutible cuando se desencadenaron las simulaciones transaccionales de venta interinas y telemetría forzada. Se originaron diagnósticos exhaustivos en forma de \textit{troubleshooting}. En particular, cabe destacar y resaltar la formidable refactorización operada para sortear y derrocar permanentemente el interino error código 500 originado trágicamente al intentar volcar e inyectar bitácoras de la ingesta de telemetría de monitoreo masivo hacia la consola pública relacional de Google Cloud (BigQuery) provocado inicialmente por la mera y llana indisponibilidad en la inserción cruda paramétrica de la extensión \texttt{pg\_stat\_statements} de postgres en la capa temprana de construcción nativa \textit{Docker}, resuelto con elegancia proscribiendo las consultas internas para invocar al motor directamente mediante el constructor local pre-cargado asépticamente.
+En el transitar hacia la estabilización técnica se detonaron incidencias complejas y resoluciones (\textit{Troubleshooting}). El caso primario consistió en el bloqueo absoluto (Código 500) suscitado en la fase de exportado hacia BigQuery, producto de la incapacidad intrínseca constructiva para acceder localmente a los bytes gastados sin la extensión \texttt{pg\_stat\_statements}. Se resolvió exitosamente ajustando el comando de arranque (Entrypoint) del Docker de Postgres garantizando pre-carga nativa del analizador de tráfico a memoria ram.
 
 % =========================================================
 % 13. Resultados 
 % =========================================================
 \section{Resultados}
-Se declara el alcancé satisfactorio y la culminación apoteósica de una arquitectura de prototipo sumamente funcional, altamente reactiva, de veloz repuesta y capaz de someterse y soportar exigencias palpables de un servidor en producción real acoplado integralmente a un almacén persistente de Big Data asíncrono. La integración del modelo algorítmico IQR estadístico y resolutivo opera de forma factible comprobando experimentalmente eficientes e indectables tiempos ínfimos limitados al milisegundo en iteraciones transaccionales numéricas masivas escalables. La gráfica del "Riesgo Histórico Operacional de Inventario" y su cruce emparejado numérico transaccional se refleja indudablemente nítida, contundentemente ilustrada sobre la capa gráfica interactiva fluida (Echarts) a favor del comerciante universitario sin exhibir un menoscabo estático frente el dinamismo reactivo subyacente de la plataforma frontend.
+Se alcanzó la concreción de un aplicativo comercial vanguardista. Operacionalmente, la inclusión de las funciones reactivas demostró el emparejamiento perfecto del \textit{Dashboard} gráfico estadístico a pantalla y los cambios drásticos reflejados asíncronamente en el fondo (Backend).
+
+% INSTRUCCIÓN PARA EL USUARIO:
+% Agrega aquí una captura de pantalla final de cómo se ve el sistema andando (La página web).
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{captura-sistema-web.png}
+    \fbox{\parbox[c][6cm][c]{0.8\textwidth}{\centering \textit{[INSTRUCCIÓN: Inserta aquí una \textbf{Captura de Pantalla} del sistema web (Dashboard / Tienda) funcionado]}}}
+    \caption{Visualización de la Interfaz Web Responsiva (Frontend) de TienditaCampus}
+    \label{fig:resultado_web}
+\end{figure}
 
 % =========================================================
 % 14. Conclusiones 
 % =========================================================
 \section{Conclusiones}
-La consolidación en la culminación perimetral definitiva del software integral "TienditaCampus" se impuso superando infinitamente la llana directriz y expectativa primaria de servir como un simple inventario y hoja de anotación de despensa virtual digital, enarbolándose por su cuenta a modo de un ecosistema analítico de talla corporativa, férreamente consolidado e idóneo propulsor formal del nicho desatendido y precario universitario intra-escolar. El desglose coordinado interino adoptado en los modelos relacionales de \textit{Monorepositorio}, aunado al diseño exhaustivo sobre paradigmas lógicos transaccionales estériles y el abordaje riguroso acoplable del uso relacional paramétrico avanzado consolidó y afianzó por sobre las trabas y retos una pericia maestra e irrefutable respecto la ingeniería estructural del software por la planilla colaboradora integrante de este formidable esquema aplicativo, planteando y dejando el camino asimilable, abierto y propicio a futuro sobre mejoras colosales del esquema local macro estudiantil al prevenir pérdidas mercantiles a las juventudes incipientes y pioneras.
+La conclusión unánime de los integrantes tras erigir a TienditaCampus reitera la convicción profesional e intelectual que requiere trascender la teoría pura para abordar crisis comunitarias tangibles. Construir un motor \textit{Monorepo} y salvaguardarlo bajo lógicas relacionales matemáticas y auditorías en tiempo casi real con BigQuery ha afianzado destrezas absolutas propias de corporativos ingenieriles de rango masivo. Al resolver de fondo un problema estocástico aplicando heurísticas elementales IQR conectadas al ecosistema Google y NestJS, cerramos el ciclo, validando la tesis inicial: es fáctico y mandatorio abatir el desperdicio en las microeconomías con bases racionales de software pulido.
 
 % =========================================================
 % 15. Recomendaciones 
 % =========================================================
 \section{Recomendaciones}
-Prevalecer, afianzar y extender sobre los próximos confines paralelos y subsecuentes horizontes de este prototipo validativo la integración intrínseca asimilable conectada estrictamente un eslabón o pasarela transaccional de \textit{Machine Learning / Deep Learning AI} inter-actuable al emplear API REST micro analíticas orientadas desde la inyeca nube matriz expuesta del propio Google AI Models paralelos o análogos. De igual imperiosa facultad progresista será propulsar integralmente y asimilar en las vistas finales esquemas contundentes transigentes interbancarios digitales vía APIs nativas y federadas tipo \textit{Open Financial Banking}, relevando del cargo riesgoso anacrónico transaccional basado con estricta excentricidad en solo papel y efectivo orgánico circulante para este rubro juvenil.
+El prototipo iterativo final ostenta vasto espacio para metamorfosis expansivas. Las recomendaciones prospectivas postulan extender el horizonte mediante integraciones y pasarelas de finanzas abiertas vía APIs (\textit{Open Banking FinTechs}) para exiliar paulatinamente la hegemonía y morosidad de las transacciones exclusivamente físicas/efectivas. Subsecuentemente, una adopción formal y masiva sobre el alumnado permitiría reclutar bases de datos macro-estocásticas habilitando la factibilidad para, entonces sí, transicionar del IQR hacia pasarelas nativas de Inteligencia Artificial (\textit{Machine Learning Clusters}) para dictaminar sugerencias predictivas alimentadas por variables del clima temporal y estacionalidades lectivas de examen.
 
 % =========================================================
 % 16. Referencias 
 % =========================================================
 \section{Referencias}
 \begin{itemize}
-    \item Organización de las Naciones Unidas para la Alimentación y la Agricultura (FAO). (2024). \textit{The State of Food and Agriculture 2024: Value Chain Vulnerabilities and The Future of Dietary Merch}.
+    \item Organización de las Naciones Unidas para la Alimentación y la Agricultura (FAO). (2024). \textit{El estado mundial de la agricultura y la alimentación 2024}.
     \item NestJS Foundation. (2025). \textit{Official Documentation: Providers, Controllers and Dependency Injection Architectures in Modern Server Node applications.} \url{https://docs.nestjs.com/}
     \item Diario Oficial de la Federación. \textit{Norma Oficial Mexicana NOM-251-SSA1-2009. Prácticas de Higiene para el Proceso de Alimentos, Bebidas o Suplementos Alimenticios.} 
     \item Moore, D. S., Notz, W. I., \& Flinger, M. A. (2013). \textit{The basic practice of statistics} (6th ed.). W. H. Freeman and Company.
     \item Vercel Inc. (2025). \textit{Next.js 14 Documentación Oficial: App Router and React Server Components.} \url{https://nextjs.org/docs}
+    \item Google Cloud Platform. (2025). \textit{BigQuery documentation: Data analysis and warehouse capabilities.} \url{https://cloud.google.com/bigquery/docs}
 \end{itemize}
 
 % =========================================================
