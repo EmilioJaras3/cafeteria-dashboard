@@ -122,40 +122,43 @@ El estudio se divide en tres etapas principales:
 2.  **Intervención:** Introducción de TienditaCampus. El sistema comienza a proporcionar sugerencias de compra basadas en el IQR después de los primeros 7 días de datos acumulados.
 3.  **Evaluación de Impacto:** Re-evaluación del volumen de mermas y análisis estadístico mediante SPSS o R para determinar la significancia de los cambios observados. Se espera que el uso del SSD reduzca no solo el volumen físico de desperdicio, sino también la huella hídrica y de carbono asociada a la producción de esos alimentos no consumidos.
 
-## 5. Avance Tecnológico: Arquitectura y Pila de Desarrollo
+## 5. Arquitectura del Proyecto: ¿Cómo lo desarrollamos?
 
-La arquitectura de TienditaCampus ha sido seleccionada por su capacidad para ofrecer una solución robusta, escalable y segura, alineada con los estándares de la industria del software moderno. El uso de tecnologías como Next.js, NestJS y Docker permite una separación clara de responsabilidades y una alta eficiencia en el despliegue.
+Para llevar TienditaCampus de una idea a un producto de software real, adoptamos una arquitectura de **Monorepo** dividida en tres servicios principales, todos orquestados mediante **Docker** y `docker-compose` para asegurar que el sistema corra exactamente igual en cualquier computadora sin problemas de compatibilidad.
 
-### Frontend: Next.js y la Experiencia de Usuario
+1.  **El Frontend (La cara del usuario):**
+    *   Desarrollado con **React y Next.js 14**. Elegimos Next.js porque nos permite hacer *Server-Side Rendering*, haciendo que la app cargue rapidísimo incluso en los celulares de los estudiantes que solo tienen datos móviles dentro del campus.
+    *   Para el diseño usamos TailwindCSS, dándole un aspecto de *"Dark Luxury"* muy moderno que rompe con el diseño aburrido de los sistemas universitarios tradicionales.
+    *   Integramos **Google SSO (Single Sign-On)** con OAuth2, así los alumnos pueden iniciar sesión con un solo clic usando su correo institucional, sin tener que memorizar otra contraseña más.
 
-La interfaz de usuario se desarrolla en Next.js debido a su soporte nativo para el renderizado del lado del servidor (SSR) y la generación de sitios estáticos (SSG), lo que garantiza tiempos de carga extremadamente rápidos. Para un estudiante que necesita registrar una venta entre clases, la velocidad de respuesta es crítica. La aplicación se diseña como una Progressive Web App (PWA), permitiendo su uso en dispositivos móviles con una experiencia similar a una aplicación nativa, pero sin las barreras de descarga de las tiendas de aplicaciones tradicionales.
+2.  **El Backend (El cerebro lógico):**
+    *   Construido en Node.js usando **NestJS** con TypeScript. NestJS nos obligó a mantener un código súper ordenado y modular (usando Controladores, Servicios y Módulos).
+    *   Aquí implementamos toda la lógica de validación, la creación de JWTs (JSON Web Tokens) para mantener la sesión segura, y la lógica pesada del Método IQR para calcular las estadísticas sin congelar el celular del usuario.
 
-### Backend: NestJS y la Lógica Analítica
+3.  **La Base de Datos (PostgreSQL):**
+    *   Elegimos **PostgreSQL 16** alojado en un contenedor Docker.
+    *   Usamos **TypeORM** en el backend para comunicarnos con la base de datos mediante objetos de TypeScript, evitando escribir SQL crudo y previniendo ataques de Inyección SQL.
 
-El corazón lógico del sistema reside en un servidor NestJS. Este framework de Node.js utiliza TypeScript, lo que proporciona una tipificación fuerte que previene errores comunes en la manipulación de datos estadísticos complejos. NestJS facilita la implementación de microservicios, permitiendo que el módulo de cálculo de IQR sea independiente del módulo de gestión de usuarios, lo que aumenta la mantenibilidad del sistema.
+## 6. Estructura de la Base de Datos
 
-### Persistencia y Seguridad: PostgreSQL y Google OAuth 2.0
+Nuestra base de datos relacional está diseñada para soportar ventas concurrentes y mantener un historial perfecto para los reportes administrativos. Las tablas principales son:
 
-Para el almacenamiento de datos, se utiliza PostgreSQL, un sistema de gestión de bases de datos relacionales conocido por su cumplimiento de las propiedades ACID y su robustez en la gestión de transacciones financieras. PostgreSQL permite realizar consultas analíticas complejas necesarias para calcular cuartiles y percentiles directamente en el motor de base de datos cuando el volumen de registros aumenta.
+*   **`users`**: Guarda la información de compradores y vendedores, controlando roles y el estado de la verificación por Google.
+*   **`projects` y `queries`**: Tablas administrativas para documentar qué equipo está haciendo las pruebas de la Unidad 2 y qué consultas SQL se están ejecutando.
+*   **`products`**: El catálogo central. Registra precios, imágenes, costos y el flag `is_perishable` (es perecedero) que activa las alertas rápidas.
+*   **`inventory_records`**: Gestiona las existencias en tiempo real usando el principio FIFO (Primeras Entradas, Primeras Salidas).
+*   **`orders` y `order_items`**: Relación maestro-detalle donde guardamos cada venta, quién la hizo, qué productos compró y si ya se entregó el pedido.
+*   **`daily_sales`**: Una tabla de consolidación donde, al final del día, calculamos la ganancia neta, la inversión total y preparamos los datos para los gráficos del dashboard sin tener que recalcular todo desde cero cada vez.
 
-La seguridad de acceso se gestiona mediante Google OAuth 2.0. Este protocolo permite que los estudiantes utilicen sus cuentas institucionales o personales de Google para autenticarse, eliminando la necesidad de que TienditaCampus almacene contraseñas y delegando la seguridad de la identidad a la infraestructura de clase mundial de Google. El flujo de autorización garantiza que la aplicación solo reciba un código de autorización que luego se intercambia por un token de acceso seguro, cumpliendo así con los requisitos de la LFPDPPP sobre la minimización de datos.
+Para la evaluación práctica reciente, activamos la extensión `pg_stat_statements` en PostgreSQL. Esto nos permite rastrear el consumo de hardware de cada consulta SQL y exportar un *Snapshot* a la nube de Google BigQuery (a través de la vista `v_daily_export`) para auditar el rendimiento del sistema en tiempo real.
 
-| Componente | Tecnología | Ventaja Estratégica |
-| :--- | :--- | :--- |
-| **Interfaz** | Next.js | Optimización de rendimiento y SEO. |
-| **API** | NestJS | Arquitectura modular y escalabilidad. |
-| **Datos** | PostgreSQL | Integridad de transacciones y robustez relacional. |
-| **Contenedores** | Docker | Consistencia entre entornos de desarrollo y producción. |
-| **Autenticación** | Google OAuth | Seguridad delegada y reducción de fricción para el usuario. |
+## 7. Equipo de Desarrollo
 
-### Infraestructura y Despliegue: Docker y DevOps
+Este proyecto fue planeado, diseñado y programado desde cero por nuestro equipo, combinando conocimientos de Bases de Datos Avanzadas, Programación Web Full-Stack y Análisis Estadístico.
 
-El sistema se orquestará utilizando Docker, lo que garantiza que la aplicación funcione de manera idéntica en el entorno de desarrollo y en el servidor de producción. La contenedorización permite un aislamiento completo de las dependencias, facilitando la escalabilidad horizontal en caso de que el sistema se expanda a múltiples campus universitarios. Este enfoque DevOps reduce los errores de configuración y acelera el ciclo de vida de desarrollo, permitiendo actualizaciones frecuentes de las funcionalidades de recomendación basadas en el feedback de los usuarios.
+*   **[Tu Nombre / Apellido]** - *[Tu Rol, ej. Líder de Proyecto / Frontend Developer]*
+*   **[Nombre Compañero 1]** - *[Su Rol, ej. Backend Developer / DBA]*
+*   **[Nombre Compañero 2]** - *[Su Rol, ej. Documentación / Testing]*
+*   *(Añadir más miembros si es necesario)*
 
-## Conclusiones y Recomendaciones Estratégicas
-
-El desarrollo y la fundamentación teórica de TienditaCampus demuestran que la tecnología puede ser un puente efectivo para la formalización y optimización de las microeconomías estudiantiles. La integración del Método del Rango Intercuartílico (IQR) ofrece una solución de bajo costo computacional pero de alto impacto analítico, logrando una robustez que supera las capacidades de la intuición humana y de los modelos estadísticos tradicionales en entornos de alta incertidumbre.
-
-La reducción proyectada del 10% en las mermas de alimentos perecederos no solo representa un beneficio económico directo para el estudiante emprendedor, permitiéndole reinvertir sus ahorros en su educación o en el crecimiento de su negocio, sino que también contribuye significativamente a los compromisos nacionales de sostenibilidad. En un país donde el desperdicio de alimentos es una crisis de seguridad nacional, dotar a los ciudadanos más jóvenes de herramientas digitales para combatir este problema desde la base es una estrategia de largo plazo para el cambio cultural.
-
-Se recomienda a las instituciones universitarias fomentar la adopción de estas herramientas no solo como software de gestión, sino como parte de programas curriculares de emprendimiento e innovación social. La transición hacia una economía de desperdicio cero requiere datos, y TienditaCampus proporciona la plataforma necesaria para transformar cada transacción informal en una oportunidad de aprendizaje y eficiencia. El futuro de la gestión minorista de alimentos en campus dependerá de la capacidad de integrar la responsabilidad sanitaria (NOM-251), la ética de datos (LFPDPPP) y la excelencia estadística (IQR) en una sola solución accesible y escalable.
+> **Mensaje de Cierre:** TienditaCampus no es solo un gestor de bases de datos; es una herramienta real para formalizar el comercio estudiantil, proteger la inversión de nuestros compañeros y reducir el impacto ambiental del desperdicio de comida en nuestra universidad. ¡Gracias!
