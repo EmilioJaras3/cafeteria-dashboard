@@ -3,7 +3,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 CREATE OR REPLACE VIEW v_daily_export AS
 SELECT 
-    (SELECT project_id FROM projects LIMIT 1) as project_id, -- Ajustar según el ID de tu equipo
+    2 as project_id, -- ID fijo del equipo TienditaCampus
     CURRENT_DATE as snapshot_date,
     queryid,
     dbid,
