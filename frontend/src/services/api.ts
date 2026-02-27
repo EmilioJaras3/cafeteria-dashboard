@@ -12,7 +12,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 if (!API_BASE_URL) {
     console.warn(
-        '⚠️ ATENCIÓN: La variable NEXT_PUBLIC_API_URL no está definida. Se usará http://localhost:3001/api como fallback. Asegúrate de configurar tu archivo .env.local',
+        'ATENCION: La variable NEXT_PUBLIC_API_URL no esta definida. Se usara http://localhost:3001/api como fallback. Asegurate de configurar tu archivo .env.local',
     );
 }
 

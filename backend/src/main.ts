@@ -40,8 +40,8 @@ async function bootstrap() {
     const port = configService.get<number>('BACKEND_PORT', 3001);
     await app.listen(port);
 
-    console.log(`🚀 TienditaCampus API running on port ${port}`);
-    console.log(`📡 Environment: ${configService.get<string>('NODE_ENV', 'development')}`);
+    console.log(`TienditaCampus API running on port ${port}`);
+    console.log(`Environment: ${configService.get<string>('NODE_ENV', 'development')}`);
 }
 
 bootstrap();
