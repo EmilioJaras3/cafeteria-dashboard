@@ -8,8 +8,8 @@ const CACHE_NAME = 'tienditacampus-v1';
 const STATIC_ASSETS = [
     '/',
     '/manifest.json',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png',
+    '/icons/icon-192x192.svg',
+    '/icons/icon-512x512.svg',
 ];
 
 // Instalación: cachear assets estáticos

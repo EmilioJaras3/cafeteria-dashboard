@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=http://54.157.136.124/api
+    container_name: tc-frontend
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=http://54.157.136.124/api
+    networks:
+      - tc-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: tc-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.frontend.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - tc-network
+    depends_on:
+      - frontend
+
+networks:
+  tc-network:
+    driver: bridge
+    name: tienditacampus-network
