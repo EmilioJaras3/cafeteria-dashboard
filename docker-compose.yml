@@ -66,6 +66,8 @@ services:
     volumes:
       - tc-pgdata:/var/lib/postgresql/data
       - ./database/init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
     networks:
       - tc-network
     healthcheck:
@@ -78,6 +80,8 @@ services:
   mongodb:
     image: mongo:7
     restart: unless-stopped
+    ports:
+      - "27017:27017"
     volumes:
       - tc-mongodata:/data/db
     networks:

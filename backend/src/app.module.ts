@@ -6,7 +6,7 @@ import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation.schema';
 import { databaseConfig } from './config/database.config';
 
-// Módulos de negocio
+// Módulos de negocio.
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
@@ -22,20 +22,20 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @Module({
     imports: [
-        // Configuración centralizada
+        // Configuración centralizada.
         ConfigModule.forRoot({
             isGlobal: true,
             load: [configuration],
             validationSchema,
         }),
 
-        // ── Base de datos RELACIONAL (PostgreSQL) ────────────
+        // Base datos PostgreSQL.
         TypeOrmModule.forRootAsync({
             inject: [ConfigService],
             useFactory: databaseConfig,
         }),
 
-        // ── Base de datos NO RELACIONAL (MongoDB) ────────────
+        // Base datos MongoDB.
         MongooseModule.forRootAsync({
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => ({
@@ -46,7 +46,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
             }),
         }),
 
-        // Módulos activos
+        // Módulos activos.
         AuthModule,
         UsersModule,
         ProductsModule,

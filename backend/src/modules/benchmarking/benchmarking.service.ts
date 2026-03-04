@@ -22,7 +22,7 @@ export class BenchmarkingService {
     ) { }
 
     /**
-     * Obtiene el ID del proyecto actual o crea uno por defecto si no existe.
+     * Obtener o crear proyecto.
      */
     async getCurrentProjectId(): Promise<number> {
         let project = await this.projectRepository.findOne({ where: {} });
@@ -38,7 +38,7 @@ export class BenchmarkingService {
     }
 
     /**
-     * Ejecuta todas las consultas registradas para generar métricas.
+     * Ejecutar consultas registradas.
      */
     async runRegisteredQueries(): Promise<void> {
         const queries = await this.queryRepository.find();
@@ -53,20 +53,20 @@ export class BenchmarkingService {
     }
 
     /**
-     * Captura el snapshot actual de pg_stat_statements y lo envía a BigQuery.
+     * Capturar snapshot BigQuery.
      */
     async processDailySnapshot(authHeader: string): Promise<any> {
         const accessToken = authHeader.replace('Bearer ', '');
         if (!accessToken) throw new BadRequestException('OAuth token is required');
 
-        // 1. Obtener datos desde la VISTA v_daily_export (Requerimiento del profesor)
+        // 1. Obtener métricas vista.
         const metrics = await this.entityManager.query('SELECT * FROM v_daily_export');
 
         if (metrics.length === 0) {
             throw new BadRequestException('No hay métricas acumuladas (calls > 0) para exportar.');
         }
 
-        // 2. Enviar a BigQuery usando el token del usuario
+        // 2. Enviar BigQuery Cloud.
         try {
             const oauth2Client = new OAuth2Client();
             oauth2Client.setCredentials({ access_token: accessToken });
@@ -90,7 +90,7 @@ export class BenchmarkingService {
 
             await bigquery.dataset(datasetId).table(tableId).insert(rows);
 
-            // 3. Solo si el envío es exitoso, reiniciar estadísticas (Requerimiento del profesor)
+            // 3. Reiniciar estadísticas SQL.
             await this.entityManager.query('SELECT pg_stat_statements_reset()');
 
             return {
@@ -104,7 +104,7 @@ export class BenchmarkingService {
     }
 
     /**
-     * Obtiene métricas reales directamente de pg_stat_statements.
+     * Métricas reales pg_stat_statements.
      */
     async getQueryMetrics(limit = 20): Promise<any[]> {
         try {
