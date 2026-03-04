@@ -7,9 +7,7 @@ export class BenchmarkingController {
     constructor(private readonly benchmarkingService: BenchmarkingService) { }
 
     /**
-     * Endpoint para realizar el "Corte del Día".
-     * Extrae métricas de PostgreSQL y las envía a BigQuery.
-     * Requiere el token de Google del usuario en el header Authorization.
+     * Realizar Corte del Día.
      */
     @Post('snapshot')
     async takeSnapshot(@Headers('authorization') authHeader: string) {
@@ -20,7 +18,7 @@ export class BenchmarkingController {
     }
 
     /**
-     * Endpoint para ejecutar las consultas de prueba registradas.
+     * Ejecutar consultas prueba registradas.
      */
     @Post('run-queries')
     async runQueries() {
@@ -29,7 +27,7 @@ export class BenchmarkingController {
     }
 
     /**
-     * Obtiene el ID del proyecto actual para referencia del cliente.
+     * Obtener ID proyecto actual.
      */
     @Get('project')
     async getProject() {
@@ -38,8 +36,7 @@ export class BenchmarkingController {
     }
 
     /**
-     * GET /api/benchmarking/metrics
-     * Retorna las métricas reales de pg_stat_statements.
+     * Métricas reales pg_stat_statements.
      */
     @Get('metrics')
     async getMetrics(@Query('limit') limit?: string) {
