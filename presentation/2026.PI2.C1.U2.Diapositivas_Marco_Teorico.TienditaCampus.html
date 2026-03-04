@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>TienditaCampus — Diapositivas</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0a0a0a;
+      color: #fafafa
+    }
+
+    .s {
+      width: 254mm;
+      height: 142.9mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 32px 60px;
+      page-break-after: always;
+      page-break-inside: avoid;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    /* --- Portada --- */
+    .s-cover {
+      align-items: center;
+      text-align: center;
+      background: #0a0a0a
+    }
+
+    .s-cover .uni {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #525252;
+      font-weight: 500
+    }
+
+    .s-cover .sub {
+      font-size: 13px;
+      color: #525252;
+      margin-top: 4px
+    }
+
+    .s-cover .logo {
+      font-size: 80px;
+      font-weight: 900;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #dc2626, #f59e0b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 32px 0 8px;
+      line-height: 1;
+    }
+
+    .s-cover .tagline {
+      font-size: 18px;
+      color: #737373;
+      font-weight: 300;
+      margin-bottom: 36px
+    }
+
+    .s-cover .pills {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 36px
+    }
+
+    .s-cover .pill {
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid #262626;
+      color: #a3a3a3;
+      background: #141414;
+    }
+
+    .s-cover .names {
+      font-size: 13px;
+      color: #525252;
+      line-height: 2.2
+    }
+
+    .s-cover .names b {
+      color: #a3a3a3;
+      font-weight: 500
+    }
+
+    .s-cover .prof {
+      font-size: 11px;
+      color: #404040;
+      margin-top: 16px
+    }
+
+    /* --- Content slides --- */
+    .s-body {
+      background: #0a0a0a;
+      align-items: flex-start
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f59e0b;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      margin-bottom: 16px;
+    }
+
+    .s-body h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fafafa;
+      margin-bottom: 28px;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+
+    .s-body h2 em {
+      font-style: normal;
+      color: #dc2626
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      width: 100%
+    }
+
+    .span-2 {
+      grid-column: span 2
+    }
+
+    .card {
+      background: #141414;
+      border: 1px solid #1f1f1f;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fafafa;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card h3 .ico {
+      font-size: 16px
+    }
+
+    .card p,
+    .card li {
+      font-size: 13px;
+      color: #a3a3a3;
+      line-height: 1.7
+    }
+
+    .card ul {
+      padding-left: 16px;
+      margin: 0
+    }
+
+    .card li {
+      margin-bottom: 3px
+    }
+
+    .card b {
+      color: #e5e5e5;
+      font-weight: 600
+    }
+
+    .card.accent {
+      border-color: #dc262640;
+      background: rgba(220, 38, 38, 0.04)
+    }
+
+    .card.accent h3 {
+      color: #dc2626
+    }
+
+    .card.green {
+      border-color: #16a34a40;
+      background: rgba(22, 163, 74, 0.04)
+    }
+
+    .card.green h3 {
+      color: #22c55e
+    }
+
+    .verdict {
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 8px;
+      display: block
+    }
+
+    .verdict.bad {
+      color: #dc2626
+    }
+
+    .verdict.good {
+      color: #22c55e
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .stat {
+      background: #141414;
+      border: 1px solid #1f1f1f;
+      border-radius: 10px;
+      padding: 16px 24px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .stat .n {
+      font-size: 28px;
+      font-weight: 800;
+      color: #dc2626;
+      display: block
+    }
+
+    .stat .l {
+      font-size: 10px;
+      color: #525252;
+      margin-top: 2px;
+      display: block
+    }
+
+    /* Result */
+    .result {
+      background: rgba(220, 38, 38, 0.06);
+      border: 1px solid rgba(220, 38, 38, 0.2);
+      border-radius: 12px;
+      padding: 16px 32px;
+      text-align: center;
+      display: inline-block;
+      margin: 16px auto;
+    }
+
+    .result .n {
+      font-size: 48px;
+      font-weight: 900;
+      color: #dc2626
+    }
+
+    .result .l {
+      font-size: 14px;
+      color: #737373;
+      margin-left: 12px
+    }
+
+    /* Row cards (caso práctico) */
+    .row-card {
+      background: #141414;
+      border: 1px solid #1f1f1f;
+      border-radius: 10px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .row-card .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #f59e0b;
+      min-width: 80px;
+    }
+
+    .row-card .val {
+      font-size: 13px;
+      color: #d4d4d4
+    }
+
+    .row-card.hl {
+      border-color: #dc262640;
+      background: rgba(220, 38, 38, 0.04)
+    }
+
+    .row-card.hl .label {
+      color: #dc2626
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 12px
+    }
+
+    .badge {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #141414;
+      border: 1px solid #262626;
+      color: #a3a3a3;
+    }
+
+    /* Formula */
+    .formula {
+      font-size: 20px;
+      text-align: center;
+      padding: 16px;
+      color: #fafafa;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    /* Footer */
+    .foot {
+      position: absolute;
+      bottom: 16px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: #262626;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* Print */
+    @page {
+      size: 254mm 142.9mm landscape;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #0a0a0a;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .s {
+        margin: 0;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== 1. PORTADA ===== -->
+  <div class="s s-cover">
+    <p class="uni">Universidad Politécnica de Chiapas</p>
+    <p class="sub">Proyecto Integrador 2 · Corte 1 · Unidad 2</p>
+    <h1 class="logo">TienditaCampus</h1>
+    <p class="tagline">Herramientas digitales para vendedores universitarios</p>
+    <div class="pills">
+      <span class="pill">Marco Teórico</span>
+      <span class="pill">Marco Legal y Normativo</span>
+      <span class="pill">Población y Muestra</span>
+    </div>
+    <div class="names">
+      <b>Héctor Isaac Espinoza Mendoza</b><br>
+      <b>Luis Emilio Jaras Sánchez</b><br>
+      <b>Jesel Moreno Zúñiga</b>
+    </div>
+    <p class="prof">Docente: Rocío Crystal Hernández Camacho · Marzo 2026</p>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Agenda</span>
+    <h2>Contenido de la <em>Presentación</em></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Marco Teórico</h3>
+        <ul>
+          <li>Comercio electrónico universitario</li>
+          <li>Aplicaciones similares y diferenciación</li>
+          <li>PWA y stack tecnológico</li>
+          <li>Arquitectura 3-Tier en AWS</li>
+          <li>Gestión de inventarios perecederos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2. Marco Legal</h3>
+        <ul>
+          <li>LFPDPPP — Datos Personales</li>
+          <li>Protección al Consumidor</li>
+          <li>NOM-151, NOM-251</li>
+        </ul>
+        <h3 style="margin-top:16px">3. Población y Muestra</h3>
+        <ul>
+          <li>Caso práctico integrador</li>
+          <li>Criterios de selección</li>
+          <li>Cálculo de muestra (n≈108)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>02</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Teórico</span>
+    <h2>Comercio Electrónico <em>Universitario</em></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Definición</h3>
+        <p>El e-commerce es la compra y venta de bienes a través de Internet (Laudon & Traver, 2022). En universidades
+          surge como respuesta al emprendimiento estudiantil con herramientas accesibles.</p>
+      </div>
+      <div class="card">
+        <h3>Contexto</h3>
+        <p>Según ANUIES (2024), el <b>38%</b> de los universitarios mexicanos han vendido informalmente en su campus,
+          pero la mayoría carece de herramientas digitales para gestionar sus micro-negocios.</p>
+      </div>
+      <div class="card accent span-2">
+        <h3>TienditaCampus como solución</h3>
+        <p>PWA que digitaliza la gestión: <b>control de inventario</b>, <b>seguimiento de ventas diarias</b>,
+          <b>análisis de rentabilidad</b> y <b>predicción de compra con el Método IQR</b> — todo desde el celular, sin
+          instalar app.
+        </p>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>03</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Teórico</span>
+    <h2>Aplicaciones <em>Similares</em></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Square y Toast</h3>
+        <p>Terminales POS con comisiones del <b>3%+</b> por transacción. Un estudiante vendiendo tortas de $25 no puede
+          absorber ese costo.</p>
+        <span class="verdict bad">✕ Muy caro para micronegocios</span>
+      </div>
+      <div class="card">
+        <h3>FáciLUNCH e Infood</h3>
+        <p>Apps de pedidos universitarios. Distribuyen comida en el campus pero <b>no ayudan</b> al vendedor a saber
+          cuánto comprar.</p>
+        <span class="verdict bad">✕ No previenen el desperdicio</span>
+      </div>
+      <div class="card">
+        <h3>Too Good To Go</h3>
+        <p>Vende sobras a precio rebajado. Solución <b>reactiva</b>: funciona después de que la comida ya se echó a
+          perder.</p>
+        <span class="verdict bad">✕ Solo mitiga, no previene</span>
+      </div>
+      <div class="card green">
+        <h3>TienditaCampus</h3>
+        <p>Enfoque <b>PREVENTIVO</b> con Método IQR: analiza ventas pasadas, filtra outliers, sugiere cuánto comprar.
+          <b>Gratuito</b>.
+        </p>
+        <span class="verdict good">✓ Ataca el problema ANTES</span>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>04</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Teórico</span>
+    <h2>Aplicaciones Web <em>Progresivas</em></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>¿Qué es una PWA?</h3>
+        <p>Combina lo mejor de apps web y nativas (Google, 2023). Instalables, funcionan offline, se actualizan
+          automáticamente con Service Workers y Web App Manifest.</p>
+      </div>
+      <div class="card">
+        <h3>Ventajas</h3>
+        <ul>
+          <li><b>Sin App Store</b> — solo un link</li>
+          <li><b>Offline</b> — registrar ventas sin red</li>
+          <li><b>Liviana</b> — no ocupa espacio</li>
+          <li><b>Multi-plataforma</b> — Android, iOS, Windows</li>
+        </ul>
+      </div>
+    </div>
+    <div class="badges" style="margin-top:20px">
+      <span class="badge" style="border-color:#f59e0b40;color:#fbbf24">Next.js 14</span>
+      <span class="badge" style="border-color:#dc262640;color:#f87171">NestJS</span>
+      <span class="badge" style="border-color:#3b82f640;color:#60a5fa">PostgreSQL 16</span>
+      <span class="badge" style="border-color:#22c55e40;color:#4ade80">MongoDB 7</span>
+      <span class="badge" style="border-color:#8b5cf640;color:#a78bfa">Docker</span>
+      <span class="badge" style="border-color:#ec489940;color:#f472b6">Nginx</span>
+      <span class="badge" style="border-color:#14b8a640;color:#2dd4bf">Tailwind CSS v4</span>
+      <span class="badge" style="border-color:#f9731640;color:#fb923c">AWS EC2</span>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>05</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Teórico</span>
+    <h2>Arquitectura <em>3 Niveles</em> en AWS</h2>
+    <p style="font-size:13px;color:#737373;margin-bottom:20px">Cada capa en una instancia EC2 independiente —
+      escalabilidad, aislamiento, seguridad (Fowler, 2002).</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Presentación</h3>
+        <p><b>Next.js + Nginx</b></p>
+        <ul>
+          <li>Interfaz PWA</li>
+          <li>Reverse proxy</li>
+          <li>SSR (Server-Side Rendering)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Lógica</h3>
+        <p><b>NestJS API REST</b></p>
+        <ul>
+          <li>JWT + Google OAuth</li>
+          <li>Validación con DTOs</li>
+          <li>Comunicación IP privada</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>Datos</h3>
+        <p><b>PostgreSQL 16</b> — relacional</p>
+        <p><b>MongoDB 7</b> — logs y auditoría</p>
+        <p style="margin-top:8px">Arquitectura poliglota.</p>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>06</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Teórico</span>
+    <h2>Inventarios <em>Perecederos</em></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Problemática</h3>
+        <p>Según la FAO (2023), hasta el <b>30%</b> del inventario en micronegocios de alimentos se pierde por falta de
+          control. Los vendedores universitarios son especialmente vulnerables.</p>
+      </div>
+      <div class="card">
+        <h3>Solución</h3>
+        <ul>
+          <li><b>Registro diario</b> — entradas y salidas</li>
+          <li><b>Alertas de caducidad</b></li>
+          <li><b>Rentabilidad</b> — costo vs. ganancia real</li>
+          <li><b>Mermas</b> — patrones de pérdida</li>
+        </ul>
+      </div>
+      <div class="card span-2">
+        <h3>Modelo de Datos</h3>
+        <p><b>Products</b> → <b>InventoryRecords</b> → <b>DailySales</b> → <b>SaleDetails</b> → <b>Orders</b>.
+          Trazabilidad completa desde compra de insumos hasta venta, calculando márgenes reales (Chopra & Meindl, 2020).
+        </p>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>07</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Legal y Normativo</span>
+    <h2>Protección de <em>Datos Personales</em></h2>
+    <div class="grid">
+      <div class="card accent">
+        <h3>LFPDPPP (DOF, 2010)</h3>
+        <ul>
+          <li><b>Art. 6:</b> Tratamiento lícito e informado</li>
+          <li><b>Art. 9:</b> Consentimiento expreso para datos sensibles</li>
+          <li><b>Art. 16:</b> Aviso de privacidad obligatorio</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Cumplimiento en TienditaCampus</h3>
+        <ul>
+          <li><b>Argon2</b> — hashing de contraseñas</li>
+          <li><b>JWT</b> — sin datos sensibles en servidor</li>
+          <li><b>Google OAuth</b> — autenticación delegada</li>
+          <li><b>.env</b> — cero credenciales en código</li>
+          <li><b>Roles</b> — principio de mínimo privilegio</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>08</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Marco Legal y Normativo</span>
+    <h2>Comercio Digital y <em>Normativas</em></h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Protección al Consumidor</h3>
+        <p><b>Capítulo VIII Bis</b> — Transacciones electrónicas.</p>
+        <ul>
+          <li><b>Art. 76 Bis:</b> Identidad del proveedor</li>
+          <li><b>Frac. V:</b> Protección de datos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>NOM-151-SCFI-2002</h3>
+        <p>Conservación de mensajes de datos. MongoDB como sistema de auditoría y trazabilidad.</p>
+      </div>
+      <div class="card">
+        <h3>NOM-251-SSA1-2009</h3>
+        <p>Higiene alimentaria. El sistema obliga orden <b>FIFO</b>: lo primero que entra es lo primero que se vende.
+        </p>
+      </div>
+      <div class="card accent">
+        <h3>UPChiapas</h3>
+        <p>Alineado con políticas de emprendimiento e innovación, dentro del <b>Modelo Educativo Basado en Competencias
+            (MEBC)</b>.</p>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>09</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Población y Muestra</span>
+    <h2>Caso Práctico <em>Integrador</em></h2>
+    <div style="width:100%;max-width:900px">
+      <div class="row-card">
+        <span class="label">Tema</span>
+        <span class="val">Gestión del comercio informal de snacks universitarios mediante una aplicación web.</span>
+      </div>
+      <div class="row-card">
+        <span class="label">Diseño</span>
+        <span class="val">Cuasi-experimental, mediciones pre-post intervención, enfoque cuantitativo.</span>
+      </div>
+      <div class="row-card">
+        <span class="label">Población</span>
+        <span class="val">Todos los vendedores estudiantiles de snacks en la Universidad Politécnica de Chiapas.</span>
+      </div>
+      <div class="row-card hl">
+        <span class="label">Muestra</span>
+        <span class="val">Muestreo intencional — vender productos preparados perecederos al menos <b
+            style="color:#fafafa">3 días/semana</b>.</span>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>10</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Población y Muestra</span>
+    <h2>Criterios de <em>Selección</em></h2>
+    <div class="grid">
+      <div class="card green">
+        <h3>Inclusión</h3>
+        <ul>
+          <li>Estudiante <b>activo</b> en UPChiapas</li>
+          <li>Vendedor de <b>snacks</b> en campus</li>
+          <li>Mínimo <b>1 mes</b> de experiencia</li>
+          <li>Vender <b>3+ días/semana</b></li>
+          <li>Disponibilidad para usar la plataforma</li>
+          <li>Acceso a dispositivo con navegador</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>Exclusión</h3>
+        <ul>
+          <li>Vendedores de <b>comidas completas</b> (desayunos, comidas formales)</li>
+          <li><b>Ambulantes</b> sin punto fijo de venta</li>
+          <li><b>Ajenos</b> a la comunidad universitaria</li>
+          <li>Personal administrativo o docente</li>
+          <li>Negocios con sistemas contables existentes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>11</span></div>
+  </div>
+
+  <div class="s s-body">
+    <span class="tag">Población y Muestra</span>
+    <h2>Cálculo de la <em>Muestra</em></h2>
+    <div class="card" style="text-align:center;margin-bottom:20px;width:100%">
+      <p class="formula">n = (N · Z² · p · q) / (e² · (N − 1) + Z² · p · q)</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">N=150</span><span class="l">Población</span></div>
+      <div class="stat"><span class="n">Z=1.96</span><span class="l">Confianza 95%</span></div>
+      <div class="stat"><span class="n">p=0.5</span><span class="l">Proporción</span></div>
+      <div class="stat"><span class="n">e=5%</span><span class="l">Error</span></div>
+    </div>
+    <div style="text-align:center;width:100%">
+      <div class="result">
+        <span class="n">n ≈ 108</span>
+        <span class="l">vendedores a encuestar</span>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:#737373"><b style="color:#a3a3a3">Muestreo intencional</b> + bola
+      de nieve durante recesos y cambios de clase.</p>
+    <div class="foot"><span>TIENDITACAMPUS</span><span>12</span></div>
+  </div>
+
+  <div class="s s-cover">
+    <h1 class="logo" style="font-size:64px">Gracias</h1>
+    <p class="tagline">¿Preguntas o comentarios?</p>
+    <div class="pills">
+      <span class="pill">tienditacampus.com</span>
+    </div>
+    <div class="names" style="margin-top:8px">
+      <b>Héctor Isaac Espinoza Mendoza</b><br>
+      <b>Luis Emilio Jaras Sánchez</b><br>
+      <b>Jesel Moreno Zúñiga</b>
+    </div>
+    <p class="prof">Universidad Politécnica de Chiapas · Proyecto Integrador 2 · Marzo 2026</p>
+  </div>
+
+</body>
+
+</html>

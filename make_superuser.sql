@@ -1,0 +1,3 @@
+ALTER USER tc_admin WITH SUPERUSER;
+GRANT ALL ON SCHEMA public TO tc_admin;
+ALTER SCHEMA public OWNER TO tc_admin;

@@ -1,0 +1,688 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pgf-umlcd}
+\usetikzlibrary{positioning, shapes.multipart, arrows.meta}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black!70!blue,
+    urlcolor=blue,
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small TienditaCampus}
+\fancyhead[R]{\small Proyecto Integrador II}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+
+% =========================================================
+% 1. PORTADA
+% =========================================================
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    {\Large \textbf{UNIVERSIDAD POLITÉCNICA DE CHIAPAS}}\par
+    \vspace{0.5cm}
+    \rule{\textwidth}{0.5pt}\par
+    \vspace{1cm}
+    
+    {\large \textbf{INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN E INNOVACIÓN DIGITAL}}\par
+    \vspace{2cm}
+    
+    {\Large \textbf{REPORTE DE PROYECTO INTEGRADOR II}}\par
+    \vspace{1.5cm}
+    
+    {\large \textbf{Nombre del Proyecto:}}\par
+    \vspace{0.3cm}
+    {\LARGE \textbf{TienditaCampus}}\par
+    \vspace{1.5cm}
+    
+    {\large \textbf{Integrantes:}}\par
+    \vspace{0.3cm}
+    {\normalsize 
+    \textbf{Luis Emilio Jaras Sánchez} \\
+    \textbf{Jesel Moreno Zúñiga} \\
+    \textbf{Héctor Isaac Espinoza Mendoza}
+    }\par
+    \vspace{1.5cm}
+    
+    {\large \textbf{Docente:}}\par
+    \vspace{0.3cm}
+    {\normalsize \textbf{Rocío Crystal Hernández Camacho}}\par
+    \vspace{1.5cm}
+    
+    {\large \textbf{Fecha de entrega:}}\par
+    \vspace{0.3cm}
+    {\normalsize 26 de febrero de 2026}\par
+    
+    \vfill
+\end{titlepage}
+
+% =========================================================
+% ÍNDICES
+% =========================================================
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% =========================================================
+% 2. RESUMEN
+% =========================================================
+\section{Resumen}
+TienditaCampus es un sistema web para gestionar inventarios y ventas, diseñado para estudiantes que venden comida dentro de universidades. El sistema usa el \textbf{Método IQR} (Rango Intercuartílico) para analizar el historial de ventas del estudiante y sugerirle cuánto producto debe comprar, evitando que compre de más y se le eche a perder.
+
+La aplicación fue construida con \textbf{Next.js 14} en el frontend, \textbf{NestJS} en el backend, \textbf{PostgreSQL} como base de datos, y todo empaquetado con \textbf{Docker}. Además, se conectó a \textbf{Google BigQuery} para auditoría en la nube.
+
+% =========================================================
+% 3. INTRODUCCIÓN
+% =========================================================
+\section{Introducción}
+En las universidades mexicanas, muchos estudiantes venden sándwiches, postres y botanas para pagar sus gastos. El problema es que llevan sus cuentas ``al tanteo'': anotan en libretas o simplemente recuerdan cuánto compraron y cuánto vendieron. Esto hace que compren de más (y la comida se echa a perder) o compren de menos (y pierdan ventas).
+
+TienditaCampus nace para resolver esto. Es una plataforma web que le permite al estudiante registrar sus productos, llevar el control de su inventario, procesar ventas desde el celular y, lo más importante, recibir sugerencias basadas en estadística sobre cuánto debe comprar la próxima vez. Todo usando tecnologías modernas como React, Node.js y Google Cloud, cumpliendo con las normas de higiene alimentaria y protección de datos de México.
+
+% =========================================================
+% 4. PLANTEAMIENTO DEL PROBLEMA
+% =========================================================
+\section{Planteamiento del problema}
+
+\subsection{Descripción del problema en su contexto}
+En la Universidad Politécnica de Chiapas (y en universidades en general) hay estudiantes que venden comida todos los días. Su problema principal es que no saben cuánto producto comprar. Llevan sus registros de forma manual, en papel o de memoria, lo que causa una mala rotación de inventario.
+
+\subsection{Antecedentes y evidencia}
+México desperdicia aproximadamente 30 millones de toneladas de alimentos al año. A nivel universitario, cuando un estudiante compra mucho producto sin basarse en datos reales de sus ventas pasadas, termina tirando lo que no vendió. Las aplicaciones que ya existen no le sirven: los Puntos de Venta como \textit{Square} o \textit{Toast} cobran comisiones altísimas que un estudiante no puede pagar. Las apps de rescate de comida como \textit{Too Good To Go} o \textit{Infood} solo ayudan a vender las sobras baratas, pero no previenen el desperdicio desde el origen.
+
+\subsection{Declaración clara del problema}
+No existen herramientas accesibles que analicen el historial de ventas de un estudiante vendedor y le digan cuánto producto debe comprar. Esto causa desperdicio de comida y pérdida de dinero.
+
+\subsection{Consecuencias del problema}
+\begin{enumerate}
+    \item Pérdida del dinero invertido en producto que se echó a perder.
+    \item Aumento del desperdicio de alimentos dentro del campus.
+    \item Riesgo sanitario al no saber qué producto entró primero al inventario.
+\end{enumerate}
+
+\subsection{Delimitación del problema}
+El sistema se limita a ser una aplicación web responsive (funciona en celular y computadora). No incluye logística de reparto fuera del campus ni pagos con tarjeta. El algoritmo de predicción usa exclusivamente el método IQR.
+
+\subsection{Preguntas de investigación}
+\begin{itemize}
+    \item ¿El uso del Método IQR para filtrar datos de ventas puede reducir el desperdicio de producto en los vendedores universitarios?
+    \item ¿Una arquitectura Monorepo con Docker mejora la mantenibilidad del sistema a largo plazo?
+\end{itemize}
+
+\subsection{Justificación del proyecto}
+El proyecto se justifica en dos sentidos: socialmente, protege el dinero del estudiante emprendedor y reduce el desperdicio; académicamente, permite al equipo aplicar bases de datos avanzadas (PostgreSQL con extensiones), arquitecturas de software modernas (NestJS, Docker) y conexión a la nube (BigQuery).
+
+% =========================================================
+% 5. OBJETIVOS
+% =========================================================
+\section{Objetivos}
+
+\subsection{Objetivo General}
+Desarrollar TienditaCampus, un sistema web de gestión de inventarios y ventas que use el Método IQR para reducir el desperdicio de productos perecederos en los comercios informales universitarios.
+
+\subsection{Objetivos Específicos}
+\begin{itemize}
+    \item Construir una API REST con \textbf{NestJS} y \textbf{TypeScript} que maneje toda la lógica del sistema.
+    \item Crear un frontend rápido y optimizado para celulares con \textbf{Next.js 14} y \textbf{Tailwind CSS}.
+    \item Diseñar la base de datos en \textbf{PostgreSQL} aplicando la regla FIFO (lo primero en entrar es lo primero en salir).
+    \item Integrar \textbf{Google SSO} (OAuth2) para que los usuarios inicien sesión con su cuenta de Google sin necesidad de crear contraseñas.
+    \item Exportar métricas de rendimiento de la base de datos hacia \textbf{Google BigQuery} para auditoría.
+\end{itemize}
+
+% =========================================================
+% 6. MARCO TEÓRICO
+% =========================================================
+\section{Marco teórico}
+
+\subsection{Antecedentes teóricos y tecnológicos}
+Los Puntos de Venta (POS) tradicionales fueron hechos para negocios grandes y establecidos. Para el nicho universitario, existen algunas alternativas pero ninguna resuelve el problema de fondo:
+
+\begin{itemize}
+    \item \textbf{Square y Toast:} Son terminales de pago que cobran comisiones del 3\% o más por transacción. Un estudiante que vende tortas de \$25 pesos no puede absorber ese costo.
+    \item \textbf{FáciLUNCH e Infood:} Son apps universitarias de pedidos y entrega. Ayudan a distribuir la comida, pero no ayudan al vendedor a saber cuánto producto comprar.
+    \item \textbf{Too Good To Go:} Vende sobras de comida a precio rebajado. Es una solución reactiva (después de que ya se echó a perder), no preventiva.
+\end{itemize}
+
+TienditaCampus es diferente porque ataca el problema antes de que suceda: analiza las ventas pasadas y sugiere cuánto comprar.
+
+\subsection{Conceptos clave}
+\begin{itemize}
+    \item \textbf{Merma:} Producto que se pierde o se echa a perder. En nuestro contexto, comida que caduca sin venderse.
+    \item \textbf{FIFO (First In, First Out):} Método de rotación de inventario donde lo primero que entra al almacén es lo primero que debe salir. Evita que productos viejos se queden al fondo.
+    \item \textbf{Monorepo:} Guardar todo el código del proyecto (frontend, backend, configuración) en un solo repositorio de Git.
+    \item \textbf{SSR (Server Side Rendering):} Técnica donde el servidor genera la página HTML completa antes de enviarla al navegador. Hace que la aplicación cargue rápido incluso con internet malo.
+    \item \textbf{JWT (JSON Web Token):} Un token cifrado que se usa para verificar la identidad del usuario en cada petición al servidor.
+    \item \textbf{Docker:} Herramienta que empaqueta la aplicación y todas sus dependencias en un contenedor aislado, garantizando que funcione igual en cualquier computadora.
+\end{itemize}
+
+\subsection{Tecnologías utilizadas}
+
+\subsubsection{Frontend: Next.js 14 con React}
+Next.js es un framework de React que permite renderizar las páginas desde el servidor (SSR). Esto es clave porque los estudiantes acceden desde sus celulares con el Wi-Fi del campus, que a veces es lento. Con SSR, la página llega lista para verse sin esperar a que JavaScript cargue todo.
+
+\subsubsection{Backend: NestJS con TypeScript}
+NestJS es un framework para Node.js que organiza el código en módulos, controladores y servicios. El uso de TypeScript (en lugar de JavaScript puro) nos permite detectar errores antes de ejecutar el código, algo importante cuando se hacen cálculos matemáticos como el IQR.
+
+\subsubsection{Base de Datos: PostgreSQL 16}
+PostgreSQL es una base de datos relacional de código abierto. Lo elegimos por su estabilidad, su soporte para transacciones complejas y porque tiene extensiones como \texttt{pg\_stat\_statements} que nos permiten medir el rendimiento de cada consulta SQL.
+
+\subsubsection{Contenedores: Docker Compose}
+Docker Compose nos permite levantar todo el sistema (frontend, backend y base de datos) con un solo comando. Cada servicio corre en su propio contenedor aislado. Si la base de datos se reinicia, los datos se preservan porque están en un volumen persistente.
+
+\subsubsection{Nube: Google BigQuery}
+BigQuery es un servicio de Google Cloud para analizar grandes cantidades de datos. Lo usamos para exportar métricas de rendimiento de la base de datos. Esto permite que un profesor o auditor revise en tiempo real cuántas consultas se hicieron y cuántos recursos consumieron.
+
+\subsection{El Método IQR (Rango Intercuartílico)}
+Este es el corazón matemático de TienditaCampus. Cuando un estudiante registra sus ventas diarias, algunos días puede tener picos irreales (por ejemplo, vendió 40 sándwiches un día de evento cuando normalmente vende 10). Si simplemente sacamos el promedio, nos daría un número inflado y el estudiante compraría de más.
+
+El IQR resuelve esto eliminando esos valores extremos (outliers). Funciona así:
+
+\begin{enumerate}
+    \item Se ordenan todas las ventas de menor a mayor.
+    \item Se calcula el Primer Cuartil ($Q_1$): el valor donde se acumula el 25\% de los datos.
+    \item Se calcula el Tercer Cuartil ($Q_3$): el valor donde se acumula el 75\% de los datos.
+    \item Se obtiene el IQR:
+\end{enumerate}
+
+\begin{equation}
+IQR = Q_3 - Q_1
+\end{equation}
+
+Con ese valor se establecen límites:
+\begin{equation}
+L\acute{\imath}mite_{Inferior} = Q_1 - 1.5 \times IQR
+\end{equation}
+\begin{equation}
+L\acute{\imath}mite_{Superior} = Q_3 + 1.5 \times IQR
+\end{equation}
+
+Cualquier venta que caiga fuera de esos límites se ignora para el cálculo de reabastecimiento. Así, el sistema le sugiere al vendedor un número realista de cuánto producto comprar.
+
+\subsection{Referencias académicas}
+Las bases teóricas de este proyecto provienen de:
+\begin{itemize}
+    \item La FAO y sus reportes sobre desperdicio alimentario en Latinoamérica.
+    \item John Tukey (1977), creador del concepto de Boxplot y el método IQR.
+    \item La documentación oficial de NestJS, Next.js y PostgreSQL.
+\end{itemize}
+
+% =========================================================
+% 7. NORMATIVAS
+% =========================================================
+\section{Normativas}
+El sistema cumple con dos normas mexicanas:
+
+\begin{itemize}
+    \item \textbf{NOM-251-SSA1-2009 (Higiene Alimentaria):} El sistema obliga a despachar los productos en orden FIFO. Los productos que fueron registrados primero son los que se venden primero. Esto evita que comida vieja se quede olvidada en el inventario.
+    \item \textbf{LFPDPPP (Protección de Datos Personales):} El sistema no guarda contraseñas. Los usuarios inician sesión con su cuenta de Google (SSO), así toda la seguridad la maneja Google y nosotros nunca almacenamos datos sensibles.
+\end{itemize}
+
+% =========================================================
+% 8. METODOLOGÍA
+% =========================================================
+\section{Metodología}
+
+\subsection{Tipo de investigación}
+Investigación aplicada de tipo tecnológico, enfocada en construir un prototipo funcional que resuelva un problema real.
+
+\subsection{Enfoque metodológico}
+Se usó una metodología ágil basada en Sprints cortos (Scrum). El equipo se dividió en tres roles:
+\begin{itemize}
+    \item \textbf{Luis Emilio Jaras Sánchez:} Frontend y Backend.
+    \item \textbf{Jesel Moreno Zúñiga:} Backend y Base de Datos.
+    \item \textbf{Héctor Isaac Espinoza Mendoza:} DevOps y BigQuery.
+\end{itemize}
+
+\subsection{Fases del proyecto}
+\begin{enumerate}
+    \item \textbf{Análisis:} Definir qué necesita el sistema y qué problema resuelve.
+    \item \textbf{Diseño:} Crear los diagramas de base de datos (ER y UML) y los mockups de la interfaz.
+    \item \textbf{Desarrollo:} Programar los módulos de autenticación, productos, inventario, pedidos y ventas.
+    \item \textbf{Pruebas:} Probar cada endpoint con Postman y probar el flujo completo en celular.
+    \item \textbf{Despliegue:} Empaquetar todo en Docker y verificar que funcione con un solo comando.
+\end{enumerate}
+
+\subsection{Herramientas utilizadas}
+\begin{table}[H]
+\centering
+\caption{Herramientas de desarrollo}
+\label{tab:herramientas}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Categoría} & \textbf{Herramienta} \\ \midrule
+Control de versiones & Git + GitHub \\
+Editor de código & Visual Studio Code \\
+Frontend & Next.js 14, React, Tailwind CSS \\
+Backend & NestJS, Node.js, TypeScript, TypeORM \\
+Base de datos & PostgreSQL 16 \\
+Contenedores & Docker, Docker Compose \\
+Nube & Google BigQuery, Google OAuth 2.0 \\
+Pruebas de API & Postman \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Validación del sistema}
+Se probó cada endpoint de la API con Postman y se hicieron pruebas de flujo completo: desde crear un producto, hasta procesarlo en una venta y verificar que el stock bajara correctamente y que la ganancia se registrara en el resumen diario.
+
+% =========================================================
+% 9. ANÁLISIS DEL SISTEMA
+% =========================================================
+\section{Análisis del sistema}
+
+\subsection{Requerimientos funcionales}
+\begin{table}[H]
+\centering
+\caption{Requerimientos funcionales del sistema}
+\label{tab:req_funcionales}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{ID} & \textbf{Descripción} \\ \midrule
+RF-01 & Iniciar sesión con cuenta de Google (SSO). \\
+RF-02 & Crear, editar y eliminar productos del catálogo. \\
+RF-03 & Marcar productos como perecederos o no perecederos. \\
+RF-04 & Registrar movimientos de inventario (entradas y salidas). \\
+RF-05 & Procesar pedidos con carrito de compras. \\
+RF-06 & Calcular automáticamente la ganancia diaria. \\
+RF-07 & Exportar métricas de rendimiento de SQL a BigQuery. \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Requerimientos no funcionales}
+\begin{table}[H]
+\centering
+\caption{Requerimientos no funcionales del sistema}
+\label{tab:req_no_funcionales}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{ID} & \textbf{Descripción} \\ \midrule
+RNF-01 & La página debe cargar en menos de 3 segundos (SSR). \\
+RNF-02 & Las peticiones deben estar protegidas con tokens JWT. \\
+RNF-03 & El sistema debe funcionar en contenedores Docker. \\
+RNF-04 & La interfaz debe ser responsive (adaptarse a celulares). \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Actores del sistema}
+\begin{itemize}
+    \item \textbf{Vendedor:} Estudiante que registra productos, controla su inventario y procesa ventas.
+    \item \textbf{Comprador:} Estudiante que navega los productos disponibles y realiza pedidos.
+\end{itemize}
+
+\subsection{Diagrama Entidad-Relación}
+La Figura \ref{fig:er_diagram} muestra el modelo de datos completo de la base de datos PostgreSQL. Contiene 8 tablas principales: Usuario, Producto, Registro de Inventario, Pedido, Detalle de Pedido, Venta Diaria, Proyecto BigQuery y Ejecución SQL.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.52, transform shape,
+  entity/.style={
+    draw=black!50!blue, very thick,
+    rectangle split, rectangle split parts=2,
+    rounded corners,
+    rectangle split part fill={blue!10, white},
+    text width=4.5cm, align=left,
+    font=\sffamily\small
+  },
+  relation/.style={
+    -Stealth, thick, draw=blue!50!black, rounded corners
+  },
+  label/.style={
+    midway, fill=white, font=\scriptsize\sffamily, inner sep=1pt
+  }
+]
+
+% Fila 1
+\node[entity] (Usuario) at (0,0) {
+  \centering \textbf{USUARIO}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\[1ex]
+  email : String (UK) \\
+  password : String \\
+  firstName : String \\
+  lastName : String \\
+  role : Enum \\
+  isVerified : Boolean \\
+  googleId : String
+};
+
+\node[entity] (Producto) at (9,0) {
+  \centering \textbf{PRODUCTO}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\
+  \textbf{FK sellerId : UUID} \\[1ex]
+  name : String \\
+  price : Decimal \\
+  category : String \\
+  isPerishable : Boolean \\
+  currentStock : Int \\
+  isActive : Boolean
+};
+
+\node[entity] (RegistroInventario) at (18,0) {
+  \centering \textbf{REGISTRO\_INVENTARIO}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\
+  \textbf{FK productId : UUID} \\[1ex]
+  type : Enum \\
+  quantity : Int \\
+  reason : String \\
+  recordedAt : Date
+};
+
+% Fila 2
+\node[entity] (Pedido) at (0,-7) {
+  \centering \textbf{PEDIDO}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\
+  \textbf{FK buyerId : UUID} \\
+  \textbf{FK sellerId : UUID} \\[1ex]
+  status : Enum \\
+  totalAmount : Decimal \\
+  pickupLocation : String \\
+  createdAt : Date
+};
+
+\node[entity] (DetallePedido) at (9,-7) {
+  \centering \textbf{DETALLE\_PEDIDO}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\
+  \textbf{FK orderId : UUID} \\
+  \textbf{FK productId : UUID} \\[1ex]
+  quantity : Int \\
+  unitPrice : Decimal \\
+  subtotal : Decimal
+};
+
+% Fila 3
+\node[entity] (VentaDiaria) at (0,-14) {
+  \centering \textbf{VENTA\_DIARIA}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\
+  \textbf{FK sellerId : UUID} \\[1ex]
+  saleDate : Date \\
+  totalRevenue : Decimal \\
+  totalInvestment : Decimal \\
+  netProfit : Decimal \\
+  totalOrders : Int
+};
+
+\node[entity] (ProyectoBQ) at (9,-14) {
+  \centering \textbf{PROYECTO\_BQ}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\[1ex]
+  projectId : String \\
+  datasetId : String \\
+  tableId : String \\
+  clientEmail : String
+};
+
+\node[entity] (EjecucionSQL) at (18,-14) {
+  \centering \textbf{EJECUCION\_SQL}
+  \nodepart{second}
+  \textbf{PK id : UUID} \\
+  \textbf{FK projectId : UUID} \\[1ex]
+  executionTimeMs : Decimal \\
+  bytesBilled : Int \\
+  executionDate : Date
+};
+
+% Relaciones
+\draw[relation] (Usuario.east) -- (Producto.west) node[label] {1:N (vende)};
+\draw[relation] (Usuario.south) -- (Pedido.north) node[label] {1:N (compra)};
+\draw[relation] (Producto.south) -- (DetallePedido.north) node[label] {1:N};
+\draw[relation] (Pedido.east) -- (DetallePedido.west) node[label] {1:N (contiene)};
+\draw[relation] (Producto.east) -- (RegistroInventario.west) node[label] {1:N (rastrea)};
+\draw[relation] (Usuario.west) -- ++(-1,0) |- (VentaDiaria.west) node[label, pos=0.8] {1:N (gestiona)};
+\draw[relation] (ProyectoBQ.east) -- (EjecucionSQL.west) node[label] {1:N (aloja)};
+
+\end{tikzpicture}
+\caption{Diagrama Entidad-Relación de la base de datos PostgreSQL}
+\label{fig:er_diagram}
+\end{figure}
+
+\subsection{Reglas del negocio}
+\begin{itemize}
+    \item El stock de un producto nunca puede ser menor a cero.
+    \item Los productos perecederos se despachan obligatoriamente en orden FIFO.
+    \item Solo los usuarios autenticados con Google pueden acceder al sistema.
+    \item Cada venta genera automáticamente un registro en la tabla de Venta Diaria.
+\end{itemize}
+
+% =========================================================
+% 10. DISEÑO DEL SISTEMA
+% =========================================================
+\section{Diseño del sistema}
+La arquitectura del backend sigue el patrón \textbf{Módulo-Controlador-Servicio} de NestJS:
+\begin{itemize}
+    \item \textbf{Controlador:} Recibe las peticiones HTTP (GET, POST, PUT, DELETE).
+    \item \textbf{Servicio:} Contiene la lógica de negocio (cálculos IQR, validaciones FIFO).
+    \item \textbf{Módulo:} Agrupa controladores y servicios relacionados (ej: módulo de productos, módulo de pedidos).
+\end{itemize}
+
+La Figura \ref{fig:class_diagram} muestra el diagrama de clases completo del sistema.
+
+\begin{figure}[H]
+\centering
+\renewcommand{\umltextcolor}{black}
+\renewcommand{\umldrawcolor}{black!70!blue}
+\renewcommand{\umlfillcolor}{white!95!blue}
+\begin{tikzpicture}[scale=0.52, transform shape]
+
+% Entidad User
+\begin{class}[text width=4.5cm]{Usuario}{0,0}
+  \attribute{- id : UUID}
+  \attribute{- email : String}
+  \attribute{- password : String}
+  \attribute{- firstName : String}
+  \attribute{- lastName : String}
+  \attribute{- role : RoleEnum}
+  \attribute{- isVerified : Boolean}
+  \attribute{- googleId : String}
+  \operation{+ hashPassword() : void}
+  \operation{+ validatePassword() : Boolean}
+\end{class}
+
+% Entidad Product
+\begin{class}[text width=4.5cm]{Producto}{10,0}
+  \attribute{- id : UUID}
+  \attribute{- name : String}
+  \attribute{- description : String}
+  \attribute{- price : Decimal}
+  \attribute{- category : String}
+  \attribute{- isPerishable : Boolean}
+  \attribute{- currentStock : Int}
+  \operation{+ updateStock(amount : Int) : void}
+  \operation{+ checkPerishability() : Boolean}
+\end{class}
+
+% Entidad InventoryRecord
+\begin{class}[text width=4.8cm]{RegistroInventario}{20,0}
+  \attribute{- id : UUID}
+  \attribute{- type : InventoryTypeEnum}
+  \attribute{- quantity : Int}
+  \attribute{- reason : String}
+  \attribute{- recordedAt : Date}
+  \operation{+ applyToProduct() : void}
+\end{class}
+
+% Entidad Order
+\begin{class}[text width=4.5cm]{Pedido}{10,-8}
+  \attribute{- id : UUID}
+  \attribute{- status : OrderStatusEnum}
+  \attribute{- totalAmount : Decimal}
+  \attribute{- pickupLocation : String}
+  \attribute{- createdAt : Date}
+  \operation{+ calculateTotal() : void}
+  \operation{+ updateStatus(newStatus) : void}
+\end{class}
+
+% Entidad OrderItem
+\begin{class}[text width=4.5cm]{DetallePedido}{20,-8}
+  \attribute{- id : UUID}
+  \attribute{- quantity : Int}
+  \attribute{- unitPrice : Decimal}
+  \attribute{- subtotal : Decimal}
+  \operation{+ calculateSubtotal() : Decimal}
+\end{class}
+
+% Entidad DailySale
+\begin{class}[text width=4.5cm]{VentaDiaria}{0,-8}
+  \attribute{- id : UUID}
+  \attribute{- saleDate : Date}
+  \attribute{- totalRevenue : Decimal}
+  \attribute{- totalInvestment : Decimal}
+  \attribute{- netProfit : Decimal}
+  \operation{+ calculateDailyMetrics() : void}
+\end{class}
+
+% Entidad Project (BigQuery)
+\begin{class}[text width=4.5cm]{ProyectoBQ}{10,-16}
+  \attribute{- id : UUID}
+  \attribute{- datasetId : String}
+  \attribute{- tableId : String}
+  \attribute{- clientEmail : String}
+  \operation{+ getCredentials() : JSON}
+\end{class}
+
+% Entidad Execution
+\begin{class}[text width=4.5cm]{EjecucionSQL}{20,-16}
+  \attribute{- id : UUID}
+  \attribute{- executionTimeMs : Decimal}
+  \attribute{- bytesBilled : Int}
+  \attribute{- executionDate : Date}
+  \operation{+ logToBigQuery() : void}
+\end{class}
+
+% Relaciones
+\association{Usuario}{vende}{0..*}{Producto}{1}{vendedor}
+\association{Usuario}{realiza}{0..*}{Pedido}{1}{comprador}
+\association{Pedido}{contiene}{1..*}{DetallePedido}{1}{pedido}
+\association{Producto}{incluido\_en}{0..*}{DetallePedido}{1}{producto}
+\association{Producto}{rastrea}{1..*}{RegistroInventario}{1}{producto}
+\association{Usuario}{gestiona}{1}{VentaDiaria}{0..*}{vendedor}
+\association{ProyectoBQ}{aloja}{1..*}{EjecucionSQL}{1}{proyecto}
+
+\end{tikzpicture}
+\caption{Diagrama de Clases UML del sistema TienditaCampus}
+\label{fig:class_diagram}
+\end{figure}
+
+% =========================================================
+% 11. IMPLEMENTACIÓN
+% =========================================================
+\section{Implementación}
+El sistema se despliega con un solo comando (\texttt{docker-compose up}) que levanta tres contenedores:
+\begin{enumerate}
+    \item \textbf{Contenedor de PostgreSQL:} La base de datos con todas las tablas y la extensión \texttt{pg\_stat\_statements}.
+    \item \textbf{Contenedor del Backend:} El servidor NestJS que expone la API REST.
+    \item \textbf{Contenedor del Frontend:} La aplicación Next.js que sirve las páginas con SSR.
+\end{enumerate}
+
+El ORM utilizado es \textbf{TypeORM}, que traduce las clases de TypeScript directamente a tablas de PostgreSQL. El frontend usa un tema oscuro profesional creado con Tailwind CSS, optimizado para verse bien en pantallas de celular.
+
+El código fuente completo se encuentra en los siguientes repositorios de GitHub:
+\begin{itemize}
+    \item \textbf{Repositorio principal:} \url{https://github.com/Jesel8D/pi_privado_backup}
+\end{itemize}
+
+% =========================================================
+% 12. PRUEBAS
+% =========================================================
+\section{Pruebas}
+Durante el desarrollo se encontraron y resolvieron varios problemas técnicos:
+
+\begin{itemize}
+    \item \textbf{Error 500 en creación de productos:} La columna \texttt{seller\_id} no se estaba enviando correctamente desde el frontend. Se resolvió ajustando el servicio de autenticación para inyectar el ID del usuario.
+    \item \textbf{Error 500 en BigQuery:} La extensión \texttt{pg\_stat\_statements} no estaba disponible en el contenedor de PostgreSQL. Se resolvió agregando la instrucción de carga en el \texttt{docker-compose.yml}.
+    \item \textbf{Vista SQL faltante:} La vista \texttt{v\_daily\_export} no existía en la base de datos. Se resolvió creándola en el script de inicialización del contenedor.
+\end{itemize}
+
+Todas las rutas de la API fueron probadas con Postman, verificando tanto los casos exitosos como los de error (producto no encontrado, usuario no autenticado, stock insuficiente).
+
+% =========================================================
+% 13. RESULTADOS
+% =========================================================
+\section{Resultados}
+Se logró un prototipo completamente funcional con las siguientes capacidades:
+\begin{itemize}
+    \item Registro e inicio de sesión con Google SSO.
+    \item Creación y gestión completa de productos (con soporte para perecederos).
+    \item Procesamiento de pedidos con cálculo automático de totales.
+    \item Dashboard con resumen de ventas diarias, inversión y ganancia neta.
+    \item Exportación de métricas de rendimiento SQL hacia Google BigQuery.
+    \item Interfaz responsive que funciona correctamente en celulares.
+\end{itemize}
+
+El algoritmo IQR demostró ser viable para filtrar valores atípicos en los historiales de venta, generando sugerencias de compra más precisas que un simple promedio.
+
+% =========================================================
+% 14. CONCLUSIONES
+% =========================================================
+\section{Conclusiones}
+TienditaCampus demostró que es posible construir un sistema de gestión de inventarios profesional usando tecnologías modernas, accesible para estudiantes y con un motor estadístico que realmente ayuda a reducir el desperdicio. El trabajo en equipo bajo una arquitectura Monorepo con Docker, PostgreSQL y NestJS nos permitió aplicar de forma práctica los conocimientos adquiridos en la carrera de Ingeniería en Tecnologías de la Información.
+
+El proyecto va más allá de una simple libreta digital: es un sistema completo con autenticación segura, base de datos relacional, auditoría en la nube y análisis estadístico, todo corriendo en contenedores que se despliegan con un solo comando.
+
+% =========================================================
+% 15. RECOMENDACIONES
+% =========================================================
+\section{Recomendaciones}
+Para futuras versiones del sistema se recomienda:
+\begin{itemize}
+    \item Implementar pagos digitales con APIs de Open Banking para eliminar la dependencia del efectivo.
+    \item Integrar modelos de Machine Learning cuando se tenga suficiente volumen de datos para mejorar las predicciones más allá del IQR.
+    \item Desarrollar una aplicación móvil nativa (Android/iOS) para mayor accesibilidad.
+    \item Expandir el sistema a otras universidades del estado de Chiapas.
+\end{itemize}
+
+% =========================================================
+% 16. REFERENCIAS
+% =========================================================
+\section{Referencias}
+\begin{itemize}
+    \item FAO. (2024). \textit{El estado mundial de la agricultura y la alimentación 2024}. Organización de las Naciones Unidas.
+    \item NestJS Foundation. (2025). \textit{Documentación Oficial de NestJS.} \url{https://docs.nestjs.com/}
+    \item Vercel Inc. (2025). \textit{Documentación Oficial de Next.js 14.} \url{https://nextjs.org/docs}
+    \item Google Cloud. (2025). \textit{BigQuery Documentation.} \url{https://cloud.google.com/bigquery/docs}
+    \item Diario Oficial de la Federación. \textit{NOM-251-SSA1-2009: Prácticas de Higiene para el Proceso de Alimentos.}
+    \item Moore, D. S., Notz, W. I., \& Flinger, M. A. (2013). \textit{The Basic Practice of Statistics} (6th ed.). W. H. Freeman.
+    \item Tukey, J. W. (1977). \textit{Exploratory Data Analysis}. Addison-Wesley.
+\end{itemize}
+
+% =========================================================
+% 17. ANEXOS
+% =========================================================
+\section{Anexos}
+\textit{Anexo 1:} Repositorio en GitHub: \url{https://github.com/Jesel8D/pi_privado_backup}\\
+\textit{Anexo 2:} Capturas de pantalla de la interfaz web del sistema.\\
+
+\end{document}

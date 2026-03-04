@@ -1,0 +1,131 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{tikz}
+\usepackage{pgf-umlcd}
+\usepackage[margin=0.5in]{geometry}
+
+\title{Diagrama de Clases - TienditaCampus}
+\author{Equipo de Desarrollo}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\renewcommand{\umltextcolor}{black}
+\renewcommand{\umldrawcolor}{black!70!blue}
+\renewcommand{\umlfillcolor}{white!95!blue}
+
+\begin{tikzpicture}[scale=0.75, transform shape]
+
+% -------------------------
+% Entidad User
+% -------------------------
+\begin{class}[text width=4.5cm]{Usuario}{0,0}
+  \attribute{- id : UUID}
+  \attribute{- email : String}
+  \attribute{- password : String}
+  \attribute{- firstName : String}
+  \attribute{- lastName : String}
+  \attribute{- role : RoleEnum}
+  \attribute{- isVerified : Boolean}
+  \attribute{- googleId : String}
+  \operation{+ hashPassword() : void}
+  \operation{+ validatePassword() : Boolean}
+\end{class}
+
+% -------------------------
+% Entidad Product
+% -------------------------
+\begin{class}[text width=4.5cm]{Producto}{10,0}
+  \attribute{- id : UUID}
+  \attribute{- name : String}
+  \attribute{- description : String}
+  \attribute{- price : Decimal}
+  \attribute{- category : String}
+  \attribute{- isPerishable : Boolean}
+  \attribute{- currentStock : Int}
+  \operation{+ updateStock(amount : Int) : void}
+  \operation{+ checkPerishability() : Boolean}
+\end{class}
+
+% -------------------------
+% Entidad InventoryRecord
+% -------------------------
+\begin{class}[text width=4.8cm]{RegistroInventario}{20,0}
+  \attribute{- id : UUID}
+  \attribute{- type : InventoryTypeEnum}
+  \attribute{- quantity : Int}
+  \attribute{- reason : String}
+  \attribute{- recordedAt : Date}
+  \operation{+ applyToProduct() : void}
+\end{class}
+
+% -------------------------
+% Entidad Order
+% -------------------------
+\begin{class}[text width=4.5cm]{Pedido}{10,-8}
+  \attribute{- id : UUID}
+  \attribute{- status : OrderStatusEnum}
+  \attribute{- totalAmount : Decimal}
+  \attribute{- pickupLocation : String}
+  \attribute{- createdAt : Date}
+  \operation{+ calculateTotal() : void}
+  \operation{+ updateStatus(newStatus) : void}
+\end{class}
+
+% -------------------------
+% Entidad OrderItem
+% -------------------------
+\begin{class}[text width=4.5cm]{DetallePedido}{20,-8}
+  \attribute{- id : UUID}
+  \attribute{- quantity : Int}
+  \attribute{- unitPrice : Decimal}
+  \attribute{- subtotal : Decimal}
+  \operation{+ calculateSubtotal() : Decimal}
+\end{class}
+
+% -------------------------
+% Entidades Benchmarking
+% -------------------------
+\begin{class}[text width=4.5cm]{VentaDiaria}{0,-8}
+  \attribute{- id : UUID}
+  \attribute{- saleDate : Date}
+  \attribute{- totalRevenue : Decimal}
+  \attribute{- totalInvestment : Decimal}
+  \attribute{- netProfit : Decimal}
+  \operation{+ calculateDailyMetrics() : void}
+\end{class}
+
+\begin{class}[text width=4.5cm]{ProyectoBQ}{10,-16}
+  \attribute{- id : UUID}
+  \attribute{- datasetId : String}
+  \attribute{- tableId : String}
+  \attribute{- clientEmail : String}
+  \operation{+ getCredentials() : JSON}
+\end{class}
+
+\begin{class}[text width=4.5cm]{EjecucionSQL}{20,-16}
+  \attribute{- id : UUID}
+  \attribute{- executionTimeMs : Decimal}
+  \attribute{- bytesBilled : Int}
+  \attribute{- executionDate : Date}
+  \operation{+ logToBigQuery() : void}
+\end{class}
+
+% -------------------------
+% Relaciones
+% -------------------------
+\association{Usuario}{vende}{0..*}{Producto}{1}{vendedor}
+\association{Usuario}{realiza}{0..*}{Pedido}{1}{comprador}
+\association{Pedido}{contiene}{1..*}{DetallePedido}{1}{pedido}
+\association{Producto}{incluido\_en}{0..*}{DetallePedido}{1}{producto}
+\association{Producto}{rastrea}{1..*}{RegistroInventario}{1}{producto}
+\association{Usuario}{gestiona}{1}{VentaDiaria}{0..*}{vendedor}
+\association{ProyectoBQ}{aloja}{1..*}{EjecucionSQL}{1}{proyecto}
+
+\end{tikzpicture}
+\end{center}
+
+\end{document}

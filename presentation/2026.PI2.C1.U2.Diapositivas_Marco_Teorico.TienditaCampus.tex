@@ -1,0 +1,458 @@
+\documentclass[aspectratio=169, 12pt]{beamer}
+
+% --- Paquetes (compatible con pdfLaTeX) ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, shadows.blur}
+
+% --- Colores ---
+\definecolor{bg}{HTML}{0F172A}
+\definecolor{bg2}{HTML}{1E293B}
+\definecolor{red1}{HTML}{EF4444}
+\definecolor{yellow1}{HTML}{F59E0B}
+\definecolor{green1}{HTML}{22C55E}
+\definecolor{txt}{HTML}{F8FAFC}
+\definecolor{txt2}{HTML}{94A3B8}
+\definecolor{txt3}{HTML}{64748B}
+\definecolor{border}{HTML}{334155}
+
+% --- Tema minimalista oscuro ---
+\usetheme{default}
+\usecolortheme{default}
+\setbeamercolor{background canvas}{bg=bg}
+\setbeamercolor{normal text}{fg=txt}
+\setbeamercolor{frametitle}{fg=txt}
+\setbeamercolor{item}{fg=yellow1}
+\setbeamercolor{subitem}{fg=red1}
+\setbeamercolor{block title}{fg=yellow1, bg=bg2}
+\setbeamercolor{block body}{fg=txt2, bg=bg2}
+\setbeamercolor{block title alerted}{fg=red1, bg=bg2}
+\setbeamercolor{block body alerted}{fg=txt2, bg=bg2}
+
+% --- Sin navegación, footer minimalista ---
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}{
+  \vspace{8pt}
+  {\large\bfseries\insertframetitle}
+}
+\setbeamertemplate{footline}{
+  \hbox to \paperwidth{
+    \hspace{14pt}
+    {\tiny\color{txt3}\textbf{TIENDITACAMPUS}}
+    \hfill
+    {\tiny\color{txt3}\insertframenumber\,/\,\inserttotalframenumber}
+    \hspace{14pt}
+  }
+  \vspace{4pt}
+}
+
+% --- Items limpios ---
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{itemize subitem}[triangle]
+\setlength{\leftmargini}{12pt}
+
+% --- Helpers ---
+\newcommand{\tag}[1]{%
+  \tikz[baseline=(t.base)]{\node[fill=bg2, draw=yellow1!30, text=yellow1,
+  rounded corners=8pt, inner xsep=6pt, inner ysep=2pt,
+  font=\tiny\bfseries] (t) {\MakeUppercase{#1}};}%
+}
+\newcommand{\pill}[1]{%
+  \tikz[baseline=(p.base)]{\node[fill=red1!15, draw=red1!30, text=red1!80!white,
+  rounded corners=12pt, inner xsep=8pt, inner ysep=3pt,
+  font=\scriptsize\bfseries] (p) {#1};}%
+}
+\newcommand{\badge}[2]{%
+  \tikz[baseline=(b.base)]{\node[fill=#1!15, text=#1!80!white,
+  rounded corners=4pt, inner xsep=4pt, inner ysep=2pt,
+  font=\tiny\bfseries] (b) {#2};}%
+}
+
+\begin{document}
+
+% ===== SLIDE 1: PORTADA =====
+{
+\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+\centering\vspace{0.8cm}
+
+{\tiny\color{txt3}\MakeUppercase{Universidad Polit\'ecnica de Chiapas}}\\[2pt]
+{\scriptsize\color{txt2}Proyecto Integrador 2 \,$\cdot$\, Corte 1 \,$\cdot$\, Unidad 2}\\[18pt]
+
+{\fontsize{36}{40}\selectfont\bfseries\color{red1}TienditaCampus}\\[6pt]
+{\small\color{txt2}Herramientas digitales para vendedores universitarios}\\[18pt]
+
+\pill{Marco Te\'orico}\hspace{6pt}
+\pill{Marco Legal y Normativo}\hspace{6pt}
+\pill{Poblaci\'on y Muestra}\\[18pt]
+
+{\footnotesize\color{txt2}
+\textbf{H\'ector Isaac Espinoza Mendoza}\\[1pt]
+\textbf{Luis Emilio Jaras S\'anchez}\\[1pt]
+\textbf{Jesel Moreno Z\'u\~niga}}\\[10pt]
+
+{\tiny\color{txt3}Docente: Roc\'io Crystal Hern\'andez Camacho \,$\cdot$\, Marzo 2026}
+\end{frame}
+}
+
+
+\begin{frame}{\tag{Agenda} \; Contenido de la {\color{red1}Presentaci\'on}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{1. Marco Te\'orico}
+\begin{itemize}\small
+  \item Comercio electr\'onico universitario
+  \item Aplicaciones similares
+  \item PWA y stack tecnol\'ogico
+  \item Arquitectura 3-Tier en AWS
+  \item Inventarios perecederos
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{2. Marco Legal y Normativo}
+\begin{itemize}\small
+  \item LFPDPPP (Datos Personales)
+  \item Protecci\'on al Consumidor
+  \item NOM-151 y NOM-251
+\end{itemize}
+\end{block}
+\vspace{4pt}
+\begin{alertblock}{3. Poblaci\'on y Muestra}
+\begin{itemize}\small
+  \item Caso pr\'actico integrador
+  \item Criterios de selecci\'on
+  \item C\'alculo de muestra
+\end{itemize}
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Te\'orico} \; Comercio Electr\'onico {\color{red1}Universitario}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{Definici\'on}
+\small El e-commerce es la compra y venta de bienes a trav\'es de Internet (Laudon \& Traver, 2022). En universidades, surge como respuesta al emprendimiento estudiantil con herramientas accesibles.
+\end{block}
+\begin{block}{Contexto}
+\small Seg\'un ANUIES (2024), el \textbf{38\%} de los universitarios mexicanos han vendido informalmente en su campus, pero carecen de herramientas digitales para gestionar sus micro-negocios.
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{TienditaCampus}
+\small PWA que digitaliza la gesti\'on de vendedores universitarios:
+\begin{itemize}\small
+  \item Control de inventario
+  \item Seguimiento de ventas diarias
+  \item An\'alisis de rentabilidad
+  \item Reducci\'on de p\'erdidas (M\'etodo IQR)
+  \item Desde el celular, sin instalar app
+\end{itemize}
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Te\'orico} \; Aplicaciones {\color{red1}Similares} y Nuestra Diferencia}
+\vspace{2pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{Square y Toast}
+\footnotesize Terminales POS con comisiones del \textbf{3\%+} por transacci\'on. Un estudiante vendiendo tortas de \$25 no puede absorber ese costo.
+\end{block}
+\vspace{2pt}
+\begin{block}{F\'aciLUNCH e Infood}
+\footnotesize Apps de pedidos universitarios. Distribuyen comida pero \textbf{no ayudan} a saber cu\'anto producto comprar.
+\end{block}
+\vspace{2pt}
+\begin{block}{Too Good To Go}
+\footnotesize Vende sobras a precio rebajado. Soluci\'on \textbf{reactiva}: el vendedor ya perdi\'o dinero.
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{TienditaCampus}
+\textbf{Enfoque PREVENTIVO con M\'etodo IQR:}
+\begin{itemize}\small
+  \item Analiza \textbf{ventas pasadas}
+  \item Filtra \textbf{picos irreales} (outliers)
+  \item \textbf{Sugiere cu\'anto comprar}
+  \item \textbf{Gratuito}, sin comisiones
+  \item Accesible desde el celular
+\end{itemize}
+\vspace{4pt}
+{\color{green1}\bfseries\small Ataca el problema ANTES de que suceda}
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Te\'orico} \; Aplicaciones Web {\color{red1}Progresivas (PWA)}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{\textquestiondown Qu\'e es una PWA?}
+\small Combina lo mejor de apps web y nativas (Google, 2023). Instalables, funcionan offline, se actualizan autom\'aticamente con Service Workers.
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{Ventajas}
+\begin{itemize}\small
+  \item \textbf{Sin App Store:} solo un link
+  \item \textbf{Offline:} registrar ventas sin red
+  \item \textbf{Liviana:} no ocupa espacio
+  \item \textbf{Multi-plataforma}
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\vspace{6pt}
+\centering
+\badge{yellow1}{Next.js 14}\hspace{2pt}
+\badge{red1}{NestJS}\hspace{2pt}
+\badge{blue}{PostgreSQL 16}\hspace{2pt}
+\badge{green1}{MongoDB 7}\hspace{2pt}
+\badge{violet}{Docker}\hspace{2pt}
+\badge{pink}{Nginx}\hspace{2pt}
+\badge{teal}{Tailwind CSS v4}\hspace{2pt}
+\badge{orange}{AWS EC2}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Te\'orico} \; Arquitectura {\color{red1}3 Niveles} en AWS}
+\vspace{4pt}
+\footnotesize Cada capa corre en una instancia EC2 independiente (Fowler, 2002).\\[6pt]
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{block}{Presentaci\'on}
+\scriptsize \textbf{Next.js + Nginx}
+\begin{itemize}\scriptsize
+  \item Interfaz PWA
+  \item Reverse proxy
+  \item SSR
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.32\textwidth}
+\begin{block}{L\'ogica}
+\scriptsize \textbf{NestJS API REST}
+\begin{itemize}\scriptsize
+  \item JWT + OAuth
+  \item Validaci\'on DTOs
+  \item IP privada
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.32\textwidth}
+\begin{alertblock}{Datos}
+\scriptsize \textbf{PostgreSQL 16} (relacional) + \textbf{MongoDB 7} (logs). Arquitectura poliglota.
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Te\'orico} \; Inventarios {\color{red1}Perecederos}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{Problem\'atica}
+\small Seg\'un la FAO (2023), hasta el \textbf{30\%} del inventario en micronegocios de alimentos se pierde por falta de control. Los vendedores universitarios son especialmente vulnerables.
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{Soluci\'on}
+\begin{itemize}\small
+  \item \textbf{Registro diario} de entradas/salidas
+  \item \textbf{Alertas} de caducidad
+  \item \textbf{Rentabilidad:} costo vs.\ ganancia
+  \item \textbf{Mermas:} patrones de p\'erdida
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\vspace{6pt}
+\begin{block}{Modelo de Datos}
+\small \textbf{Products} $\rightarrow$ \textbf{InventoryRecords} $\rightarrow$ \textbf{DailySales} $\rightarrow$ \textbf{SaleDetails} $\rightarrow$ \textbf{Orders}. Trazabilidad completa, m\'argenes reales (Chopra \& Meindl, 2020).
+\end{block}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Legal} \; Protecci\'on de {\color{red1}Datos Personales}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{LFPDPPP (DOF, 2010)}
+\begin{itemize}\small
+  \item \textbf{Art.\ 6:} Tratamiento l\'icito e informado
+  \item \textbf{Art.\ 9:} Consentimiento expreso para datos sensibles
+  \item \textbf{Art.\ 16:} Aviso de privacidad obligatorio
+\end{itemize}
+\end{alertblock}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{Cumplimiento}
+\begin{itemize}\small
+  \item \textbf{Argon2} para hashing
+  \item \textbf{JWT} sin datos sensibles en servidor
+  \item \textbf{Google OAuth} delegado
+  \item \textbf{.env} cero credenciales en c\'odigo
+  \item \textbf{Roles} con m\'inimo privilegio
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Marco Legal} \; Comercio Digital y {\color{red1}Normativas}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{Protecci\'on al Consumidor}
+\small \textbf{Cap.\ VIII Bis} --- Transacciones electr\'onicas.
+\begin{itemize}\small
+  \item \textbf{Art.\ 76 Bis:} Identidad del proveedor
+  \item \textbf{Frac.\ V:} Protecci\'on de datos
+\end{itemize}
+\end{block}
+\vspace{2pt}
+\begin{block}{NOM-151-SCFI-2002}
+\small Conservaci\'on de mensajes de datos. MongoDB como sistema de auditor\'ia y trazabilidad.
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{NOM-251-SSA1-2009}
+\small Higiene alimentaria. El sistema obliga orden \textbf{FIFO}: lo primero que entra es lo primero que se vende.
+\end{block}
+\vspace{2pt}
+\begin{alertblock}{UPChiapas}
+\small Alineado con las pol\'iticas de emprendimiento e innovaci\'on, dentro del \textbf{Modelo Educativo Basado en Competencias (MEBC)}.
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Poblaci\'on y Muestra} \; Caso Pr\'actico {\color{red1}Integrador}}
+\vspace{6pt}
+\centering
+\begin{tikzpicture}
+  \node[fill=bg2, draw=border, rounded corners=6pt, minimum width=12.5cm, 
+        minimum height=0.9cm, text width=12cm, align=left] at (0, 0) {
+    {\color{yellow1}\bfseries\scriptsize TEMA}\hspace{8pt}
+    {\color{txt}\footnotesize Gesti\'on del comercio informal de snacks universitarios mediante una app web.}
+  };
+  \node[fill=bg2, draw=border, rounded corners=6pt, minimum width=12.5cm, 
+        minimum height=0.9cm, text width=12cm, align=left] at (0,-1.2) {
+    {\color{yellow1}\bfseries\scriptsize DISE\~NO}\hspace{8pt}
+    {\color{txt}\footnotesize Cuasi-experimental, mediciones pre-post intervenci\'on, enfoque cuantitativo.}
+  };
+  \node[fill=bg2, draw=border, rounded corners=6pt, minimum width=12.5cm, 
+        minimum height=0.9cm, text width=12cm, align=left] at (0,-2.4) {
+    {\color{yellow1}\bfseries\scriptsize POBLACI\'ON}\hspace{8pt}
+    {\color{txt}\footnotesize Todos los vendedores estudiantiles de snacks en la UPChiapas.}
+  };
+  \node[fill=red1!10, draw=red1!30, rounded corners=6pt, minimum width=12.5cm, 
+        minimum height=1.1cm, text width=12cm, align=left] at (0,-3.7) {
+    {\color{red1}\bfseries\scriptsize MUESTRA}\hspace{8pt}
+    {\color{txt}\footnotesize Muestreo intencional: vender productos preparados perecederos al menos \textbf{3 d\'ias/semana}.}
+  };
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{\tag{Poblaci\'on y Muestra} \; Criterios de {\color{red1}Selecci\'on}}
+\vspace{4pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{Inclusi\'on}
+\begin{itemize}\small
+  \item Estudiante \textbf{activo} en UPChiapas
+  \item Vendedor de \textbf{snacks} en campus
+  \item M\'inimo \textbf{1 mes} de experiencia
+  \item Vender \textbf{3+ d\'ias/semana}
+  \item Disponibilidad para usar la plataforma
+  \item Acceso a dispositivo con navegador
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{Exclusi\'on}
+\begin{itemize}\small
+  \item Vendedores de \textbf{comidas completas}
+  \item \textbf{Ambulantes} sin punto fijo
+  \item \textbf{Ajenos} a la comunidad universitaria
+  \item Personal administrativo o docente
+  \item Negocios con sistemas contables
+\end{itemize}
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{\tag{Poblaci\'on y Muestra} \; C\'alculo de la {\color{red1}Muestra}}
+\vspace{4pt}
+\begin{block}{}
+\centering
+\large $n = \dfrac{N \cdot Z^2 \cdot p \cdot q}{e^2 (N-1) + Z^2 \cdot p \cdot q}$
+\end{block}
+
+\vspace{4pt}
+\begin{columns}[c]
+\begin{column}{0.22\textwidth}\centering
+{\Large\bfseries\color{red1}N=150}\\{\tiny\color{txt2}Poblaci\'on}
+\end{column}
+\begin{column}{0.22\textwidth}\centering
+{\Large\bfseries\color{red1}Z=1.96}\\{\tiny\color{txt2}Confianza 95\%}
+\end{column}
+\begin{column}{0.22\textwidth}\centering
+{\Large\bfseries\color{red1}p=0.5}\\{\tiny\color{txt2}Proporci\'on}
+\end{column}
+\begin{column}{0.22\textwidth}\centering
+{\Large\bfseries\color{red1}e=5\%}\\{\tiny\color{txt2}Error}
+\end{column}
+\end{columns}
+
+\vspace{8pt}
+\centering
+\tikz{\node[fill=red1!15, draw=red1!30, rounded corners=8pt, inner sep=8pt]{
+  {\Huge\bfseries\color{red1}n $\approx$ 108}\quad
+  {\small\color{txt2}vendedores a encuestar}
+};}
+
+\vspace{6pt}
+\small\color{txt2}\textbf{Muestreo intencional} $+$ bola de nieve durante recesos y cambios de clase.
+\end{frame}
+
+
+{
+\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+\centering\vspace{1.5cm}
+
+{\fontsize{36}{40}\selectfont\bfseries\color{red1}\textexclamdown Gracias!}\\[10pt]
+{\color{txt2}\textquestiondown Preguntas o comentarios?}\\[20pt]
+
+\pill{tienditacampus.com}\\[18pt]
+
+{\footnotesize\color{txt2}
+\textbf{H\'ector Isaac Espinoza Mendoza}\\[1pt]
+\textbf{Luis Emilio Jaras S\'anchez}\\[1pt]
+\textbf{Jesel Moreno Z\'u\~niga}}\\[12pt]
+
+{\tiny\color{txt3}Universidad Polit\'ecnica de Chiapas \,$\cdot$\, Proyecto Integrador 2 \,$\cdot$\, Marzo 2026}
+\end{frame}
+}
+
+\end{document}
