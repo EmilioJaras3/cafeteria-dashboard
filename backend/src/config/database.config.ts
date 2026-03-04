@@ -2,9 +2,7 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 /**
- * Configuración de TypeORM para PostgreSQL.
- * Lee TODAS las credenciales desde variables de entorno.
- * NUNCA hardcodear valores de conexión aquí.
+ * Configuración PostgreSQL.
  */
 export const databaseConfig = (
     configService: ConfigService,
@@ -18,7 +16,5 @@ export const databaseConfig = (
     autoLoadEntities: true,
     synchronize: false,
     logging: configService.get<string>('NODE_ENV') === 'development',
-    ssl: configService.get<string>('NODE_ENV') === 'production'
-        ? { rejectUnauthorized: false }
-        : false,
+    ssl: false, // Desactivado para AWS 3-tier.
 });
