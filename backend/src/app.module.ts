@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule'; // <-- Added here
 import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation.schema';
 import { databaseConfig } from './config/database.config';
@@ -19,6 +20,7 @@ import { HealthController } from './common/controllers/health.controller';
 import { OrdersModule } from './modules/orders/orders.module';
 import { BreakEvenModule } from './modules/break-even/break-even.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { ForecastModule } from './modules/forecast/forecast.module'; // <-- Added here
 
 @Module({
     imports: [
@@ -28,6 +30,9 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
             load: [configuration],
             validationSchema,
         }),
+
+        // ── Tareas Programadas (Cron Jobs) ────────────
+        ScheduleModule.forRoot(), // <-- Added here
 
         // ── Base de datos RELACIONAL (PostgreSQL) ────────────
         TypeOrmModule.forRootAsync({
@@ -58,6 +63,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
         ReportsModule,
         BreakEvenModule,
         DashboardModule,
+        ForecastModule, // <-- Added here
     ],
     controllers: [HealthController],
 })
