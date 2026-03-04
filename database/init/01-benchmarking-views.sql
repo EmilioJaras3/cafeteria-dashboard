@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 CREATE OR REPLACE VIEW v_daily_export AS
 SELECT 
-    2 as project_id, -- ID fijo del equipo TienditaCampus
+    -- El project_id se inyecta dinámicamente desde el servicio
     CURRENT_DATE as snapshot_date,
     queryid,
     dbid,

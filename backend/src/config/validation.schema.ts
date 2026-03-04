@@ -28,12 +28,15 @@ export const validationSchema = Joi.object({
     }),
     JWT_EXPIRATION: Joi.string().default('7d'),
 
-    // Argon2 — opcionales con defaults seguros
     ARGON2_MEMORY_COST: Joi.number().default(65536),
     ARGON2_TIME_COST: Joi.number().default(3),
     ARGON2_PARALLELISM: Joi.number().default(4),
 
-    // Security
     MAX_FAILED_LOGIN_ATTEMPTS: Joi.number().default(5),
     LOCKOUT_DURATION_MINUTES: Joi.number().default(15),
+
+    // BigQuery / Benchmarking
+    GCP_PROJECT_ID: Joi.string().default('data-from-software'),
+    BQ_DATASET_ID: Joi.string().default('benchmarking_warehouse'),
+    BQ_TABLE_ID: Joi.string().default('daily_query_metrics'),
 });

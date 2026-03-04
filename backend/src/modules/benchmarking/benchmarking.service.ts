@@ -1,6 +1,7 @@
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
+import { ConfigService } from '@nestjs/config';
 import { BigQuery } from '@google-cloud/bigquery';
 import { OAuth2Client } from 'google-auth-library';
 import { Project } from './entities/project.entity';
@@ -17,6 +18,7 @@ export class BenchmarkingService {
         private readonly projectRepository: Repository<Project>,
         @InjectRepository(Query)
         private readonly queryRepository: Repository<Query>,
+        private readonly configService: ConfigService,
     ) { }
 
     /**
@@ -69,18 +71,21 @@ export class BenchmarkingService {
             const oauth2Client = new OAuth2Client();
             oauth2Client.setCredentials({ access_token: accessToken });
 
+            const gcpProjectId = this.configService.get<string>('GCP_PROJECT_ID', 'data-from-software');
+            const datasetId = this.configService.get<string>('BQ_DATASET_ID', 'benchmarking_warehouse');
+            const tableId = this.configService.get<string>('BQ_TABLE_ID', 'daily_query_metrics');
+
             const bigquery = new BigQuery({
-                projectId: 'data-from-software',
+                projectId: gcpProjectId,
                 authClient: oauth2Client
             });
 
-            const datasetId = 'benchmarking_warehouse';
-            const tableId = 'daily_query_metrics';
+            const projectId = await this.getCurrentProjectId();
 
-            // Insertar rows directamente
             const rows = metrics.map((m: any) => ({
                 ...m,
-                snapshot_date: m.snapshot_date.toISOString().split('T')[0] // Asegurar formato YYYY-MM-DD
+                project_id: projectId,
+                snapshot_date: m.snapshot_date.toISOString().split('T')[0]
             }));
 
             await bigquery.dataset(datasetId).table(tableId).insert(rows);
