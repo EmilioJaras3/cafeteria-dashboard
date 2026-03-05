@@ -65,6 +65,7 @@ services:
 
   # ─── Database (PostgreSQL 16) ──────────────────────────────
   database:
+    container_name: tc-database
     build:
       context: ./database
       dockerfile: ../devops/docker/database/Dockerfile
@@ -76,7 +77,11 @@ services:
     command: [ "postgres", "-c", "shared_preload_libraries=pg_stat_statements" ]
     volumes:
       - tc-pgdata:/var/lib/postgresql/data
+      # 1. El init se monta en la carpeta mágica para crear extensiones y roles al arrancar
       - ./database/init:/docker-entrypoint-initdb.d:ro
+      # 2. Las migraciones y scripts se montan en la raíz para evitar el choque de "read-only"
+      - ./database/migrations:/migrations:ro
+      - ./database/scripts:/scripts:ro
     networks:
       - tc-network
     healthcheck:
@@ -85,6 +90,26 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+
+  # ─── Migrator (Ejecución automática de SQL) ────────────────
+  migrator:
+    image: flyway/flyway:latest
+    container_name: tc-migrator
+    restart: "no" # Solo corre una vez al levantar y se apaga
+    environment:
+      # Se conecta internamente al servicio "database" en el puerto 5432
+      - FLYWAY_URL=jdbc:postgresql://database:5432/${POSTGRES_DB}
+      - FLYWAY_USER=${POSTGRES_USER}
+      - FLYWAY_PASSWORD=${POSTGRES_PASSWORD}
+    command: migrate
+    volumes:
+      # Conecta tu carpeta local a la carpeta mágica de Flyway
+      - ./database/migrations:/flyway/sql:ro
+    networks:
+      - tc-network
+    depends_on:
+      database:
+        condition: service_healthy # Espera a que Postgres esté 100% listo
 
   # ─── MongoDB (NoSQL — Base de datos no relacional) ─────────
   mongodb:
@@ -100,6 +125,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 20s
+
   # ─── Nginx (Reverse Proxy) ────────────────────────────────
   nginx:
     build:
