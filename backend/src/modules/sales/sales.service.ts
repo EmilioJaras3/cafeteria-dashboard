@@ -267,10 +267,17 @@ export class SalesService {
         const profit = totalRevenue - Number(sale.totalInvestment);
         sale.profitMargin = totalRevenue > 0 ? (profit / totalRevenue) * 100 : 0;
 
-        // Note: totalProfit is generated column in DB, but we do not write to it. 
-        // If it was a real column we would set it here.
+        await this.dailySaleRepository.save(sale);
 
-        return await this.dailySaleRepository.save(sale);
+        await this.dailySaleRepository.update(sale.id, {
+            totalRevenue: sale.totalRevenue,
+            unitsSold: sale.unitsSold,
+            unitsLost: sale.unitsLost,
+            totalWasteCost: sale.totalWasteCost,
+            profitMargin: sale.profitMargin
+        });
+
+        return sale;
     }
 
     async getROI(user: User, startDate?: string, endDate?: string) {
