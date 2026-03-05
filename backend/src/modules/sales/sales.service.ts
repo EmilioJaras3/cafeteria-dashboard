@@ -249,16 +249,19 @@ export class SalesService {
         let totalRevenue = 0;
         let unitsSold = 0;
         let unitsLost = 0;
+        let totalWasteCost = 0;
 
         for (const detail of sale.details) {
             totalRevenue += Number(detail.unitPrice) * detail.quantitySold;
             unitsSold += detail.quantitySold;
             unitsLost += detail.quantityLost;
+            totalWasteCost += Number(detail.wasteCost || 0); // Include generated column if available
         }
 
         sale.totalRevenue = totalRevenue;
         sale.unitsSold = unitsSold;
         sale.unitsLost = unitsLost;
+        sale.totalWasteCost = totalWasteCost;
 
         // Profit & Margin
         const profit = totalRevenue - Number(sale.totalInvestment);
