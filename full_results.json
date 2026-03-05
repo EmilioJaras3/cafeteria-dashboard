@@ -1,0 +1,2097 @@
+{
+  "total_files_scanned": 62213,
+  "files_with_hardcode": 243,
+  "findings": [
+    {
+      "file": "backend\\.eslintrc.js"
+    },
+    {
+      "file": "frontend\\next-env.d.ts",
+      "urls": [
+        [
+          "https://nextjs.org/docs/app/building-your-application/configuring/typescript",
+          129
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\postcss.config.js"
+    },
+    {
+      "file": "frontend\\public\\sw.js"
+    },
+    {
+      "file": "frontend\\src\\app\\layout.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\page.tsx",
+      "urls": [
+        [
+          "https://lh3.googleusercontent.com/aida-public/AB6AXuBxEzEY2M4GQm7g3GYQ1_3hGxRrVBnGUcoif-ZCjsQSJGM65dCiQAY6Coqvs1tp1woZTTBSSAe-DjVH7vgz7HDHTaDTcvlAzvsFelYMetNJQoAdmJHXn7BLlV44Xx846vvvNAnqdOjSmRSeRTLROYAjzv1c67EQgtI0h-1e9eF-O8jiUYvCry_Yt6tR8kbsr8FYXE2kPEEjrZoHVYWsufSa24M7qGANqFivGMk30gza2haO8fNg4o9uO_zCK7qRBbzQD9SG-LXrMasz",
+          5873
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          14198
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\src\\components\\product-card.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\pwa-register.tsx"
+    },
+    {
+      "file": "frontend\\src\\lib\\utils.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\api.ts",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          462
+        ],
+        [
+          "http://localhost:3001/api",
+          595
+        ],
+        [
+          "localhost:3001",
+          469
+        ],
+        [
+          "localhost:3001",
+          602
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\src\\services\\auth.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\benchmarking.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\finance.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\inventory.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\orders.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\products.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\sales.service.ts"
+    },
+    {
+      "file": "frontend\\src\\services\\users.service.ts"
+    },
+    {
+      "file": "frontend\\src\\store\\auth.store.ts"
+    },
+    {
+      "file": "frontend\\src\\types\\index.ts"
+    },
+    {
+      "file": "frontend\\src\\components\\layout\\Navbar.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\layout\\Sidebar.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\providers\\google-provider.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\sales\\close-day-dialog.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\avatar.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\badge.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\button.tsx",
+      "credentials": [
+        "host: 'hover:bg-slate-100 hover:text-text'"
+      ]
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\card.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\checkbox.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\dialog.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\input.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\label.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\table.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\textarea.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\toast.tsx"
+    },
+    {
+      "file": "frontend\\src\\components\\ui\\use-toast.ts"
+    },
+    {
+      "file": "frontend\\src\\app\\(auth)\\layout.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\layout.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\buyer\\layout.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\checkout\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\marketplace\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\seller\\[id]\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\marketplace\\product\\[id]\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\buyer\\dashboard\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\audit\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\benchmarking\\page.tsx",
+      "urls": [
+        [
+          "https://www.googleapis.com/auth/bigquery",
+          1510
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\dashboard\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\products\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\reports\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\sales\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\settings\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\products\\new\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\products\\[id]\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(dashboard)\\products\\[id]\\stock\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(auth)\\login\\page.tsx"
+    },
+    {
+      "file": "frontend\\src\\app\\(auth)\\register\\page.tsx"
+    },
+    {
+      "file": "frontend\\.next\\server\\interception-route-rewrite-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\middleware-build-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\middleware-react-loadable-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\next-font-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\server-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\webpack-runtime.js"
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\layout.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3292
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3280
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\buyer\\layout.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3316
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\checkout\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3313
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\marketplace\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3322
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\seller\\[id]\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3328
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\marketplace\\product\\[id]\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3373
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\buyer\\dashboard\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3340
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\audit\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3346
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\dashboard\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3358
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\products\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3355
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\reports\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3352
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\sales\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3346
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\settings\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3355
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\products\\new\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3373
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\products\\[id]\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3376
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(dashboard)\\products\\[id]\\stock\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3400
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(auth)\\login\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3331
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\types\\app\\(auth)\\register\\page.ts",
+      "urls": [
+        [
+          "https://github.com/sindresorhus/type-fest",
+          3340
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\177mjj3ZerV8yo1OUfcH9\\_buildManifest.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\177mjj3ZerV8yo1OUfcH9\\_ssgManifest.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\117-38b0e4cf9f7da2bd.js",
+      "urls": [
+        [
+          "http://n",
+          11476
+        ],
+        [
+          "https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams",
+          29017
+        ],
+        [
+          "https://nextjs.org/docs/messages/next-dynamic-api-wrong-context",
+          37405
+        ],
+        [
+          "http://n",
+          87207
+        ],
+        [
+          "https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering",
+          88314
+        ],
+        [
+          "https://nextjs.org/docs/messages/dynamic-server-error",
+          88623
+        ],
+        [
+          "https://nextjs.org/docs/app/api-reference/functions/unstable_cache",
+          89151
+        ],
+        [
+          "https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering",
+          89395
+        ],
+        [
+          "https://nextjs.org/docs/messages/dynamic-server-error",
+          89708
+        ],
+        [
+          "https://nextjs.org/docs/messages/ppr-caught-error",
+          90180
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\157-296e7f692288774f.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\184-88f8f7bad3567f37.js",
+      "urls": [
+        [
+          "http://[${n.value",
+          83429
+        ],
+        [
+          "http://[${e",
+          83957
+        ],
+        [
+          "https://json-schema.org/draft/2020-12/schema",
+          133782
+        ],
+        [
+          "http://json-schema.org/draft-07/schema#",
+          133861
+        ],
+        [
+          "http://json-schema.org/draft-04/schema#",
+          133935
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\438-3b48b8002e563a3f.js",
+      "urls": [
+        [
+          "http://www.w3.org/2000/svg",
+          664
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          1008
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          1435
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          1860
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          2185
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\551-7b67ac7d4a38830a.js",
+      "urls": [
+        [
+          "http://www.w3.org/2000/svg",
+          527
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\666-a5cb2592904f6970.js",
+      "urls": [
+        [
+          "https://radix-ui.com/primitives/docs/components/",
+          41394
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\972-138c4ca576b3d7fb.js",
+      "urls": [
+        [
+          "http://n",
+          5937
+        ],
+        [
+          "http://n",
+          5972
+        ],
+        [
+          "https://nextjs.org/docs/messages/public-next-folder-conflict",
+          11209
+        ],
+        [
+          "https://nextjs.org/docs/messages/404-get-initial-props",
+          11642
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-export",
+          11774
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-component-member",
+          12218
+        ],
+        [
+          "https://nextjs.org/docs/messages/non-standard-node-env",
+          12432
+        ],
+        [
+          "https://nextjs.org/docs/messages/ssg-fallback-true-export",
+          12582
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\fd9d1056-346a4d4db4c146e1.js",
+      "urls": [
+        [
+          "https://react.dev/errors/",
+          211
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          12119
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          79121
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          99517
+        ],
+        [
+          "http://www.w3.org/1998/Math/MathML",
+          99582
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          99676
+        ],
+        [
+          "http://www.w3.org/1998/Math/MathML",
+          99745
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          148835
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          150071
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          150151
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          150228
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          150302
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          150377
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          150452
+        ],
+        [
+          "http://www.w3.org/XML/1998/namespace",
+          150524
+        ],
+        [
+          "http://www.w3.org/XML/1998/namespace",
+          150602
+        ],
+        [
+          "http://www.w3.org/XML/1998/namespace",
+          150681
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          156394
+        ],
+        [
+          "http://www.w3.org/1998/Math/MathML",
+          156436
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          164625
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\framework-f66176bb897dc684.js",
+      "urls": [
+        [
+          "https://reactjs.org/docs/error-decoder.html?invariant=",
+          158
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          4908
+        ],
+        [
+          "http://www.w3.org/XML/1998/namespace",
+          5045
+        ],
+        [
+          "http://www.w3.org/1999/xlink",
+          5236
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          10852
+        ],
+        [
+          "http://www.w3.org/1998/Math/MathML",
+          10898
+        ],
+        [
+          "http://www.w3.org/1999/xhtml",
+          10949
+        ],
+        [
+          "http://www.w3.org/1999/xhtml",
+          11014
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          11055
+        ],
+        [
+          "http://www.w3.org/1999/xhtml",
+          11109
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          11176
+        ],
+        [
+          "http://www.w3.org/1999/xhtml",
+          101178
+        ],
+        [
+          "http://www.w3.org/1999/xhtml",
+          101224
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\main-8af60bf41076ff11.js",
+      "urls": [
+        [
+          "https://nextjs.org/docs/messages/client-side-exception-occurred",
+          12024
+        ],
+        [
+          "http://n",
+          24552
+        ],
+        [
+          "http://n",
+          24587
+        ],
+        [
+          "https://nextjs.org/docs/messages/next-router-not-mounted",
+          31955
+        ],
+        [
+          "https://fonts.googleapis.com/",
+          49187
+        ],
+        [
+          "https://fonts.gstatic.com",
+          49242
+        ],
+        [
+          "https://use.typekit.net",
+          49276
+        ],
+        [
+          "https://use.typekit.net",
+          49313
+        ],
+        [
+          "https://fonts.googleapis.com/css",
+          52128
+        ],
+        [
+          "https://use.typekit.net/",
+          52163
+        ],
+        [
+          "http://f",
+          58490
+        ],
+        [
+          "http://n",
+          64938
+        ],
+        [
+          "http://n",
+          65068
+        ],
+        [
+          "https://nextjs.org/docs/messages/",
+          68717
+        ],
+        [
+          "http://n",
+          84054
+        ],
+        [
+          "https://nextjs.org/docs/messages/invalid-multi-match",
+          96098
+        ],
+        [
+          "https://nextjs.org/docs/messages/public-next-folder-conflict",
+          126062
+        ],
+        [
+          "https://nextjs.org/docs/messages/404-get-initial-props",
+          126495
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-export",
+          126627
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-component-member",
+          127071
+        ],
+        [
+          "https://nextjs.org/docs/messages/non-standard-node-env",
+          127285
+        ],
+        [
+          "https://nextjs.org/docs/messages/ssg-fallback-true-export",
+          127435
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\main-app-ee696f3d688d9549.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\polyfills-42372ed130431b0a.js",
+      "urls": [
+        [
+          "https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE",
+          2928
+        ],
+        [
+          "https://github.com/zloirock/core-js",
+          2994
+        ],
+        [
+          "https://a",
+          70709
+        ],
+        [
+          "https://a/c%20d?a=1&c=3",
+          70913
+        ],
+        [
+          "https://a@b",
+          71034
+        ],
+        [
+          "https://тест",
+          71146
+        ],
+        [
+          "https://a#б",
+          71188
+        ],
+        [
+          "https://x",
+          71235
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\webpack-c1441d91a884af15.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\layout-23c0d2339acbf253.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\page-a6edd76e13922e43.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\pages\\_app-72b849fbd24ac258.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\pages\\_error-7ba65e1336b92748.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(auth)\\layout-ddf2297c3a5cc7ee.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\layout-09bccf81031b7916.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\buyer\\layout-02a88a623d061e94.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\checkout\\page-f301b75820404a57.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          13730
+        ],
+        [
+          "http://localhost:3001/api",
+          15273
+        ],
+        [
+          "localhost:3001",
+          13737
+        ],
+        [
+          "localhost:3001",
+          15280
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\marketplace\\page-ccbfc80909ffd96c.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          11651
+        ],
+        [
+          "http://localhost:3001/api",
+          13194
+        ],
+        [
+          "localhost:3001",
+          11658
+        ],
+        [
+          "localhost:3001",
+          13201
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\_not-found\\page-896600a21df78320.js"
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\seller\\[id]\\page-be0e0f520975bfba.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          18277
+        ],
+        [
+          "http://localhost:3001/api",
+          19820
+        ],
+        [
+          "localhost:3001",
+          18284
+        ],
+        [
+          "localhost:3001",
+          19827
+        ]
+      ],
+      "credentials": [
+        "host:\"hover:bg-slate-100 hover:text-text\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\marketplace\\product\\[id]\\page-aeb01edd741d7e67.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          13527
+        ],
+        [
+          "http://localhost:3001/api",
+          15070
+        ],
+        [
+          "localhost:3001",
+          13534
+        ],
+        [
+          "localhost:3001",
+          15077
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\buyer\\dashboard\\page-62df945027b7f9cf.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          15759
+        ],
+        [
+          "http://localhost:3001/api",
+          17302
+        ],
+        [
+          "localhost:3001",
+          15766
+        ],
+        [
+          "localhost:3001",
+          17309
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\audit\\page-9a51ef07a0ec29fb.js",
+      "urls": [
+        [
+          "http://www.w3.org/2000/svg",
+          588
+        ]
+      ],
+      "credentials": [
+        "user:\"Emilio J.\"",
+        "user:\"Ana P.\"",
+        "user:\"Admin\"",
+        "user:\"Unknown\"",
+        "user:\"Sistema\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\dashboard\\page-0344551750ea7096.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          15806
+        ],
+        [
+          "http://localhost:3001/api",
+          17349
+        ],
+        [
+          "localhost:3001",
+          15813
+        ],
+        [
+          "localhost:3001",
+          17356
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\products\\page-9cd5c750d9f4740a.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          11382
+        ],
+        [
+          "http://localhost:3001/api",
+          12925
+        ],
+        [
+          "localhost:3001",
+          11389
+        ],
+        [
+          "localhost:3001",
+          12932
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\reports\\page-12600e6945709061.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          14468
+        ],
+        [
+          "http://localhost:3001/api",
+          16011
+        ],
+        [
+          "localhost:3001",
+          14475
+        ],
+        [
+          "localhost:3001",
+          16018
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\sales\\page-6ff3294ce4211425.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          14070
+        ],
+        [
+          "http://localhost:3001/api",
+          15613
+        ],
+        [
+          "localhost:3001",
+          14077
+        ],
+        [
+          "localhost:3001",
+          15620
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\settings\\page-3e4c07e51562175c.js",
+      "urls": [
+        [
+          "http://www.w3.org/2000/svg",
+          588
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\products\\new\\page-d72113be70da8b6c.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          10779
+        ],
+        [
+          "http://localhost:3001/api",
+          12322
+        ],
+        [
+          "localhost:3001",
+          10786
+        ],
+        [
+          "localhost:3001",
+          12329
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\products\\[id]\\page-1c7c654fb55dad91.js",
+      "urls": [
+        [
+          "https://ejemplo.com/mi-producto.jpg",
+          5288
+        ],
+        [
+          "http://localhost:3001/api",
+          9608
+        ],
+        [
+          "http://localhost:3001/api",
+          11151
+        ],
+        [
+          "localhost:3001",
+          9615
+        ],
+        [
+          "localhost:3001",
+          11158
+        ]
+      ],
+      "credentials": [
+        "host:\"hover:bg-slate-100 hover:text-text\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(dashboard)\\products\\[id]\\stock\\page-987351360bd10b64.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          10809
+        ],
+        [
+          "http://localhost:3001/api",
+          12352
+        ],
+        [
+          "localhost:3001",
+          10816
+        ],
+        [
+          "localhost:3001",
+          12359
+        ]
+      ],
+      "credentials": [
+        "host:\"hover:bg-slate-100 hover:text-text\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(auth)\\login\\page-4a9a273aa12a3dc4.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          7579
+        ],
+        [
+          "http://localhost:3001/api",
+          9122
+        ],
+        [
+          "localhost:3001",
+          7586
+        ],
+        [
+          "localhost:3001",
+          9129
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\static\\chunks\\app\\(auth)\\register\\page-286b8c88f62287f6.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          10291
+        ],
+        [
+          "http://localhost:3001/api",
+          11834
+        ],
+        [
+          "localhost:3001",
+          10298
+        ],
+        [
+          "localhost:3001",
+          11841
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\page.js",
+      "urls": [
+        [
+          "http://www.w3.org/2000/svg",
+          2766
+        ],
+        [
+          "https://lh3.googleusercontent.com/aida-public/AB6AXuBxEzEY2M4GQm7g3GYQ1_3hGxRrVBnGUcoif-ZCjsQSJGM65dCiQAY6Coqvs1tp1woZTTBSSAe-DjVH7vgz7HDHTaDTcvlAzvsFelYMetNJQoAdmJHXn7BLlV44Xx846vvvNAnqdOjSmRSeRTLROYAjzv1c67EQgtI0h-1e9eF-O8jiUYvCry_Yt6tR8kbsr8FYXE2kPEEjrZoHVYWsufSa24M7qGANqFivGMk30gza2haO8fNg4o9uO_zCK7qRBbzQD9SG-LXrMasz",
+          10423
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          16577
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\177.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          1991
+        ],
+        [
+          "http://localhost:3001/api",
+          3436
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          4727
+        ],
+        [
+          "localhost:3001",
+          1998
+        ],
+        [
+          "localhost:3001",
+          3443
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\404.js",
+      "urls": [
+        [
+          "http://n",
+          5402
+        ],
+        [
+          "http://n",
+          5437
+        ],
+        [
+          "https://nextjs.org/docs/messages/public-next-folder-conflict",
+          10661
+        ],
+        [
+          "https://nextjs.org/docs/messages/404-get-initial-props",
+          11094
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-export",
+          11226
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-component-member",
+          11670
+        ],
+        [
+          "https://nextjs.org/docs/messages/non-standard-node-env",
+          11884
+        ],
+        [
+          "https://nextjs.org/docs/messages/ssg-fallback-true-export",
+          12034
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\477.js",
+      "urls": [
+        [
+          "http://www.w3.org/2000/svg",
+          414
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\582.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\592.js",
+      "urls": [
+        [
+          "http://[${n.value",
+          74347
+        ],
+        [
+          "http://[${e",
+          74875
+        ],
+        [
+          "https://json-schema.org/draft/2020-12/schema",
+          123995
+        ],
+        [
+          "http://json-schema.org/draft-07/schema#",
+          124074
+        ],
+        [
+          "http://json-schema.org/draft-04/schema#",
+          124148
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\682.js",
+      "urls": [
+        [
+          "https://nextjs.org/docs/messages/invalid-script",
+          4030
+        ],
+        [
+          "https://nextjs.org/docs/messages/conflicting-amp-tag",
+          8945
+        ],
+        [
+          "https://cdn.ampproject.org/v0.js",
+          10643
+        ],
+        [
+          "https://cdn.ampproject.org/v0.js",
+          11606
+        ],
+        [
+          "https://nextjs.org/docs/messages/large-page-data",
+          13091
+        ],
+        [
+          "https://nextjs.org/docs/messages/circular-structure",
+          13329
+        ],
+        [
+          "https://fonts.googleapis.com/",
+          20099
+        ],
+        [
+          "https://fonts.gstatic.com",
+          20154
+        ],
+        [
+          "https://use.typekit.net",
+          20188
+        ],
+        [
+          "https://use.typekit.net",
+          20225
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\833.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\chunks\\869.js",
+      "urls": [
+        [
+          "http://n",
+          5802
+        ],
+        [
+          "https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams",
+          23194
+        ],
+        [
+          "http://n",
+          74393
+        ],
+        [
+          "https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering",
+          75507
+        ],
+        [
+          "https://nextjs.org/docs/messages/dynamic-server-error",
+          75816
+        ],
+        [
+          "https://nextjs.org/docs/app/api-reference/functions/unstable_cache",
+          76344
+        ],
+        [
+          "https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering",
+          76588
+        ],
+        [
+          "https://nextjs.org/docs/messages/dynamic-server-error",
+          76901
+        ],
+        [
+          "https://nextjs.org/docs/messages/ppr-caught-error",
+          77373
+        ],
+        [
+          "https://nextjs.org/docs/messages/public-next-folder-conflict",
+          121570
+        ],
+        [
+          "https://nextjs.org/docs/messages/404-get-initial-props",
+          122003
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-export",
+          122135
+        ],
+        [
+          "https://nextjs.org/docs/messages/gssp-component-member",
+          122579
+        ],
+        [
+          "https://nextjs.org/docs/messages/non-standard-node-env",
+          122793
+        ],
+        [
+          "https://nextjs.org/docs/messages/ssg-fallback-true-export",
+          122943
+        ],
+        [
+          "http://n",
+          126200
+        ],
+        [
+          "https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering",
+          127315
+        ],
+        [
+          "https://nextjs.org/docs/messages/dynamic-server-error",
+          127624
+        ],
+        [
+          "https://nextjs.org/docs/app/api-reference/functions/unstable_cache",
+          128152
+        ],
+        [
+          "https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering",
+          128396
+        ],
+        [
+          "https://nextjs.org/docs/messages/dynamic-server-error",
+          128709
+        ],
+        [
+          "https://nextjs.org/docs/messages/ppr-caught-error",
+          129181
+        ],
+        [
+          "http://n",
+          138267
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          154755
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          155099
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          155526
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          155951
+        ],
+        [
+          "http://www.w3.org/2000/svg",
+          156276
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\pages\\_app.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\pages\\_document.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\pages\\_error.js",
+      "urls": [
+        [
+          "https://fonts.googleapis.com/css",
+          5670
+        ],
+        [
+          "https://use.typekit.net/",
+          5705
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\checkout\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          13229
+        ],
+        [
+          "http://localhost:3001/api",
+          14674
+        ],
+        [
+          "localhost:3001",
+          13236
+        ],
+        [
+          "localhost:3001",
+          14681
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\checkout\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\marketplace\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          11418
+        ],
+        [
+          "http://localhost:3001/api",
+          12863
+        ],
+        [
+          "localhost:3001",
+          11425
+        ],
+        [
+          "localhost:3001",
+          12870
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\marketplace\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\_not-found\\page.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\_not-found\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\seller\\[id]\\page.js",
+      "urls": [
+        [
+          "https://radix-ui.com/primitives/docs/components/${t.docsSlug",
+          37323
+        ],
+        [
+          "http://localhost:3001/api",
+          57546
+        ],
+        [
+          "http://localhost:3001/api",
+          58991
+        ],
+        [
+          "localhost:3001",
+          57553
+        ],
+        [
+          "localhost:3001",
+          58998
+        ]
+      ],
+      "credentials": [
+        "host:\"hover:bg-slate-100 hover:text-text\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\seller\\[id]\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\marketplace\\product\\[id]\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          13243
+        ],
+        [
+          "http://localhost:3001/api",
+          14688
+        ],
+        [
+          "localhost:3001",
+          13250
+        ],
+        [
+          "localhost:3001",
+          14695
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\marketplace\\product\\[id]\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\buyer\\dashboard\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          15411
+        ],
+        [
+          "http://localhost:3001/api",
+          16856
+        ],
+        [
+          "localhost:3001",
+          15418
+        ],
+        [
+          "localhost:3001",
+          16863
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\buyer\\dashboard\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\audit\\page.js",
+      "credentials": [
+        "user:\"Emilio J.\"",
+        "user:\"Ana P.\"",
+        "user:\"Admin\"",
+        "user:\"Unknown\"",
+        "user:\"Sistema\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\audit\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\dashboard\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          15347
+        ],
+        [
+          "http://localhost:3001/api",
+          16792
+        ],
+        [
+          "localhost:3001",
+          15354
+        ],
+        [
+          "localhost:3001",
+          16799
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\dashboard\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          11252
+        ],
+        [
+          "http://localhost:3001/api",
+          12697
+        ],
+        [
+          "localhost:3001",
+          11259
+        ],
+        [
+          "localhost:3001",
+          12704
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\reports\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          13864
+        ],
+        [
+          "http://localhost:3001/api",
+          15309
+        ],
+        [
+          "localhost:3001",
+          13871
+        ],
+        [
+          "localhost:3001",
+          15316
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\reports\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\sales\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          14046
+        ],
+        [
+          "http://localhost:3001/api",
+          15491
+        ],
+        [
+          "localhost:3001",
+          14053
+        ],
+        [
+          "localhost:3001",
+          15498
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\sales\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\settings\\page.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\settings\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\new\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          12510
+        ],
+        [
+          "http://localhost:3001/api",
+          13955
+        ],
+        [
+          "localhost:3001",
+          12517
+        ],
+        [
+          "localhost:3001",
+          13962
+        ]
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\new\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\[id]\\page.js",
+      "urls": [
+        [
+          "https://ejemplo.com/mi-producto.jpg",
+          7473
+        ],
+        [
+          "http://localhost:3001/api",
+          11414
+        ],
+        [
+          "http://localhost:3001/api",
+          12859
+        ],
+        [
+          "localhost:3001",
+          11421
+        ],
+        [
+          "localhost:3001",
+          12866
+        ]
+      ],
+      "credentials": [
+        "host:\"hover:bg-slate-100 hover:text-text\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\[id]\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\[id]\\stock\\page.js",
+      "urls": [
+        [
+          "http://localhost:3001/api",
+          12456
+        ],
+        [
+          "http://localhost:3001/api",
+          13901
+        ],
+        [
+          "localhost:3001",
+          12463
+        ],
+        [
+          "localhost:3001",
+          13908
+        ]
+      ],
+      "credentials": [
+        "host:\"hover:bg-slate-100 hover:text-text\""
+      ]
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(dashboard)\\products\\[id]\\stock\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(auth)\\login\\page.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(auth)\\login\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(auth)\\register\\page.js"
+    },
+    {
+      "file": "frontend\\.next\\server\\app\\(auth)\\register\\page_client-reference-manifest.js"
+    },
+    {
+      "file": "backend\\src\\app.module.ts"
+    },
+    {
+      "file": "backend\\src\\main.ts",
+      "urls": [
+        [
+          "http://localhost",
+          356
+        ]
+      ]
+    },
+    {
+      "file": "backend\\test\\app.e2e-spec.ts"
+    },
+    {
+      "file": "backend\\src\\config\\configuration.ts"
+    },
+    {
+      "file": "backend\\src\\config\\database.config.ts"
+    },
+    {
+      "file": "backend\\src\\config\\validation.schema.ts",
+      "urls": [
+        [
+          "http://localhost",
+          431
+        ]
+      ]
+    },
+    {
+      "file": "backend\\src\\modules\\audit\\audit.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\audit\\audit.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\audit\\audit.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\auth.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\auth.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\auth.service.ts",
+      "urls": [
+        [
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          5591
+        ]
+      ]
+    },
+    {
+      "file": "backend\\src\\modules\\benchmarking\\benchmarking.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\benchmarking\\benchmarking.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\benchmarking\\benchmarking.service.ts",
+      "sql_queries": [
+        "'SELECT * FROM v_daily_export'",
+        "'SELECT pg_stat_statements_reset()'"
+      ]
+    },
+    {
+      "file": "backend\\src\\modules\\break-even\\break-even.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\break-even\\break-even.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\break-even\\break-even.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\dashboard\\dashboard.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\dashboard\\dashboard.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\dashboard\\dashboard.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\forecast\\forecast.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\forecast\\forecast.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\forecast\\forecast.service.ts",
+      "sql_queries": [
+        "`SELECT recommended_quantity \n       FROM vw_daily_production_forecast \n       WHERE product_id = $1..."
+      ]
+    },
+    {
+      "file": "backend\\src\\modules\\inventory\\inventory.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\inventory\\inventory.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\inventory\\inventory.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\orders\\orders.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\orders\\orders.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\orders\\orders.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\products\\products.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\products\\products.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\products\\products.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\reports\\reports.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\reports\\reports.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\reports\\reports.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\sales.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\sales.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\sales.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\users\\users.controller.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\users\\users.module.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\users\\users.service.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\users\\dto\\create-user.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\users\\dto\\update-user.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\users\\entities\\user.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\dto\\prepare-daily-sale.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\dto\\track-sale.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\entities\\daily-sale.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\sales\\entities\\sale-detail.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\reports\\dto\\get-weekly-reports.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\reports\\entities\\weekly-report.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\products\\dto\\create-product.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\products\\dto\\update-product.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\products\\entities\\product.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\orders\\dto\\create-order.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\orders\\entities\\order-item.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\orders\\entities\\order.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\inventory\\dto\\create-inventory-record.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\inventory\\entities\\inventory-record.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\dashboard\\dto\\dashboard-comparison-query.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\break-even\\dto\\calculate-break-even.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\benchmarking\\entities\\execution.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\benchmarking\\entities\\project.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\benchmarking\\entities\\query.entity.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\dto\\google-login.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\dto\\login.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\dto\\register.dto.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\guards\\jwt-auth.guard.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\auth\\strategies\\jwt.strategy.ts"
+    },
+    {
+      "file": "backend\\src\\modules\\audit\\schemas\\audit-log.schema.ts"
+    },
+    {
+      "file": "backend\\src\\database\\migrations\\1772591774953-CreateForecastMaterializedView.ts"
+    },
+    {
+      "file": "backend\\src\\common\\controllers\\health.controller.ts"
+    },
+    {
+      "file": "backend\\src\\common\\decorators\\current-user.decorator.ts"
+    },
+    {
+      "file": "backend\\src\\common\\decorators\\roles.decorator.ts"
+    },
+    {
+      "file": "backend\\src\\common\\guards\\jwt-auth.guard.ts"
+    },
+    {
+      "file": "backend\\src\\common\\guards\\roles.guard.ts"
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+﻿{
+  "total_files_scanned": 114,
+  "files_with_hardcode": 75,
+  "findings": [
+    {
+      "file": "app.module.ts"
+    },
+    {
+      "file": "main.ts",
+      "urls": [
+        [
+          "http://localhost",
+          356
+        ]
+      ]
+    },
+    {
+      "file": "config\\configuration.ts"
+    },
+    {
+      "file": "config\\database.config.ts"
+    },
+    {
+      "file": "config\\validation.schema.ts",
+      "urls": [
+        [
+          "http://localhost",
+          431
+        ]
+      ]
+    },
+    {
+      "file": "modules\\audit\\audit.controller.ts"
+    },
+    {
+      "file": "modules\\audit\\audit.module.ts"
+    },
+    {
+      "file": "modules\\audit\\audit.service.ts"
+    },
+    {
+      "file": "modules\\auth\\auth.controller.ts"
+    },
+    {
+      "file": "modules\\auth\\auth.module.ts"
+    },
+    {
+      "file": "modules\\auth\\auth.service.ts",
+      "urls": [
+        [
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          5591
+        ]
+      ]
+    },
+    {
+      "file": "modules\\benchmarking\\benchmarking.controller.ts"
+    },
+    {
+      "file": "modules\\benchmarking\\benchmarking.module.ts"
+    },
+    {
+      "file": "modules\\benchmarking\\benchmarking.service.ts",
+      "sql_queries": [
+        "'SELECT * FROM v_daily_export'",
+        "'SELECT pg_stat_statements_reset()'"
+      ]
+    },
+    {
+      "file": "modules\\break-even\\break-even.controller.ts"
+    },
+    {
+      "file": "modules\\break-even\\break-even.module.ts"
+    },
+    {
+      "file": "modules\\break-even\\break-even.service.ts"
+    },
+    {
+      "file": "modules\\dashboard\\dashboard.controller.ts"
+    },
+    {
+      "file": "modules\\dashboard\\dashboard.module.ts"
+    },
+    {
+      "file": "modules\\dashboard\\dashboard.service.ts"
+    },
+    {
+      "file": "modules\\forecast\\forecast.controller.ts"
+    },
+    {
+      "file": "modules\\forecast\\forecast.module.ts"
+    },
+    {
+      "file": "modules\\forecast\\forecast.service.ts",
+      "sql_queries": [
+        "`SELECT recommended_quantity \n       FROM vw_daily_production_forecast \n       WHERE product_id = $1..."
+      ]
+    },
+    {
+      "file": "modules\\inventory\\inventory.controller.ts"
+    },
+    {
+      "file": "modules\\inventory\\inventory.module.ts"
+    },
+    {
+      "file": "modules\\inventory\\inventory.service.ts"
+    },
+    {
+      "file": "modules\\orders\\orders.controller.ts"
+    },
+    {
+      "file": "modules\\orders\\orders.module.ts"
+    },
+    {
+      "file": "modules\\orders\\orders.service.ts"
+    },
+    {
+      "file": "modules\\products\\products.controller.ts"
+    },
+    {
+      "file": "modules\\products\\products.module.ts"
+    },
+    {
+      "file": "modules\\products\\products.service.ts"
+    },
+    {
+      "file": "modules\\reports\\reports.controller.ts"
+    },
+    {
+      "file": "modules\\reports\\reports.module.ts"
+    },
+    {
+      "file": "modules\\reports\\reports.service.ts"
+    },
+    {
+      "file": "modules\\sales\\sales.controller.ts"
+    },
+    {
+      "file": "modules\\sales\\sales.module.ts"
+    },
+    {
+      "file": "modules\\sales\\sales.service.ts"
+    },
+    {
+      "file": "modules\\users\\users.controller.ts"
+    },
+    {
+      "file": "modules\\users\\users.module.ts"
+    },
+    {
+      "file": "modules\\users\\users.service.ts"
+    },
+    {
+      "file": "modules\\users\\dto\\create-user.dto.ts"
+    },
+    {
+      "file": "modules\\users\\dto\\update-user.dto.ts"
+    },
+    {
+      "file": "modules\\users\\entities\\user.entity.ts"
+    },
+    {
+      "file": "modules\\sales\\dto\\prepare-daily-sale.dto.ts"
+    },
+    {
+      "file": "modules\\sales\\dto\\track-sale.dto.ts"
+    },
+    {
+      "file": "modules\\sales\\entities\\daily-sale.entity.ts"
+    },
+    {
+      "file": "modules\\sales\\entities\\sale-detail.entity.ts"
+    },
+    {
+      "file": "modules\\reports\\dto\\get-weekly-reports.dto.ts"
+    },
+    {
+      "file": "modules\\reports\\entities\\weekly-report.entity.ts"
+    },
+    {
+      "file": "modules\\products\\dto\\create-product.dto.ts"
+    },
+    {
+      "file": "modules\\products\\dto\\update-product.dto.ts"
+    },
+    {
+      "file": "modules\\products\\entities\\product.entity.ts"
+    },
+    {
+      "file": "modules\\orders\\dto\\create-order.dto.ts"
+    },
+    {
+      "file": "modules\\orders\\entities\\order-item.entity.ts"
+    },
+    {
+      "file": "modules\\orders\\entities\\order.entity.ts"
+    },
+    {
+      "file": "modules\\inventory\\dto\\create-inventory-record.dto.ts"
+    },
+    {
+      "file": "modules\\inventory\\entities\\inventory-record.entity.ts"
+    },
+    {
+      "file": "modules\\dashboard\\dto\\dashboard-comparison-query.dto.ts"
+    },
+    {
+      "file": "modules\\break-even\\dto\\calculate-break-even.dto.ts"
+    },
+    {
+      "file": "modules\\benchmarking\\entities\\execution.entity.ts"
+    },
+    {
+      "file": "modules\\benchmarking\\entities\\project.entity.ts"
+    },
+    {
+      "file": "modules\\benchmarking\\entities\\query.entity.ts"
+    },
+    {
+      "file": "modules\\auth\\dto\\google-login.dto.ts"
+    },
+    {
+      "file": "modules\\auth\\dto\\login.dto.ts"
+    },
+    {
+      "file": "modules\\auth\\dto\\register.dto.ts"
+    },
+    {
+      "file": "modules\\auth\\guards\\jwt-auth.guard.ts"
+    },
+    {
+      "file": "modules\\auth\\strategies\\jwt.strategy.ts"
+    },
+    {
+      "file": "modules\\audit\\schemas\\audit-log.schema.ts"
+    },
+    {
+      "file": "database\\migrations\\1772591774953-CreateForecastMaterializedView.ts"
+    },
+    {
+      "file": "common\\controllers\\health.controller.ts"
+    },
+    {
+      "file": "common\\decorators\\current-user.decorator.ts"
+    },
+    {
+      "file": "common\\decorators\\roles.decorator.ts"
+    },
+    {
+      "file": "common\\guards\\jwt-auth.guard.ts"
+    },
+    {
+      "file": "common\\guards\\roles.guard.ts"
+    }
+  ]
+}

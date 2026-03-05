@@ -5,11 +5,11 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=http://54.157.136.124/api
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     container_name: tc-frontend
     restart: unless-stopped
     environment:
-      - NEXT_PUBLIC_API_URL=http://54.157.136.124/api
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     networks:
       - tc-network
 

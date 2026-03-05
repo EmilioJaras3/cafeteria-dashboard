@@ -44,7 +44,7 @@ services:
       - ARGON2_MEMORY_COST=${ARGON2_MEMORY_COST}
       - ARGON2_TIME_COST=${ARGON2_TIME_COST}
       - ARGON2_PARALLELISM=${ARGON2_PARALLELISM}
-      - MONGO_URI=mongodb://mongodb:27017/tienditacampus_logs
+      - MONGO_URI=${MONGO_URI}
     expose:
       - "${BACKEND_PORT:-3001}"
     ports:
