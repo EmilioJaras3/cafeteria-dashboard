@@ -51,7 +51,7 @@ async function bootstrap() {
     });
 
     const port = configService.get<number>('BACKEND_PORT');
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
 
     console.log(`TienditaCampus API running on port ${port}`);
     console.log(`Environment: ${configService.get<string>('NODE_ENV', 'development')}`);
