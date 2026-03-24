@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ScheduleModule } from '@nestjs/schedule';
+import { ScheduleModule } from '@nestjs/schedule'; // <-- Added here
 import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation.schema';
 import { databaseConfig } from './config/database.config';
@@ -20,7 +19,8 @@ import { HealthController } from './common/controllers/health.controller';
 import { OrdersModule } from './modules/orders/orders.module';
 import { BreakEvenModule } from './modules/break-even/break-even.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { ForecastModule } from './modules/forecast/forecast.module';
+import { ForecastModule } from './modules/forecast/forecast.module'; // <-- Added here
+import { ExpirationModule } from './modules/expiration/expiration.module';
 
 @Module({
     imports: [
@@ -32,23 +32,12 @@ import { ForecastModule } from './modules/forecast/forecast.module';
         }),
 
         // ── Tareas Programadas (Cron Jobs) ────────────
-        ScheduleModule.forRoot(),
+        ScheduleModule.forRoot(), // <-- Added here
 
-        // Base de datos RELACIONAL
+        // ── Base de datos RELACIONAL (PostgreSQL) ────────────
         TypeOrmModule.forRootAsync({
             inject: [ConfigService],
             useFactory: databaseConfig,
-        }),
-
-        // Base de datos NO RELACIONAL
-        MongooseModule.forRootAsync({
-            inject: [ConfigService],
-            useFactory: (configService: ConfigService) => ({
-                uri: configService.get<string>(
-                    'MONGO_URI',
-                    'mongodb://mongodb:27017/tienditacampus_logs',
-                ),
-            }),
         }),
 
         // Módulos activos
@@ -64,6 +53,7 @@ import { ForecastModule } from './modules/forecast/forecast.module';
         BreakEvenModule,
         DashboardModule,
         ForecastModule,
+        ExpirationModule,
     ],
     controllers: [HealthController],
 })

@@ -41,12 +41,23 @@ export class InventoryRecord {
     @Column({ type: 'decimal', precision: 10, scale: 2, name: 'investment_amount' })
     investmentAmount: number;
 
+    @Column({ type: 'decimal', precision: 10, scale: 2, name: 'unit_cost', default: 0 })
+    unitCost: number;
+
     @Column({
-        type: 'enum',
-        enum: ['active', 'sold_out', 'expired', 'closed'],
+        type: 'varchar',
+        length: 20,
         default: 'active',
     })
     status: 'active' | 'sold_out' | 'expired' | 'closed';
+
+    @Column({
+        type: 'date',
+        nullable: true,
+        name: 'expires_at',
+        comment: 'Fecha de caducidad del lote = record_date + product.shelf_life_days',
+    })
+    expiresAt: string | null;
 
     @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
     createdAt: Date;

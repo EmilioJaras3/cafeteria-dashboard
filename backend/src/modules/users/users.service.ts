@@ -6,10 +6,10 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
+import { hash } from '@node-rs/argon2';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { hash } from '@node-rs/argon2';
 import { Product } from '../products/entities/product.entity';
 
 @Injectable()
@@ -22,14 +22,12 @@ export class UsersService {
         private readonly configService: ConfigService,
     ) { }
 
-    // Busca usuario activo por email
     async findByEmail(email: string): Promise<User | null> {
         return this.usersRepository.findOne({
             where: { email: email.toLowerCase(), isActive: true },
         });
     }
 
-    // Busca usuario por ID
     async findById(id: string): Promise<User | null> {
         return this.usersRepository.findOne({
             where: { id, isActive: true },
@@ -50,7 +48,12 @@ export class UsersService {
         const products = await this.productRepository.createQueryBuilder('product')
             .where('product.seller_id = :sellerId', { sellerId: id })
             .andWhere('product.isActive = :isActive', { isActive: true })
+            .andWhere(`EXISTS (
+                SELECT 1 FROM inventory_records inventory 
+                WHERE inventory.product_id = product.id 
+                AND inventory.quantity_remaining > 0 
                 AND inventory.status = 'active'
+            )`)
             .getMany();
 
         return {
@@ -59,9 +62,7 @@ export class UsersService {
         };
     }
 
-    // Crea usuario con contraseña Argon2
     async create(dto: CreateUserDto): Promise<User> {
-        // Verificar que el email no exista
         const existing = await this.usersRepository.findOne({
             where: { email: dto.email.toLowerCase() },
         });
@@ -69,11 +70,14 @@ export class UsersService {
             throw new ConflictException('El email ya está registrado');
         }
 
-        // Hashear contraseña con Argon2id
+        const memoryCost = this.configService.get<number>('ARGON2_MEMORY_COST', 65536);
+        const timeCost = this.configService.get<number>('ARGON2_TIME_COST', 3);
+        const parallelism = this.configService.get<number>('ARGON2_PARALLELISM', 4);
+
         const passwordHash = await hash(dto.password, {
-            memoryCost: this.configService.get<number>('ARGON2_MEMORY_COST', 65536),
-            timeCost: this.configService.get<number>('ARGON2_TIME_COST', 3),
-            parallelism: this.configService.get<number>('ARGON2_PARALLELISM', 4),
+            memoryCost,
+            timeCost,
+            parallelism,
         });
 
         const user = this.usersRepository.create({
@@ -90,7 +94,9 @@ export class UsersService {
         return this.usersRepository.save(user) as Promise<User>;
     }
 
-    // Actualiza perfil (sin email/password)
+    /**
+     * Actualiza datos del perfil (sin email ni contraseña).
+     */
     async update(id: string, dto: UpdateUserDto): Promise<User> {
         const user = await this.findById(id);
         if (!user) {
@@ -101,9 +107,6 @@ export class UsersService {
         return this.usersRepository.save(user);
     }
 
-    // Trazabilidad de logins
-
-    // Registra login exitoso y resetea intentos
     async recordSuccessfulLogin(id: string): Promise<void> {
         await this.usersRepository.update(id, {
             lastLoginAt: new Date(),
@@ -113,7 +116,6 @@ export class UsersService {
         } as any);
     }
 
-    // Registra fallo y bloquea si es necesario
     async recordFailedLogin(id: string): Promise<void> {
         const user = await this.findById(id);
         if (!user) return;
@@ -128,7 +130,6 @@ export class UsersService {
             failedLoginAttempts: newAttempts,
         };
 
-        // Bloquear cuenta si supera el máximo
         if (newAttempts >= maxAttempts) {
             const lockoutMinutes = this.configService.get<number>(
                 'LOCKOUT_DURATION_MINUTES',
@@ -140,6 +141,13 @@ export class UsersService {
         }
 
         await this.usersRepository.update(id, updateData);
+    }
+
+    /**
+     * Actualiza el rol de un usuario.
+     */
+    async updateRole(id: string, role: 'admin' | 'seller' | 'buyer'): Promise<void> {
+        await this.usersRepository.update(id, { role });
     }
 
     /**

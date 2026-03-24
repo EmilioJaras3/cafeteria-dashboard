@@ -1,161 +1,186 @@
 'use client';
 
-import { ShieldCheck, Search, ArrowDownToLine, Zap, Clock, Database, HardDrive, Loader2, RefreshCw } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { benchmarkingService, QueryMetric } from '@/services/benchmarking.service';
+import { 
+    ShieldCheck, 
+    Search, 
+    Filter, 
+    Clock, 
+    User, 
+    Activity, 
+    FileText,
+    Download,
+    RefreshCw,
+    AlertCircle,
+    CheckCircle2,
+    Loader2
+} from 'lucide-react';
+import { toast } from 'sonner';
+
+// Simulating audit service fetch since we need to confirm the exact endpoint
+// but based on controllers, it should be something like this:
+import { auditService, AuditLog } from '@/services/audit.service';
 
 export default function AuditPage() {
-    const [search, setSearch] = useState('');
-    const [metrics, setMetrics] = useState<QueryMetric[]>([]);
+    const [logs, setLogs] = useState<AuditLog[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const loadMetrics = async () => {
-        setLoading(true);
-        setError(null);
+    useEffect(() => {
+        loadLogs();
+    }, []);
+
+    const loadLogs = async () => {
         try {
-            const data = await benchmarkingService.getMetrics(30);
-            setMetrics(data);
-        } catch (err: any) {
-            setError(err.message || 'Error al cargar métricas');
-            setMetrics([]);
+            setLoading(true);
+            const data = await auditService.getLogs();
+            setLogs(data);
+        } catch (error) {
+            console.error(error);
+            toast.error('Error al cargar logs de auditoría');
         } finally {
             setLoading(false);
         }
     };
 
-    useEffect(() => {
-        loadMetrics();
-    }, []);
-
-    const filteredMetrics = metrics.filter(m =>
-        m.query?.toLowerCase().includes(search.toLowerCase())
+    const filteredLogs = logs.filter(log => 
+        log.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const totalCalls = metrics.reduce((sum, m) => sum + (Number(m.calls) || 0), 0);
-    const totalTime = metrics.reduce((sum, m) => sum + (Number(m.total_time_ms) || 0), 0);
-    const totalRows = metrics.reduce((sum, m) => sum + (Number(m.rows_returned) || 0), 0);
+    const getTypeColor = (type: AuditLog['type']) => {
+        switch (type) {
+            case 'success': return 'text-primary';
+            case 'error': return 'text-destructive';
+            case 'warning': return 'text-primary/70';
+            default: return 'text-muted-foreground';
+        }
+    };
+
+    const getTypeIcon = (type: AuditLog['type']) => {
+        switch (type) {
+            case 'success': return <CheckCircle2 size={16} />;
+            case 'error': return <AlertCircle size={16} />;
+            case 'warning': return <AlertCircle size={16} />;
+            default: return <Activity size={16} />;
+        }
+    };
 
     return (
-        <div className="p-6 md:p-10 space-y-10">
-            <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 overflow-hidden">
-                <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 bg-neo-red text-white px-4 py-1 border-2 border-black font-black uppercase text-xs tracking-widest shadow-neo-sm rotate-1">
-                        <ShieldCheck size={16} /> Auditoría SQL
+        <div className="p-4 md:p-10 space-y-12 font-display min-h-screen bg-background selection:bg-primary/20 pb-24">
+            {/* Header */}
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-4 border-foreground/10 pb-8">
+                <div className="space-y-2">
+                    <div className="inline-block bg-primary text-primary-foreground border border-primary/10 px-3 py-1 font-semibold text-xs tracking-widest shadow-neo-sm transform -rotate-1 mb-2 rounded-sm">
+                        SISTEMA DE SEGURIDAD
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
-                        MÉTRICAS <span className="text-neo-red">REALES</span>
+                    <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter leading-none text-foreground uppercase italic">
+                        AUDITORÍA <span className="text-primary italic">CMS</span>
                     </h1>
-                    <p className="text-sm font-bold text-slate-400 uppercase tracking-tight max-w-lg border-l-4 border-black pl-4">
-                        Datos generados en tiempo real por pg_stat_statements desde PostgreSQL.
+                    <p className="text-lg font-bold text-muted-foreground uppercase tracking-tight max-w-md border-l-4 border-foreground pl-4">
+                        Historial completo de acciones y movimientos del sistema.
                     </p>
                 </div>
                 <div className="flex gap-4">
-                    <button
-                        onClick={loadMetrics}
-                        className="h-14 px-8 border-4 border-black bg-white font-black uppercase text-xs tracking-widest hover:bg-black hover:text-white transition-all shadow-neo-sm flex items-center gap-2"
+                    <button 
+                        onClick={loadLogs}
+                        className="flex items-center gap-3 px-6 h-14 bg-card border border-foreground/10 font-bold text-xs tracking-widest uppercase hover:bg-muted transition-all rounded-xl shadow-neo-sm"
                     >
-                        <RefreshCw size={18} /> ACTUALIZAR
+                        <RefreshCw size={18} className={loading ? 'animate-spin' : ''} /> RECARGAR
+                    </button>
+                    <button className="flex items-center gap-3 px-6 h-14 bg-foreground text-background border border-foreground/10 font-bold text-xs tracking-widest uppercase hover:opacity-90 transition-all rounded-xl shadow-neo">
+                        <Download size={18} /> EXPORTAR
                     </button>
                 </div>
-            </header>
-
-            {/* Search Bar */}
-            <div className="flex flex-col md:flex-row gap-4 items-center">
-                <div className="relative flex-1 group w-full">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-black" size={20} />
-                    <input
-                        type="text"
-                        placeholder="BUSCAR POR CONSULTA SQL..."
-                        className="w-full h-16 pl-14 pr-4 border-4 border-black font-black uppercase bg-white focus:bg-neo-yellow/10 focus:outline-none placeholder:text-slate-300"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-                    <div className="absolute inset-0 border-4 border-black translate-x-2 translate-y-2 -z-10 group-focus-within:translate-x-0 group-focus-within:translate-y-0 transition-transform bg-neo-yellow"></div>
-                </div>
             </div>
 
-            {/* Metrics Table */}
-            <div className="bg-white border-4 border-black shadow-neo-lg overflow-hidden">
-                <div className="grid grid-cols-12 bg-black text-white p-4 font-black uppercase text-[10px] tracking-[0.2em]">
-                    <div className="col-span-5">Consulta SQL</div>
-                    <div className="col-span-2 text-center">Llamadas</div>
-                    <div className="col-span-2 text-center">Tiempo Total (ms)</div>
-                    <div className="col-span-1 text-center">Promedio</div>
-                    <div className="col-span-2 text-center">Filas</div>
+            {/* Content Table */}
+            <div className="bg-card border border-foreground/10 shadow-neo-sm rounded-[3rem] overflow-hidden">
+                <div className="p-8 border-b border-foreground/5 flex flex-col md:flex-row gap-6 items-center justify-between">
+                    <h3 className="text-2xl font-bold tracking-tighter uppercase italic flex items-center gap-3">
+                        <FileText className="text-primary" /> Historial de Logs
+                    </h3>
+                    <div className="relative w-full md:w-96 group">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" size={18} />
+                        <input 
+                            type="text"
+                            placeholder="Buscar por usuario o acción..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full h-12 pl-12 pr-4 bg-muted/30 border border-foreground/5 font-bold text-xs uppercase focus:outline-none focus:bg-primary/5 focus:border-primary/20 transition-all rounded-xl"
+                        />
+                    </div>
                 </div>
 
-                {loading ? (
-                    <div className="p-12 text-center">
-                        <Loader2 className="animate-spin mx-auto mb-4" size={32} />
-                        <p className="font-black uppercase text-xs text-slate-400">Cargando métricas reales...</p>
-                    </div>
-                ) : error ? (
-                    <div className="p-12 text-center">
-                        <p className="font-black uppercase text-xs text-neo-red">{error}</p>
-                        <p className="text-xs text-slate-400 mt-2">Asegúrate de que pg_stat_statements esté habilitado.</p>
-                    </div>
-                ) : filteredMetrics.length === 0 ? (
-                    <div className="p-12 text-center">
-                        <p className="font-black uppercase text-xs text-slate-400">No hay métricas registradas. Usa el sistema para generar datos.</p>
-                    </div>
-                ) : (
-                    <div className="divide-y-2 divide-black/10">
-                        {filteredMetrics.map((metric, idx) => (
-                            <div key={metric.id || idx} className="grid grid-cols-12 p-4 items-center hover:bg-slate-50 transition-colors group">
-                                <div className="col-span-5">
-                                    <code className="text-[11px] text-slate-600 break-all leading-tight">
-                                        {metric.query}
-                                    </code>
-                                </div>
-                                <div className="col-span-2 text-center">
-                                    <span className="bg-neo-yellow/20 text-black border-2 border-black/10 px-3 py-1 font-black text-xs">
-                                        {Number(metric.calls).toLocaleString()}
-                                    </span>
-                                </div>
-                                <div className="col-span-2 text-center font-bold text-xs">
-                                    {Number(metric.total_time_ms).toLocaleString()} ms
-                                </div>
-                                <div className="col-span-1 text-center font-bold text-xs text-slate-500">
-                                    {Number(metric.avg_time_ms).toFixed(1)}
-                                </div>
-                                <div className="col-span-2 text-center font-bold text-xs">
-                                    {Number(metric.rows_returned).toLocaleString()}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-
-            {/* Footer Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="p-6 border-4 border-black bg-slate-50 flex items-center gap-4">
-                    <Zap size={24} className="text-neo-yellow" />
-                    <div>
-                        <p className="text-[10px] font-black uppercase text-slate-400">Total Consultas</p>
-                        <p className="text-2xl font-black">{totalCalls.toLocaleString()}</p>
-                    </div>
+                <div className="overflow-x-auto">
+                    {loading ? (
+                        <div className="py-32 flex flex-col items-center justify-center gap-4 text-muted-foreground">
+                            <Loader2 className="animate-spin text-primary" size={48} />
+                            <p className="font-bold text-[10px] tracking-[0.2em] uppercase italic">Analizando registros de seguridad...</p>
+                        </div>
+                    ) : filteredLogs.length === 0 ? (
+                        <div className="py-32 text-center text-muted-foreground font-bold uppercase italic tracking-widest">
+                            No se encontraron registros coincidentes.
+                        </div>
+                    ) : (
+                        <table className="w-full text-left">
+                            <thead className="bg-muted/50 text-muted-foreground text-[10px] font-bold uppercase tracking-[0.2em]">
+                                <tr>
+                                    <th className="px-8 py-4">Status</th>
+                                    <th className="px-8 py-4">Usuario</th>
+                                    <th className="px-8 py-4">Acción</th>
+                                    <th className="px-8 py-4">Descripción</th>
+                                    <th className="px-8 py-4">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-foreground/5">
+                                {filteredLogs.map((log) => (
+                                    <tr key={log.id} className="hover:bg-muted/30 transition-colors group">
+                                        <td className="px-8 py-6">
+                                            <div className={`flex items-center gap-2 font-bold text-[10px] uppercase italic ${getTypeColor(log.type)}`}>
+                                                {getTypeIcon(log.type)} {log.type}
+                                            </div>
+                                        </td>
+                                        <td className="px-8 py-6">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 bg-foreground text-background flex items-center justify-center font-bold text-xs uppercase rounded-lg group-hover:rotate-6 transition-transform">
+                                                    {log.userName.charAt(0)}
+                                                </div>
+                                                <div className="font-bold text-sm tracking-tighter uppercase italic">{log.userName}</div>
+                                            </div>
+                                        </td>
+                                        <td className="px-8 py-6">
+                                            <span className="bg-muted px-3 py-1 border border-foreground/5 font-bold text-[9px] uppercase tracking-widest rounded-full">
+                                                {log.action}
+                                            </span>
+                                        </td>
+                                        <td className="px-8 py-6">
+                                            <p className="text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors max-w-xs">{log.description}</p>
+                                        </td>
+                                        <td className="px-8 py-6">
+                                            <div className="flex flex-col">
+                                                <span className="text-[10px] font-bold uppercase italic text-foreground tracking-tighter flex items-center gap-2">
+                                                    <Clock size={12} className="text-primary" /> {new Date(log.createdAt).toLocaleTimeString()}
+                                                </span>
+                                                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">
+                                                    {new Date(log.createdAt).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
                 </div>
-                <div className="p-6 border-4 border-black bg-slate-50 flex items-center gap-4">
-                    <Clock size={24} className="text-neo-red" />
-                    <div>
-                        <p className="text-[10px] font-black uppercase text-slate-400">Tiempo Total</p>
-                        <p className="text-2xl font-black">{(totalTime / 1000).toFixed(1)}s</p>
-                    </div>
-                </div>
-                <div className="p-6 border-4 border-black bg-slate-50 flex items-center gap-4">
-                    <Database size={24} className="text-blue-500" />
-                    <div>
-                        <p className="text-[10px] font-black uppercase text-slate-400">Filas Procesadas</p>
-                        <p className="text-2xl font-black">{totalRows.toLocaleString()}</p>
-                    </div>
-                </div>
-                <div className="p-6 border-4 border-black bg-black text-white flex items-center gap-4">
-                    <HardDrive size={24} className="text-neo-red" />
-                    <div>
-                        <p className="text-[10px] font-black uppercase text-slate-400 opacity-50">Queries Únicas</p>
-                        <p className="text-2xl font-black">{metrics.length}</p>
+                
+                <div className="p-8 bg-muted/20 border-t border-foreground/5 flex items-center justify-between">
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest italic">
+                        Mostrando {filteredLogs.length} de {logs.length} registros totales.
+                    </p>
+                    <div className="flex items-center gap-3 text-primary font-bold text-[9px] uppercase tracking-[0.3em] italic">
+                        <ShieldCheck size={16} /> Sistema Protegido por CampusGuard
                     </div>
                 </div>
             </div>

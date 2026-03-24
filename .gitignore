@@ -70,3 +70,9 @@ coverage/
 *.pid
 *.seed
 *.pid.lock
+
+# Variables de entorno - NUNCA commitear esto
+.env
+.env.local
+.env.*.local
+.env.production

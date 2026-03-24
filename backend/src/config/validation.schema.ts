@@ -11,14 +11,18 @@ export const validationSchema = Joi.object({
         .default('development'),
 
     BACKEND_PORT: Joi.number().default(3001),
-    FRONTEND_URL: Joi.string().required(),
+    PORT: Joi.number().default(3001),
+    FRONTEND_URL: Joi.string().default('http://localhost'),
 
-    // Database — requeridas
-    POSTGRES_HOST: Joi.string().required(),
+    // Database
+    DATABASE_URL: Joi.string().optional(),
+    POSTGRES_HOST: Joi.string().optional(),
     POSTGRES_PORT: Joi.number().default(5432),
-    POSTGRES_DB: Joi.string().required(),
-    POSTGRES_USER: Joi.string().required(),
-    POSTGRES_PASSWORD: Joi.string().required(),
+    POSTGRES_DB: Joi.string().optional(),
+    POSTGRES_USER: Joi.string().optional(),
+    POSTGRES_PASSWORD: Joi.string().optional(),
+    POSTGRES_SSL: Joi.boolean().default(true),
+    POSTGRES_SYNCHRONIZE: Joi.boolean().default(false),
 
     // JWT — requerido en producción
     JWT_SECRET: Joi.string().when('NODE_ENV', {
@@ -33,7 +37,19 @@ export const validationSchema = Joi.object({
     ARGON2_TIME_COST: Joi.number().default(3),
     ARGON2_PARALLELISM: Joi.number().default(4),
 
+    // Default admin seed (optional)
+    DEFAULT_ADMIN_EMAIL: Joi.string().allow('').optional(),
+    DEFAULT_ADMIN_PASSWORD: Joi.string().allow('').optional(),
+
     // Security
     MAX_FAILED_LOGIN_ATTEMPTS: Joi.number().default(5),
     LOCKOUT_DURATION_MINUTES: Joi.number().default(15),
+
+    // BigQuery / Google OAuth
+    GCP_PROJECT_ID: Joi.string().optional(),
+    BIGQUERY_DATASET: Joi.string().optional(),
+    BIGQUERY_TABLE: Joi.string().optional(),
+    GOOGLE_CLIENT_ID: Joi.string().optional(),
+    GOOGLE_CLIENT_SECRET: Joi.string().optional(),
+    GOOGLE_REDIRECT_URI: Joi.string().optional(),
 });

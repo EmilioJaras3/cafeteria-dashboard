@@ -35,6 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
     const [deliveryMessage, setDeliveryMessage] = useState('');
     const [isPurchasing, setIsPurchasing] = useState(false);
     const [imageFailed, setImageFailed] = useState(false);
+    const [imageLoading, setImageLoading] = useState(true);
 
     const handlePurchase = async () => {
         if (!isAuthenticated) {
@@ -76,33 +77,66 @@ export function ProductCard({ product }: { product: Product }) {
         }
     };
 
+    // Mejorar validación de URL de imagen
+    const isValidImageUrl = (url: string | undefined): boolean => {
+        if (!url) return false;
+        try {
+            new URL(url);
+            return true;
+        } catch {
+            return false;
+        }
+    };
+
+    const hasValidImage = isValidImageUrl(product.imageUrl) && !imageFailed;
+
     return (
-        <div className="bg-white border-2 border-slate-900 dark:border-white shadow-[6px_6px_0px_0px_#E31837] overflow-hidden transition-transform group flex flex-col h-full hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none">
-            <div className="aspect-square bg-[#f1f1f1] relative overflow-hidden border-b-2 border-slate-900 dark:border-white">
-                {product.imageUrl && !imageFailed ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                        onError={() => setImageFailed(true)}
-                    />
+        <div className="bg-white border border-primary/10 dark:border-white/10 shadow-md overflow-hidden transition-transform group flex flex-col h-full hover:-translate-y-1  hover:shadow-lg">
+            <div className="aspect-square bg-[#f1f1f1] relative overflow-hidden border-b-2 border-primary/10 dark:border-white/10 flex items-center justify-center">
+                {hasValidImage ? (
+                    // ✅ MEJORADO: Imagen con mejor manejo de carga y CORS
+                    <>
+                        {imageLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-[#f1f1f1]">
+                                <Loader2 className="animate-spin text-slate-400" size={32} />
+                            </div>
+                        )}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src={product.imageUrl || ''}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                            onLoad={() => setImageLoading(false)}
+                            onError={() => {
+                                setImageFailed(true);
+                                setImageLoading(false);
+                            }}
+                            crossOrigin="anonymous"
+                            loading="lazy"
+                        />
+                    </>
                 ) : (
-                    <div className="flex items-center justify-center w-full h-full text-slate-900 text-5xl font-black bg-[#FFC72C] uppercase">
-                        {product.name.charAt(0)}
+                    // ✅ MEJORADO: Placeholder mejor diseñado
+                    <div className="flex flex-col items-center justify-center w-full h-full text-slate-900 bg-[#FFC72C]">
+                        <div className="text-5xl font-semibold">
+                            {product.name.charAt(0)}
+                        </div>
+                        <div className="text-xs font-bold mt-2 text-slate-700">
+                            Sin imagen
+                        </div>
                     </div>
                 )}
                 {product.isPerishable && (
-                    <span className="absolute top-3 right-3 bg-[#FFC72C] text-slate-900 text-xs font-black px-2 py-1 border-2 border-slate-900 dark:border-white uppercase tracking-wider">
+                    <span className="absolute top-3 right-3 bg-[#FFC72C] text-slate-900 text-xs font-bold px-2 py-1 border border-primary/10 dark:border-white/10 uppercase tracking-wider">
                         Perecedero
                     </span>
                 )}
                 {stockAvailable > 0 ? (
-                    <span className="absolute bottom-3 left-3 bg-white text-slate-900 text-xs font-black px-2 py-1 border-2 border-slate-900 dark:border-white uppercase tracking-wider">
+                    <span className="absolute bottom-3 left-3 bg-white text-slate-900 text-xs font-bold px-2 py-1 border border-primary/10 dark:border-white/10 uppercase tracking-wider">
                         Stock {stockAvailable}
                     </span>
                 ) : (
-                    <span className="absolute bottom-3 left-3 bg-[#E31837] text-white text-xs font-black px-2 py-1 border-2 border-slate-900 dark:border-white uppercase tracking-wider">
+                    <span className="absolute bottom-3 left-3 bg-[#E31837] text-white text-xs font-bold px-2 py-1 border border-primary/10 dark:border-white/10 uppercase tracking-wider">
                         Agotado
                     </span>
                 )}
@@ -111,7 +145,7 @@ export function ProductCard({ product }: { product: Product }) {
             <div className="p-4 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-2">
                     <div>
-                        <h3 className="font-black text-slate-900 line-clamp-1 uppercase tracking-tight" title={product.name}>
+                        <h3 className="font-bold text-slate-900 line-clamp-1 uppercase tracking-tight" title={product.name}>
                             {product.name}
                         </h3>
                         {sellerId ? (
@@ -143,7 +177,7 @@ export function ProductCard({ product }: { product: Product }) {
                         )}
                     </div>
                     <div className="shrink-0 ml-3 text-right">
-                        <div className="inline-flex border-2 border-slate-900 dark:border-white bg-[#FFC72C] px-2 py-1 font-black text-slate-900">
+                        <div className="inline-flex border border-primary/10 dark:border-white/10 bg-[#FFC72C] px-2 py-1 font-bold text-slate-900">
                             ${Number(product.salePrice).toFixed(2)}
                         </div>
                     </div>
@@ -159,7 +193,7 @@ export function ProductCard({ product }: { product: Product }) {
                     <Dialog open={open} onOpenChange={setOpen}>
                         <DialogTrigger asChild>
                             <Button
-                                className="w-full gap-2 transition-transform active:scale-95 bg-[#E31837] hover:bg-[#c9122e] border-2 border-slate-900 dark:border-white font-black uppercase shadow-[4px_4px_0px_0px_#FFC72C]"
+                                className="w-full gap-2 transition-transform active:scale-95 bg-[#E31837] hover:bg-[#c9122e] border border-primary/10 dark:border-white/10 font-semibold shadow-md"
                                 disabled={stockAvailable < 1 || !sellerId}
                             >
                                 <ShoppingCart size={16} />

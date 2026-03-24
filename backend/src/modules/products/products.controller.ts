@@ -27,9 +27,15 @@ export class ProductsController {
      * Endpoint público — cualquier usuario (autenticado o no) puede ver el catálogo.
      */
     @Get('marketplace')
-    getMarketplace(@Query('q') q?: string, @Query('seller') sellerId?: string) {
-        return this.productsService.findMarketplace(q, sellerId);
+    getMarketplace(
+        @Query('q') q?: string, 
+        @Query('seller') sellerId?: string,
+        @Query('category') category?: string
+    ) {
+        return this.productsService.findMarketplace(q, sellerId, category);
     }
+
+
 
     /**
      * GET /products/marketplace/:id

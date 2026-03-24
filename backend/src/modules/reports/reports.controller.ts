@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Query, Req, UseGuards, Param, Delete } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
@@ -23,5 +23,15 @@ export class ReportsController {
         @Query('endWeek') endWeek?: string,
     ) {
         return this.reportsService.getWeeklyReports(req.user as User, startWeek, endWeek);
+    }
+
+    @Get('weekly/:id')
+    getReportById(@Param('id') id: string, @Req() req: any) {
+        return this.reportsService.findOne(id, req.user as User);
+    }
+
+    @Delete('weekly/:id')
+    deleteReport(@Param('id') id: string, @Req() req: any) {
+        return this.reportsService.remove(id, req.user as User);
     }
 }

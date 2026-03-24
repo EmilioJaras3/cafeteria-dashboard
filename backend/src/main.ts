@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import * as express from 'express';
 
 function getAllowedOrigins(configService: ConfigService): string[] {
-    const frontendUrl = configService.get<string>('frontendUrl');
+    const frontendUrl = configService.get<string>('FRONTEND_URL', 'http://localhost');
     return frontendUrl
         .split(',')
         .map((origin) => origin.trim())
@@ -13,17 +13,13 @@ function getAllowedOrigins(configService: ConfigService): string[] {
 }
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-
-    // Límite imágenes Base64.
-    app.use(express.json({ limit: '10mb' }));
-    app.use(express.urlencoded({ limit: '10mb', extended: true }));
+    const app = await NestFactory.create(AppModule, { bodyParser: false });
+    app.use(express.json({ limit: '50mb' }));
+    app.use(express.urlencoded({ limit: '50mb', extended: true }));
     const configService = app.get(ConfigService);
 
-    // Prefijo API.
     app.setGlobalPrefix('api');
 
-    // Validación DTOs.
     app.useGlobalPipes(
         new ValidationPipe({
             whitelist: true,
@@ -34,24 +30,16 @@ async function bootstrap() {
 
     const allowedOrigins = getAllowedOrigins(configService);
 
-    // Configuración CORS.
     app.enableCors({
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-                return;
-            }
-            callback(new Error(`CORS blocked for origin: ${origin}`));
-        },
+        origin: true, 
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-        preflightContinue: false,
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
         optionsSuccessStatus: 204,
     });
 
-    const port = configService.get<number>('BACKEND_PORT');
-    await app.listen(port, '0.0.0.0');
+    const port = configService.get<number>('PORT') || configService.get<number>('BACKEND_PORT', 3001);
+    await app.listen(port);
 
     console.log(`TienditaCampus API running on port ${port}`);
     console.log(`Environment: ${configService.get<string>('NODE_ENV', 'development')}`);

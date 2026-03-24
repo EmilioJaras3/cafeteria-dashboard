@@ -1,110 +1,89 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { AuditLog } from './schemas/audit-log.schema';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { AuditLog } from './entities/audit-log.entity';
 
-/**
- * AuditService — Servicio de auditoría usando MongoDB (NoSQL).
- *
- * Este servicio se conecta a MongoDB (base de datos NO relacional)
- * para almacenar logs de actividad como documentos JSON flexibles.
- *
- * Diferencia clave vs PostgreSQL:
- *   - PostgreSQL: tablas con columnas fijas, relaciones, JOINs
- *   - MongoDB: documentos JSON sin esquema fijo, cada documento puede ser diferente
- */
 @Injectable()
 export class AuditService {
     constructor(
-        @InjectModel(AuditLog.name)
-        private readonly auditModel: Model<AuditLog>,
+        @InjectRepository(AuditLog)
+        private readonly auditRepository: Repository<AuditLog>,
     ) { }
 
-    /**
-     * Registra un evento de auditoría en MongoDB.
-     * El campo `metadata` puede contener cualquier estructura JSON.
-     */
     async log(params: {
         action: string;
         entityType?: string;
         entityId?: string;
         userId?: string;
         metadata?: Record<string, any>;
-        level?: 'info' | 'warn' | 'error' | 'debug' | 'critical';
+        level?: 'info' | 'warn' | 'error' | 'debug';
         description?: string;
         ipAddress?: string;
-    }): Promise<AuditLog> {
-        const entry = new this.auditModel({
-            action: params.action,
-            entityType: params.entityType,
-            entityId: params.entityId,
-            userId: params.userId,
-            metadata: params.metadata || {},
-            level: params.level || 'info',
-            description: params.description,
-            ipAddress: params.ipAddress,
-        });
-        return entry.save();
+    }): Promise<AuditLog | null> {
+        try {
+            const entry = this.auditRepository.create({
+                action: params.action,
+                entityType: params.entityType,
+                entityId: params.entityId,
+                userId: params.userId,
+                metadata: params.metadata || {},
+                level: params.level || 'info',
+                description: params.description,
+                ipAddress: params.ipAddress,
+            });
+            return await this.auditRepository.save(entry);
+        } catch (error) {
+            console.error('Audit log failed (PostgreSQL):', error.message);
+            return null;
+        }
     }
 
-    /**
-     * Busca logs por acción.
-     */
     async findByAction(action: string): Promise<AuditLog[]> {
-        return this.auditModel
-            .find({ action })
-            .sort({ created_at: -1 })
-            .limit(100)
-            .exec();
+        return this.auditRepository.find({
+            where: { action },
+            order: { createdAt: 'DESC' },
+            take: 100,
+        });
     }
 
-    /**
-     * Busca logs de un usuario específico.
-     */
     async findByUser(userId: string): Promise<AuditLog[]> {
-        return this.auditModel
-            .find({ userId })
-            .sort({ created_at: -1 })
-            .limit(100)
-            .exec();
+        return this.auditRepository.find({
+            where: { userId },
+            order: { createdAt: 'DESC' },
+            take: 100,
+        });
     }
 
-    /**
-     * Busca logs de una entidad específica.
-     */
     async findByEntity(entityType: string, entityId: string): Promise<AuditLog[]> {
-        return this.auditModel
-            .find({ entityType, entityId })
-            .sort({ created_at: -1 })
-            .limit(50)
-            .exec();
+        return this.auditRepository.find({
+            where: { entityType, entityId },
+            order: { createdAt: 'DESC' },
+            take: 50,
+        });
     }
 
-    /**
-     * ════════════════════════════════════════════
-     *  Consulta NoSQL — Buscar dentro del JSON
-     * ════════════════════════════════════════════
-     *
-     * En MongoDB, buscar dentro de documentos anidados
-     * es nativo. No necesitas operadores especiales como
-     * en PostgreSQL (->>, @>). Simplemente usas dot notation.
-     */
     async findByMetadataKey(key: string, value: string): Promise<AuditLog[]> {
-        return this.auditModel
-            .find({ [`metadata.${key}`]: value })
-            .sort({ created_at: -1 })
-            .limit(50)
-            .exec();
+        // Para JSONB en PostgreSQL usamos query builder o parámetros de búsqueda crudos si es complejo, 
+        // pero para llaves directas podemos usar la sintaxis de TypeORM
+        return this.auditRepository
+            .createQueryBuilder('audit')
+            .where(`audit.metadata->>'${key}' = :value`, { value })
+            .orderBy('audit.createdAt', 'DESC')
+            .take(50)
+            .getMany();
     }
 
-    /**
-     * Obtiene los últimos N logs del sistema.
-     */
     async getRecent(limit = 50): Promise<AuditLog[]> {
-        return this.auditModel
-            .find()
-            .sort({ created_at: -1 })
-            .limit(limit)
-            .exec();
+        return this.auditRepository.find({
+            order: { createdAt: 'DESC' },
+            take: limit,
+        });
+    }
+
+    async findAll(): Promise<AuditLog[]> {
+        return this.auditRepository.find({
+            order: { createdAt: 'DESC' },
+            take: 100
+        });
     }
 }

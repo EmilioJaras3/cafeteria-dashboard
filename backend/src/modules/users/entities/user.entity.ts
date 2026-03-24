@@ -15,7 +15,7 @@ import { Exclude } from 'class-transformer';
  * El campo password_hash se excluye automáticamente de las responses
  * gracias al decorador @Exclude() + ClassSerializerInterceptor.
  */
-@Entity('users', { synchronize: false })
+@Entity('users')
 export class User {
     @PrimaryColumn('uuid')
     @Generated('uuid')
@@ -93,16 +93,12 @@ export class User {
     @CreateDateColumn({
         type: 'timestamptz',
         name: 'created_at',
-        insert: false,
-        update: false
     })
     createdAt: Date;
 
     @UpdateDateColumn({
         type: 'timestamptz',
         name: 'updated_at',
-        insert: false,
-        update: false
     })
     updatedAt: Date;
 

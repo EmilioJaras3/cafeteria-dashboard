@@ -1,0 +1,4 @@
+com\tienditacampus\tests\UserApiTest.class
+com\tienditacampus\tests\ProductApiTest.class
+com\tienditacampus\tests\AuthApiTest.class
+com\tienditacampus\tests\BaseApiTest.class

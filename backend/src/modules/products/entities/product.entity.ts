@@ -8,6 +8,7 @@ import {
     JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { Category } from './category.entity';
 
 @Entity('products')
 export class Product {
@@ -21,11 +22,19 @@ export class Product {
     @JoinColumn({ name: 'seller_id' })
     seller: User;
 
+    @Column({ type: 'uuid', nullable: true, name: 'category_id' })
+    categoryId: string | null;
+
+    @ManyToOne(() => Category, { nullable: true, onDelete: 'SET NULL' })
+    @JoinColumn({ name: 'category_id' })
+    category: Category | null;
+
     @Column({ type: 'varchar', length: 200 })
     name: string;
 
     @Column({ type: 'text', nullable: true })
     description: string;
+
 
     @Column({ type: 'decimal', precision: 10, scale: 2, name: 'unit_cost' })
     unitCost: number;

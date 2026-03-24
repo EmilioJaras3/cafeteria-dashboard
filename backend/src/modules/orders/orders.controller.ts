@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Req, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Body, Req, UseGuards, Param } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -31,20 +31,20 @@ export class OrdersController {
 
     @Post(':id/accept')
     @Roles('seller', 'admin')
-    async acceptOrder(@Req() req: any) {
-        return this.ordersService.acceptOrder(req.params.id, req.user as User);
+    async acceptOrder(@Param('id') id: string, @Req() req: any) {
+        return this.ordersService.acceptOrder(id, req.user as User);
     }
 
     @Post(':id/reject')
     @Roles('seller', 'admin')
-    async rejectOrder(@Req() req: any) {
-        return this.ordersService.rejectOrder(req.params.id, req.user as User);
+    async rejectOrder(@Param('id') id: string, @Req() req: any) {
+        return this.ordersService.rejectOrder(id, req.user as User);
     }
 
     @Post(':id/deliver')
     @Roles('buyer', 'seller', 'admin')
-    async deliverOrder(@Req() req: any, @Body() body: any) {
+    async deliverOrder(@Param('id') id: string, @Req() req: any) {
         // We use Post to make it simpler, but acting as Patch
-        return this.ordersService.deliverOrder(req.params.id, req.user as User);
+        return this.ordersService.deliverOrder(id, req.user as User);
     }
 }

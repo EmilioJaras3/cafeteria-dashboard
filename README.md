@@ -79,6 +79,30 @@ proyecto_integrador/
 - **PostgreSQL**: Base de datos relacional
 - **Nginx**: Reverse proxy y balanceo de carga
 
-## Equipo
+## Mantenimiento Automático
 
-Universidad Politecnica de Chiapas — Proyecto Integrador
+El proyecto incluye scripts para mantenimiento automático:
+
+### Scripts de Automatización
+- **`auto-restart.sh`** - Reinicio automático de contenedores cada 4 horas
+- **`auto-git-update.sh`** - Actualización automática del repositorio Git
+
+### Configuración
+Ver `MAINTENANCE.md` para instrucciones de configuración de cron jobs.
+
+## Benchmarking y Analytics
+
+### BigQuery Integration
+- Envío automático de métricas a Google BigQuery
+- Dataset: `benchmarking_warehouse`
+- Tabla: `daily_query_metrics`
+- Requiere credenciales de Google Cloud
+
+### Variables de Entorno Requeridas
+```bash
+GOOGLE_CLOUD_PROJECT=data-from-software
+BIGQUERY_PROJECT_ID=data-from-software
+BIGQUERY_DATASET_ID=benchmarking_warehouse
+BIGQUERY_TABLE_ID=daily_query_metrics
+GOOGLE_APPLICATION_CREDENTIALS=/app/service-account-key.json
+```
